@@ -1,61 +1,23 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layout')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('title')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+    Directors Read
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+@endsection
+@section('contentheader')
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Actors Read</div>
+    Directors Read
+@endsection
+@section('breadscrumb')
+    <li><a href="#"> Home /  </a><a href="#">Directors / </a><a href="#"> Read </a></li>
+@endsection
 
 
+{{--Ecrire dans la session content--}}
+@section('content')
 
-                <?php
-
-
-
-        ?>
+                <div class="title">Directors Read</div>
 
 
-
-
-
-
-
-
-            </div>
-        </div>
-    </body>
-</html>
+@endsection

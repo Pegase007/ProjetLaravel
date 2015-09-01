@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Model\Actors;
 
 /**
  * Class PagesController
@@ -14,19 +15,8 @@ class ActorsController extends Controller{
 
 
         $datas = [
-            'title'=> "Liste des acteurs",
-            'noms' =>["Julien","Matthieu","Aurelien","Thaïs","Marjorie","Daniel"],
-            "age"=>[27, 30, 22, 27, 33, 65],
-            "localite"=>[
-            "Paris"=>["Jessy","Marjorie","Daniel"],
-            "Lyon"=>["Thais","Julien","Matthieu"]
-            ],
-            'acteurs'=>[
-                ["nom"=>"Boyer","prenom"=>"Julien", "age"=>"27"],
-                ["nom"=>"De Brito","prenom"=>"Thais","age"=>"27"],
-                ["nom"=>"Rouquet","prenom"=>"Marjorie","age"=>"30"],
-                ["nom"=>"Lehne","prenom"=>"Matthieu","age"=>"30"]
-            ]
+
+           "actors"=> Actors::all()
         ];
 
         return view ('Actors/index',$datas);

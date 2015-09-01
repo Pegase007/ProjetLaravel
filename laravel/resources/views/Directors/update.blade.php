@@ -1,52 +1,26 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layout')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('title')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+    Directors Update
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+@endsection
+@section('contentheader')
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
+    Directors Update
+@endsection
+@section('breadscrumb')
+    <li><a href="#"> Home /  </a><a href="#">Directors / </a><a href="#"> Update </a></li>
+@endsection
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
 
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Actors Update</div>
+{{--Ecrire dans la session content--}}
+@section('content')
+                <div class="title">Directors Update</div>
 
 
                 <h3> L'id est {{$id}}</h3>
 
 
 
-
-            </div>
-        </div>
-    </body>
-</html>
+@endsection

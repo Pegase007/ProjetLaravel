@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Model\Directors;
 
 /**
  * Class PagesController
@@ -12,7 +13,12 @@ class DirectorsController extends Controller{
      */
     public function index(){
 
-        return view ('Directors/index');
+        $datas = [
+
+            "directors"=> Directors::all()
+        ];
+
+        return view ('Directors/index',$datas);
 
     }
     /**

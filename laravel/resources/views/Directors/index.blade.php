@@ -1,61 +1,53 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layout')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('title')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+    Directors Index
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+@endsection
+@section('contentheader')
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
+    Directors Index
+@endsection
+@section('breadscrumb')
+    <li><a href="#"> Home /  </a><a href="#">Directors / </a><a href="#"> Index </a></li>
+@endsection
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
+{{--Ecrire dans la session content--}}
+@section('content')
 
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Actors Index</div>
+                <div class="title">Directors Index</div>
 
+                <div class="table-success">
+                    <div class="table-header">
+                        <div class="table-caption">
+                            Success Table
+                        </div>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Dob</th>
 
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($directors as $director)
+                            <tr>
 
-                <?php
+                                <td>{{$director->id}}</td>
+                                <td>{{$director->lastname}}</td>
+                                <td>{{$director->firstname}}</td>
+                                <td>{{$director->dob}}</td>
 
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
 
+                </div>
 
-        ?>
-
-
-
-
-
-
-
-
-            </div>
-        </div>
-    </body>
-</html>
+@endsection

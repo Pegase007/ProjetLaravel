@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-
-    return view('welcome');
-});
+Route::get('/', ['uses' =>'PagesController@home','as'=>'home']);
 /**
  * Permet de connecter l'URI contact à la page Contact
  */
@@ -44,11 +41,13 @@ Route::group(['prefix' =>'actors'],function(){
     /**
      * Actors index liste les acteurs
      */
-    Route::get('/index',['uses' =>'ActorsController@index']);
+    Route::get('/index/{ville?}',['uses' =>'ActorsController@index','as'=>'actors.index']);
     /**
      * Actors index lit un seul acteur
      */
-    Route::get('/read/{id}',['uses' =>'ActorsController@read']);
+    Route::get('/read/{id}',['uses' =>'ActorsController@read'])
+     ->where('id','[0-9]+');
+
     /**
      * Actors index crée des acteurs
      */
@@ -56,12 +55,13 @@ Route::group(['prefix' =>'actors'],function(){
     /**
      * Actors index met à jours les acteurs
      */
-    Route::get('/update/{id}',['uses' =>'ActorsController@update']);
+    Route::get('/update/{id}',['uses' =>'ActorsController@update'])
+        ->where('id','[0-9]+');
     /**
      * Actors index supprime des acteurs
      */
-    Route::get('/delete/{id}',['uses' =>'ActorsController@delete']);
-
+    Route::get('/delete/{id}',['uses' =>'ActorsController@delete'])
+        ->where('id','[0-9]+');
 
 
 
@@ -80,11 +80,13 @@ Route::group(['prefix' =>'directors'],function() {
     /**
      * Actors index liste les acteurs
      */
-    Route::get('/index/{id}', ['uses' => 'DirectorsController@index']);
+    Route::get('/index/{ville?}', ['uses' => 'DirectorsController@index', 'as'=> 'directors.index']);
+
     /**
      * Actors index lit un seul acteur
      */
-    Route::get('/read/{id}', ['uses' => 'DirectorsController@read']);
+    Route::get('/read/{id}', ['uses' => 'DirectorsController@read'])
+    ->where('id','[0-9]+');
     /**
      * Actors index crée des acteurs
      */
@@ -92,20 +94,182 @@ Route::group(['prefix' =>'directors'],function() {
     /**
      * Actors index met à jours les acteurs
      */
-    Route::get('/update/{id}', ['uses' => 'DirectorsController@update']);
+    Route::get('/update/{id}', ['uses' => 'DirectorsController@update'])
+        ->where('id','[0-9]+');
     /**
      * Actors index supprime des acteurs
      */
-    Route::get('/delete/{id}', ['uses' => 'DirectorsController@delete']);
+    Route::get('/delete/{id}', ['uses' => 'DirectorsController@delete'])
+        ->where('id','[0-9]+');
 
 });
 
 
 
+
 /**
- * Permet de connecter l'URI actors à la page Actors
+ * GROUPE DE ROUTES movies
  */
-Route::get('/directors',['uses' =>'PagesController@directors']);
+
+
+
+Route::group(['prefix' =>'movies', 'as' =>'movies'],function() {
+    /**
+     * Movies index liste les movies
+     * 'as'=>'movies.index' permet de donner un alias pour joindre cette adresse
+     */
+    Route::get('/index/{anee?}', ['uses' => 'MoviesController@index', 'as'=>'.index'])
+        ->where('id','[0-9]+');
+    /**
+     * Movies index lit un seul movies
+     */
+    Route::get('/read/{id}', ['uses' => 'MoviesController@read', 'as'=>'.read']);
+    /**
+     * Movies index crée des movies
+     */
+    Route::get('/create', ['uses' => 'MoviesController@create', 'as'=>'.create']);
+    /**
+     * Movies index met à jours les movies
+     */
+    Route::get('/update/{id}', ['uses' => 'MoviesController@update', 'as'=>'.update'])
+        ->where('id','[0-9]+');
+    /**
+     * Movies index supprime des movies
+     */
+    Route::get('/delete/{id}', ['uses' => 'MoviesController@delete', 'as'=>'.delete'])
+        ->where('id','[0-9]+');
+
+    /**
+     * Movies search recherche des films avec des attributs par default
+     */
+    Route::get('/search/{languages?}/{visible?}/{duree?}', ['uses' => 'MoviesController@search', 'as' => '.search'])
+        ->where (['languages'=> '^(en|es|fr)$' , 'visible'=>'0|1','duree'=>'[1-9]+']);
+
+
+
+
+});
+
+
+/**
+ * GROUPE DE ROUTES users
+ */
+
+
+
+Route::group(['prefix' =>'users','as'=>'users'],function() {
+    /**
+     * Movies index liste les movies
+     * 'as'=>'movies.index' permet de donner un alias pour joindre cette adresse
+     */
+    Route::get('/index', ['uses' => 'UsersController@index', 'as'=>'.index']);
+    /**
+     * Movies index lit un seul movies
+     */
+    Route::get('/read/{id}', ['uses' => 'UsersController@read', 'as'=>'.read']);
+    /**
+     * Movies index crée des movies
+     */
+    Route::get('/create', ['uses' => 'UsersController@create', 'as'=>'.create']);
+    /**
+     * Movies index met à jours les movies
+     */
+    Route::get('/update/{id}', ['uses' => 'UsersController@update', 'as'=>'.update'])
+        ->where('id','[0-9]+');
+    /**
+     * Movies index supprime des movies
+     */
+    Route::get('/delete/{id}', ['uses' => 'UsersController@delete', 'as'=>'.delete'])
+        ->where('id','[0-9]+');
+
+    /**
+     * Movies search recherche des films avec des attributs par default
+     */
+    Route::get('/search/{zipcode?}/{ville?}/{enabled?}', ['uses' => 'UsersController@search', 'as' => '.search'])
+        ->where (['zipcode'=> '[0-9]{5}|[0-9]{2}|[*]' , 'ville'=>'[a-zA-Z-]+|[*]','enabled'=>'0|1|[*]']);
+
+
+
+
+});
+
+
+Route::group(['prefix' =>'cinema', 'as'=>'cinema'],function() {
+    /**
+     * Cinema index liste les movies
+     * 'as'=>'movies.index' permet de donner un alias pour joindre cette adresse
+     */
+    Route::get('/index', ['uses' => 'CinemaController@index', 'as'=>'.index']);
+    /**
+     * Cinema index lit un seul movies
+     */
+    Route::get('/read/{id}', ['uses' => 'CinemaController@read', 'as'=>'.read']);
+    /**
+     * Cinema index crée des movies
+     */
+    Route::get('/create', ['uses' => 'CinemaController@create', 'as'=>'.create']);
+    /**
+     * Cinema index met à jours les movies
+     */
+    Route::get('/update/{id}', ['uses' => 'CinemaController@update', 'as'=>'.update'])
+        ->where('id','[0-9]+');
+    /**
+     * Cinema index supprime des movies
+     */
+    Route::get('/delete/{id}', ['uses' => 'CinemaController@delete', 'as'=>'.delete'])
+        ->where('id','[0-9]+');
+
+    /**
+     * Cinema search recherche des films avec des attributs par default
+     */
+    Route::get('/search', ['uses' => 'CinemaController@cinema', 'as' => '.search']);
+
+
+
+
+});
+
+Route::group(['prefix' =>'category', 'as'=>'category'],function() {
+    /**
+     * Category index liste les movies
+     * 'as'=>'movies.index' permet de donner un alias pour joindre cette adresse
+     */
+    Route::get('/index', ['uses' => 'CategoryController@index', 'as'=>'.index']);
+    /**
+     * Category index lit un seul movies
+     */
+    Route::get('/read/{id}', ['uses' => 'CategoryController@read', 'as'=>'.read']);
+    /**
+     * Category index crée des movies
+     */
+    Route::get('/create', ['uses' => 'CategoryController@create', 'as'=>'.create']);
+    /**
+     * Category index met à jours les movies
+     */
+    Route::get('/update/{id}', ['uses' => 'CategoryController@update', 'as'=>'.update'])
+        ->where('id','[0-9]+');
+    /**
+     * Category index supprime des movies
+     */
+    Route::get('/delete/{id}', ['uses' => 'CategoryController@delete', 'as'=>'.delete'])
+        ->where('id','[0-9]+');
+
+    /**
+     * Category search recherche des films avec des attributs par default
+     */
+    Route::get('/search', ['uses' => 'CategoryController@cinema', 'as' => '.search']);
+
+
+
+
+});
+
+
+
+//Route::controller('cinema','CinemaController');
+//
+//Route::controller('category','CategoryController');
+
 
 
 
