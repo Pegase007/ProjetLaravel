@@ -4,12 +4,12 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Categories extends Model
+class User extends Model
 {
 
     /**
      * Ma table actors represente la classe actor
      * @var string
      */
-    protected $table='categories';
+    protected $table='user';
 }

@@ -1,10 +1,11 @@
 <?php
 namespace App\Model;
 
-use App\Model\Model;
 /*
  *
  */
+use Illuminate\Database\Eloquent\Model;
+
 class Movies extends Model
 {
 

@@ -15,18 +15,18 @@ Route::get('/', ['uses' =>'PagesController@home','as'=>'home']);
 /**
  * Permet de connecter l'URI contact à la page Contact
  */
-Route::get('/contact',['uses' => 'PagesController@contact']);
+Route::get('/contact',['uses' => 'PagesController@contact','as'=>'contact']);
 /**
  * Permet de connecter l'URI mentionlegales à la page MentionLegales
  * Le /Pages permet de cibler le fichier Page dans lequel se trouvent les pages
  */
 
-Route::get('/mentionlegales',['uses' => 'PagesController@mention']);
+Route::get('/mentionlegales',['uses' => 'PagesController@mention', 'as' =>'mentions']);
 
 /**
  * Permet de connecter l'URI faq à la page FAQ
  */
-Route::get('/faq',['uses' =>'PagesController@faq']);
+Route::get('/faq',['uses' =>'PagesController@faq', 'as'=>'faq' ]);
 
 
 
@@ -36,31 +36,31 @@ Route::get('/faq',['uses' =>'PagesController@faq']);
  * GROUPE DE ROUTES actors
  */
 
-Route::group(['prefix' =>'actors'],function(){
+Route::group(['prefix' =>'actors', 'as'=>'actors'],function(){
 
     /**
      * Actors index liste les acteurs
      */
-    Route::get('/index/{ville?}',['uses' =>'ActorsController@index','as'=>'actors.index']);
+    Route::get('/index/{ville?}',['uses' =>'ActorsController@index','as'=>'.index']);
     /**
      * Actors index lit un seul acteur
      */
-    Route::get('/read/{id}',['uses' =>'ActorsController@read'])
+    Route::get('/read/{id}',['uses' =>'ActorsController@read','as'=>'.read'])
      ->where('id','[0-9]+');
 
     /**
      * Actors index crée des acteurs
      */
-    Route::get('/create',['uses' =>'ActorsController@create']);
+    Route::get('/create',['uses' =>'ActorsController@create','as'=>'.create']);
     /**
      * Actors index met à jours les acteurs
      */
-    Route::get('/update/{id}',['uses' =>'ActorsController@update'])
+    Route::get('/update/{id}',['uses' =>'ActorsController@update','as'=>'.update'])
         ->where('id','[0-9]+');
     /**
      * Actors index supprime des acteurs
      */
-    Route::get('/delete/{id}',['uses' =>'ActorsController@delete'])
+    Route::get('/delete/{id}',['uses' =>'ActorsController@delete','as'=>'.delete'])
         ->where('id','[0-9]+');
 
 
@@ -76,30 +76,30 @@ Route::group(['prefix' =>'actors'],function(){
 
 
 
-Route::group(['prefix' =>'directors'],function() {
+Route::group(['prefix' =>'directors', 'as'=>'directors' ],function() {
     /**
      * Actors index liste les acteurs
      */
-    Route::get('/index/{ville?}', ['uses' => 'DirectorsController@index', 'as'=> 'directors.index']);
+    Route::get('/index/{ville?}', ['uses' => 'DirectorsController@index', 'as'=> '.index']);
 
     /**
      * Actors index lit un seul acteur
      */
-    Route::get('/read/{id}', ['uses' => 'DirectorsController@read'])
+    Route::get('/read/{id}', ['uses' => 'DirectorsController@read','as'=> '.read'])
     ->where('id','[0-9]+');
     /**
      * Actors index crée des acteurs
      */
-    Route::get('/create', ['uses' => 'DirectorsController@create']);
+    Route::get('/create', ['uses' => 'DirectorsController@create','as'=> '.create']);
     /**
      * Actors index met à jours les acteurs
      */
-    Route::get('/update/{id}', ['uses' => 'DirectorsController@update'])
+    Route::get('/update/{id}', ['uses' => 'DirectorsController@update','as'=> '.update'])
         ->where('id','[0-9]+');
     /**
      * Actors index supprime des acteurs
      */
-    Route::get('/delete/{id}', ['uses' => 'DirectorsController@delete'])
+    Route::get('/delete/{id}', ['uses' => 'DirectorsController@delete','as'=> '.delete'])
         ->where('id','[0-9]+');
 
 });
@@ -124,6 +124,9 @@ Route::group(['prefix' =>'movies', 'as' =>'movies'],function() {
      * Movies index lit un seul movies
      */
     Route::get('/read/{id}', ['uses' => 'MoviesController@read', 'as'=>'.read']);
+
+
+
     /**
      * Movies index crée des movies
      */

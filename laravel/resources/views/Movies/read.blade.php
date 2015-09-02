@@ -20,6 +20,6 @@
                 <div class="title">Movie Read</div>
 
 
-                    <h3> L'id est {{$id}}</h3>
+                    <h3> L'id est {{$movies->id}}</h3>
 
 @endsection

@@ -26,42 +26,42 @@
                 <div>
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="#">Home</a>
+                            <a href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-film"></i> Movies</a>
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-film"></i> Movies</a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="fa fa-search"></i> See movies</a></li>
-                                <li><a href="#"><i class="fa fa-plus"></i> Create Movies</a></li>
+                                <li><a href="{{ route('movies.index') }}"><i class="fa fa-search"></i> See movies</a></li>
+                                <li><a href="{{ route('movies.create') }}"><i class="fa fa-plus"></i> Create Movies</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-sitemap"></i> Categories</a>
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-sitemap"></i> Categories</a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="fa fa-search"></i> See Categories</a></li>
-                                <li><a href="#"><i class="fa fa-plus"></i> Create Categories</a></li>
+                                <li><a href="{{ route('category.index') }}"><i class="fa fa-search"></i> See Categories</a></li>
+                                <li><a href="{{ route('category.create') }}"><i class="fa fa-plus"></i> Create Categories</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-star"></i> Actors</a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="fa fa-search"></i> See Actors</a></li>
-                                <li><a href="#"><i class="fa fa-plus"></i> Create Actors</a></li>
+                                <li><a href="{{ route('actors.index') }}"><i class="fa fa-search"></i> See Actors</a></li>
+                                <li><a href="{{ route('actors.create') }}"><i class="fa fa-plus"></i> Create Actors</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-black-tie"></i> Directors</a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="fa fa-search"></i> See Directors</a></li>
-                                <li><a href="#"><i class="fa fa-plus"></i> Create Directors</a></li>
+                                <li><a href="{{ route('directors.index') }}"><i class="fa fa-search"></i> See Directors</a></li>
+                                <li><a href="{{ route('directors.create') }}"><i class="fa fa-plus"></i> Create Directors</a></li>
                             </ul>
                         </li>
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> User</a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="fa fa-search"></i> See User</a></li>
-                                <li><a href="#"><i class="fa fa-plus"></i> Create User</a></li>
+                                <li><a href="{{ route('users.index') }}"><i class="fa fa-search"></i> See User</a></li>
+                                <li><a href="{{ route('users.create') }}"><i class="fa fa-plus"></i> Create User</a></li>
                             </ul>
                         </li>
 

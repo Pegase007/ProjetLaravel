@@ -16,10 +16,11 @@
 {{--Ecrire dans la session content--}}
 @section('content')
 
-                <div class="title">Category Read</div>
+                {{--<div class="title">Category Read</div>--}}
 
 
-                    <h3> L'id est {{$id}}</h3>
+                    <h3> L'id est {{$category->id}}</h3>
+
 
 
 

@@ -17,7 +17,7 @@
 {{--Ecrire dans la session content--}}
 @section('content')
 
-        <div class="title">Actors Index</div>
+        {{--<div class="title">Actors Index</div>--}}
 
 
 
@@ -76,12 +76,15 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>#</th>
+                    <th>id</th>
+                    <th>Image</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Dob</th>
                     <th>City</th>
                     <th>Nationality</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -89,11 +92,15 @@
                 <tr>
 
                     <td>{{$actor->id}}</td>
-                    <td>{{$actor->lastname}}</td>
-                    <td>{{$actor->firstname}}</td>
+                    <td class="col-md-1"><a href="{{route('actors.read',['id'=>$actor->id])}}" class="thumbnail"> <img class="img-responsive" src="{{$actor->image}}" alt="{{$actor->lastname}} {{$actor->firstname}}" title="{{$actor->lastname}} {{$actor->firstname}}" ></a></td>
+
+                    <td><a href="{{route('actors.read',['id'=>$actor->id])}}" >{{$actor->lastname}}</a></td>
+                    <td><a href="{{route('actors.read',['id'=>$actor->id])}}" >{{$actor->firstname}}</a></td>
                     <td>{{$actor->dob}}</td>
                     <td>{{$actor->city}}</td>
                     <td>{{$actor->nationality}}</td>
+                    <td><button class="btn btn-default" type="submit"><i class="fa fa-eye"></i> See</button></td>
+                    <td><a href="{{route('actors.delete',['id'=>$actor->id])}}" class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i> Delete</a></td>
                 </tr>
                     @endforeach
                 </tbody>

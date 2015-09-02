@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Model\User;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Class PagesController
@@ -12,7 +15,12 @@ class UsersController extends Controller{
      */
     public function index(){
 
-        return view ('Users/index');
+        $datas=
+            [
+                'user'=> User::all()
+            ];
+
+        return view ('Users/index',$datas);
 
     }
     /**
@@ -46,7 +54,14 @@ class UsersController extends Controller{
 
     public function delete($id){
 
-        return redirect('/Users/index',['id' => $id ]);
+        $users=User::find($id);
+        $users->delete();
+
+        //j'ecris un message flash en session
+        Session::flash('success',"L'acteur {$users->firstname} {$users->lastname} a bien été supprimé");
+
+        //je redirige
+        return Redirect::route('users.index');
     }
 
 

@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Model\Categories;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Class PagesController
@@ -9,7 +12,7 @@ namespace App\Http\Controllers;
 class CategoryController extends Controller{
 
 //    /**
-//     * Movies index
+//     * Categories index
 //     */
 //    public function getIndex(){
 //
@@ -17,7 +20,7 @@ class CategoryController extends Controller{
 //
 //    }
 //    /**
-//     * Movies read
+//     * Categories read
 //     */
 //    public function getRead($id){
 //
@@ -25,7 +28,7 @@ class CategoryController extends Controller{
 //
 //    }
 //    /**
-//     * Movies update
+//     * Categories update
 //     */
 //    public function getUpdate($id){
 //
@@ -33,7 +36,7 @@ class CategoryController extends Controller{
 //
 //    }
 //    /**
-//     * Movies create
+//     * Categories create
 //     */
 //    public function getCreate(){
 //
@@ -42,7 +45,7 @@ class CategoryController extends Controller{
 //    }
 //
 //    /**
-//     * Movies delete
+//     * Categories delete
 //     */
 //
 //    public function getDelete($id){
@@ -52,7 +55,7 @@ class CategoryController extends Controller{
 //
 //
 //    /**
-//     * Movies delete
+//     * Categories delete
 //     */
 //
 //    public function getSearch(){
@@ -64,23 +67,34 @@ class CategoryController extends Controller{
 
 
     /**
-     * Movies index
+     * Categories index
      */
     public function index(){
 
-        return view ('Category/index');
+        $datas =[
+
+            'categories'=> Categories::all()
+
+        ];
+        return view ('Category/index',$datas);
+
+
 
     }
     /**
-     * Movies read
+     * Categories read
      */
-    public function read($id){
+    public function read($id=null){
 
-        return view ('Category/read',['id' => $id ]);
+        $data=[
+
+          'category'=> Categories::find($id)
+        ];
+        return view ('Category/read',$data);
 
     }
     /**
-     * Movies update
+     * Categories update
      */
     public function update($id){
 
@@ -88,7 +102,7 @@ class CategoryController extends Controller{
 
     }
     /**
-     * Movies create
+     * Categories create
      */
     public function create(){
 
@@ -97,17 +111,24 @@ class CategoryController extends Controller{
     }
 
     /**
-     * Movies delete
+     * Categories delete
      */
 
     public function delete($id){
 
-        return redirect('/Category/index',['id' => $id ]);
+        $category=Categories::find($id);
+        $category->delete();
+
+        //j'ecris un message flash en session
+        Session::flash('success',"L'acteur {$category->firstname} {$category->lastname} a bien été supprimé");
+
+        //je redirige
+        return Redirect::route('category.index');
     }
 
 
     /**
-     * Movies delete
+     * Categories delete
      */
 
     public function search(){

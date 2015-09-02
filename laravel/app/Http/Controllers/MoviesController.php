@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Model\Movies;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Class PagesController
@@ -23,17 +25,35 @@ class MoviesController extends Controller{
     /**
      * Movies read
      */
-    public function read($id){
+    public function read($id=null){
 
-        return view ('Movies/read',['id' => $id ]);
+        $datas=[
+
+            'movies'=>Movies::find($id)
+
+        ];
+
+        return view ('Movies/read',$datas);
 
     }
     /**
      * Movies update
      */
-    public function update($id){
+    public function update($id)
+    {
 
-        return view ('Movies/update',['id' => $id ]);
+        $movies = Movies::find($id);
+
+        if ($movies->visible == 0) {
+
+            $movies->update('update $movies set visible = 1');
+        } else {
+
+            $movies->update('update $movies set visible = 0');
+        }
+
+        //je redirige
+        return Redirect::route('movies.index');
 
     }
     /**
@@ -51,7 +71,16 @@ class MoviesController extends Controller{
 
     public function delete($id){
 
-        return redirect('/Movies/index',['id' => $id ]);
+        //je supprime un acteur
+        $movies=Movies::find($id);
+        $movies->delete();
+
+
+        //j'ecris un message flash en session
+        Session::flash('success',"L'acteur {$movies->firstname} {$movies->lastname} a bien été supprimé");
+
+        //je redirige
+        return Redirect::route('movies.index');
     }
 
 

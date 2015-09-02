@@ -20,11 +20,10 @@
                 <div class="title">Actors Read</div>
 
 
-                    <h3> L'id est {{$id}}</h3>
+
+                    <h3> L'id est {{$actors->id}}</h3>
+                    {{$actors->firstname}}
+                    {{$actors->lastname}}
 
 
-
-            </div>
-        </div>
-    </body>
-</html>
+@endsection

@@ -1,9 +1,8 @@
 <?php
 namespace App\Model;
 
-use App\Model\Model;
 
-class Comments extends Model
+class Comments extends \Illuminate\Database\Eloquent\Model
 {
 
     /**

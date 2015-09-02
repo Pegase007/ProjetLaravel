@@ -1,10 +1,7 @@
 
 .footer ul.container{
 
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-around;
+
     padding-left: 0;
 
 
@@ -16,12 +13,14 @@
     display: flex;
 }
 .footer .container  a{
-    display: flex;
     text-decoration: none;
     color: white;
 }
 
 footer {
+
+    display: flex;
+    flex-direction: row;
 
     position: fixed;
     height: 20px;

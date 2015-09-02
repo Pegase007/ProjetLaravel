@@ -27,10 +27,13 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>#</th>
+                            <th>Id</th>
+                            <th>Image</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Dob</th>
+                            <th>   </th>
+                            <th>   </th>
 
                         </tr>
                         </thead>
@@ -39,9 +42,12 @@
                             <tr>
 
                                 <td>{{$director->id}}</td>
-                                <td>{{$director->lastname}}</td>
-                                <td>{{$director->firstname}}</td>
+                                <td class="col-md-1"><a href="{{route('directors.read',['id'=> $director->id ])}}" class="thumbnail"> <img class="img-responsive" src="{{$director->image}}"></a></td>
+                                <td><a href="{{route('directors.read',['id'=> $director->id ])}}"> {{$director->lastname}}</a></td>
+                                <td><a href="{{route('directors.read',['id'=> $director->id ])}}"> {{$director->firstname}}</a></td>
                                 <td>{{$director->dob}}</td>
+                                <td><button class="btn btn-default" type="submit"><i class="fa fa-eye"></i> See</button></td>
+                                <td><a href="{{route('directors.delete',['id'=>$director->id])}}" class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i> Delete</a></td>
 
                             </tr>
                         @endforeach

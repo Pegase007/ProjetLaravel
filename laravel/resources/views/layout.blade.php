@@ -359,6 +359,7 @@ Use search to find needed section.
 
 
 
+        @include('Partials/_flashdatas')
         {{-- permet de définir un bloc nommé content--}}
         @yield('content')
 
