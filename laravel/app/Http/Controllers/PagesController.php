@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+
 
 /**
  * Class PagesController
@@ -39,7 +41,15 @@ class PagesController extends Controller{
     }
 
 
+    public function search(Request $request){
 
+//Recuperer le champ request securisé
+        $title=$request->input('title');
+        $lang=$request->input('lang');
+
+
+        return view('Pages/search');
+    }
 
 
 

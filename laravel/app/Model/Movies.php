@@ -15,4 +15,6 @@ class Movies extends Model
      */
     protected $table='movies';
 
+//    public $timestamps = false;
+
 }

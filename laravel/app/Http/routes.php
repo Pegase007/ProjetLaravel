@@ -29,6 +29,9 @@ Route::get('/mentionlegales',['uses' => 'PagesController@mention', 'as' =>'menti
 Route::get('/faq',['uses' =>'PagesController@faq', 'as'=>'faq' ]);
 
 
+Route::get('/search',['uses' =>'PagesController@search', 'as'=>'search' ]);
+
+
 
 
 
@@ -118,8 +121,10 @@ Route::group(['prefix' =>'movies', 'as' =>'movies'],function() {
      * Movies index liste les movies
      * 'as'=>'movies.index' permet de donner un alias pour joindre cette adresse
      */
-    Route::get('/index/{anee?}', ['uses' => 'MoviesController@index', 'as'=>'.index'])
-        ->where('id','[0-9]+');
+    Route::get('/form', ['uses' => 'MoviesController@form', 'as'=>'.form']);
+
+    Route::get('/index', ['uses' => 'MoviesController@index', 'as'=>'.index']);
+
     /**
      * Movies index lit un seul movies
      */
@@ -134,8 +139,28 @@ Route::group(['prefix' =>'movies', 'as' =>'movies'],function() {
     /**
      * Movies index met à jours les movies
      */
-    Route::get('/update/{id}', ['uses' => 'MoviesController@update', 'as'=>'.update'])
+    Route::get('/update/{id}/{action}', ['uses' => 'MoviesController@update' , 'as'=>'.update'])
         ->where('id','[0-9]+');
+
+    /**
+     * Movies condition permet de trier la table
+     */
+    Route::get('/condition/{condition}', ['uses' => 'MoviesController@condition' , 'as'=>'.condition']);
+
+
+    Route::any('/actions/{input}', ['uses' => 'MoviesController@actions' , 'as'=>'.actions']);
+
+
+
+
+
+//    /**
+//     * Movies index met à jours les movies
+//     */
+//    Route::get('/updatecover/{id}', ['uses' => 'MoviesController@updatecover', 'as'=>'.updatecover'])
+//        ->where('id','[0-9]+');
+
+
     /**
      * Movies index supprime des movies
      */
