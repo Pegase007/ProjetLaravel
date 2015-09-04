@@ -29,3 +29,13 @@
         <i class="fa fa-times"></i> {{session('danger')}}
     </div>
 @endif
+
+@if (session('tab'))
+    @foreach(session('tab') as $t)
+
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <i class="fa fa-times"></i> {{ $t }}
+    </div>
+    @endforeach
+@endif

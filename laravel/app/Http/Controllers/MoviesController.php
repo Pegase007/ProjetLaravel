@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 use App\Model\Movies;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -14,14 +15,27 @@ class MoviesController extends Controller{
      * Movies index
      */
     public function index(){
+
         $datas = [
 
-            "movies"=> Movies::all()
+            "movies"=> Movies::all(),
+            "counter"=>count(Movies::all()),
+            "top"=>count(Movies::where('cover',1)->get()),
+            "futureRelease"=>count(Movies::where('date_release','>',new \DateTime('today'))->get()),
+            "actif"=>count(Movies::where('visible',1)->get()),
+            "budget"=> Movies::where('date_release','>',2015-01-01)->where('date_release','>',2015-12-31)
+                    ->sum('budget'),
+            "categories" => Movies::find(1)->categories->get()
+
+
+
         ];
 
         return view ('Movies/index',$datas);
 
     }
+
+
     /**
      * Movies read
      */
@@ -70,7 +84,7 @@ class MoviesController extends Controller{
             //je redirige
             return Redirect::route('movies.index');
 
-        }else{
+        }elseif($action =='cover'){
 
             $movies=Movies::find($id);
 //        ->where('visible', 0)
@@ -100,7 +114,30 @@ class MoviesController extends Controller{
 
 
 
+        }elseif($action =='up') {
+
+            $movies=Movies::find($id);
+
+            $movies->note_presse = $movies->note_presse +1;
+
+            $movies->save();
+
+            Session::flash('success', "La note du film  {$movies->title} a été aumentée");
+
+            return Redirect::route('movies.index');
+        }elseif($action =='down') {
+
+            $movies=Movies::find($id);
+
+            $movies->note_presse = $movies->note_presse -1;
+
+            $movies->save();
+
+            Session::flash('danger', "La note du film  {$movies->title} a été reduit");
+
+            return Redirect::route('movies.index');
         }
+
 
 
 
@@ -156,6 +193,10 @@ class MoviesController extends Controller{
     public function form(){
 
 //        dump($languages,$visible,$duree);
+
+        Session::flash('tab', "Test 1");
+        Session::flash('tab', "Test 2");
+        Session::flash('tab', "Test 3");
 
         return view('Movies/form');
     }
@@ -252,20 +293,79 @@ class MoviesController extends Controller{
 
 
 
-    public function actions($input){
+    public function actions(Request $request)
+    {
 
 
-        if (Input::get('attending_lan') === 'yes') {
-            // checked
-        } else {
-            // unchecked
+        $movflash=[];
+        $movies = $request->input('movies');
+
+        $actions = $request->input('actions');
+
+        if ($actions == "Supprimer") {
+
+            foreach ($movies as $movie) {
+
+                $mov = Movies::find($movie);
+                $mov->delete();
+
+                array_push( $movflash,$mov->title);
+
+                array_push( $movflash,("Le film ".$mov->title." a bien été supprimé"));
+
+            }
+        }
+            if ($actions == "Activer") {
+
+
+                foreach ($movies as $movie) {
+
+                    $mov = Movies::find($movie);
+
+                    if ($mov->visible == 0) {
+
+                        $mov->visible = 1;
+
+                        $mov->save();
+
+                        array_push( $movflash,("Le film ".$mov->title." a bien été activé"));
+
+                    }
+                }
+            }
+        if ($actions == "Desactiver") {
+
+
+            foreach ($movies as $movie) {
+
+                $mov = Movies::find($movie);
+
+                if ($mov->visible == 1) {
+
+                    $mov->visible = 0;
+
+                    $mov->save();
+
+                    array_push( $movflash,("Le film ".$mov->title." a bien été desactivé"));
+
+
+
+                }
+            }
+        }
+
+        Session::flash('tab',  $movflash  );
+
+//            Session::flash('success', "Le film ".$movie." , a bien été activé");
+
+            //je redirige
+            return Redirect::route('movies.index');
+
+
         }
 
 
     }
-
-}
-
 
 
 ?>

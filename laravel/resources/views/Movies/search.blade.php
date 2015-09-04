@@ -20,9 +20,6 @@
 
 
 
-    {{$languages}}
-    {{$visible}}
-    {{$duree}}
 
 
 

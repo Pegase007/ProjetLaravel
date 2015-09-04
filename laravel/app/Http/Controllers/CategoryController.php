@@ -73,7 +73,9 @@ class CategoryController extends Controller{
 
         $datas =[
 
-            'categories'=> Categories::all()
+            'categories'=> Categories::all(),
+            'random'=>Categories::all()->random(1),
+            "movies" => Categories::find(2)->movies
 
         ];
         return view ('Category/index',$datas);
@@ -81,6 +83,9 @@ class CategoryController extends Controller{
 
 
     }
+
+
+
     /**
      * Categories read
      */

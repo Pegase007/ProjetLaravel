@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.js"],"names":[],"mappings":"AAAA;AACA;AACA;AACA","file":"main.js","sourcesContent":["$(document).ready(function(){\n   console.log('ok');\n});\n"],"sourceRoot":"/source/"}

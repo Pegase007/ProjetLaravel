@@ -12,4 +12,15 @@ class Categories extends Model
      * @var string
      */
     protected $table='categories';
+
+
+    public function Movies(){
+
+
+        return $this->hasMany('App\Model\Movies');
+
+
+
+    }
+
 }

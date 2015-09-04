@@ -17,4 +17,14 @@ class Movies extends Model
 
 //    public $timestamps = false;
 
+
+    public function Categories(){
+
+
+        return $this->belongsTo('App\Model\Categories','id','categories_id');
+
+
+
+    }
+
 }

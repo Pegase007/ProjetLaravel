@@ -148,7 +148,7 @@ Route::group(['prefix' =>'movies', 'as' =>'movies'],function() {
     Route::get('/condition/{condition}', ['uses' => 'MoviesController@condition' , 'as'=>'.condition']);
 
 
-    Route::any('/actions/{input}', ['uses' => 'MoviesController@actions' , 'as'=>'.actions']);
+    Route::any('/actions', ['uses' => 'MoviesController@actions' , 'as'=>'.actions']);
 
 
 
