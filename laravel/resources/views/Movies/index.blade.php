@@ -152,6 +152,7 @@
                     <th>Title</th>
                     <th>Languages</th>
                     <th>Distributeur</th>
+                    <th>Categories</th>
                     <th>Bo</th>
                     <th>Annee</th>
                     {{--<th>Created at</th>--}}
@@ -176,7 +177,7 @@
 
                         {{--FILL IN TABLE ROW FOR EACH MOVIE --}}
 
-                        <td><label class="px-single"><input type="checkbox" name="movies[]" value="{{$movie->id}}" class="px"><span class="lbl"></span></label>  {{$movie->id}}  {{$categories->categories->title}}</td>
+                        <td><label class="px-single"><input type="checkbox" name="movies[]" value="{{$movie->id}}" class="px"><span class="lbl"></span></label>  {{$movie->id}} </td>
                         <td class="col-md-1"><a href="{{route('movies.read',['id'=>$movie->id])}}" class="thumbnail"> <img class="img-responsive" src="{{$movie->image}}"></a></td>
                         <td>
                             {{--checks if movie is visible or not, uses check boxes to make changes--}}
@@ -212,6 +213,7 @@
                         <td><a href="{{route('movies.read',['id'=>$movie->id])}}"> {{$movie->title}}</a></td>
                         <td>{{$movie->languages}}</td>
                         <td>{{$movie->distributeur}}</td>
+                        <td>{{ $movie->categories->title }}</td>
                         <td>{{$movie->bo}}</td>
                         <td>{{$movie->annee}}</td>
                         {{--<td>{{$movie->created_at}}</td>--}}

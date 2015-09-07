@@ -52,9 +52,14 @@ Route::group(['prefix' =>'actors', 'as'=>'actors'],function(){
      ->where('id','[0-9]+');
 
     /**
-     * Actors index crée des acteurs
+     * Actors index GET crée des  acteurs
      */
-    Route::get('/create',['uses' =>'ActorsController@create','as'=>'.create']);
+    Route::get('/create', ['uses' => 'ActorsController@create', 'as'=>'.create']);
+    /**
+     * Actors index  POST va enregistrer les informations du formulaire
+     */
+    Route::post('/create', ['uses' => 'ActorsController@store', 'as'=>'.post']);
+    /**
     /**
      * Actors index met à jours les acteurs
      */

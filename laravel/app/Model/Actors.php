@@ -12,4 +12,10 @@ class Actors extends Model
      * @var string
      */
     protected $table='actors';
+
+    /**
+     * @var bool
+     */
+    public $timestamps=false;
+
 }

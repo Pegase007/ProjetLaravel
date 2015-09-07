@@ -22,20 +22,20 @@
                 <div class="stat-row">
                     <!-- Success background, small padding, vertically aligned text -->
                     <a href="#" class="stat-cell bg-danger padding-sm valign-middle">
-                         Categories sans films
+                        {{ $nomovies->nb }} Categories sans films
                     </a>
                 </div>
                 <div class="stat-row">
                     <!-- Success darken background, small padding, vertically aligned text -->
                     <a href="#" class="stat-cell bg-info darken padding-sm valign-middle">
-                        Categorie la plus populaire
+                        La Categorie la plus populaire est  <i>{{$popular->title }}</i>
 
                     </a>
                 </div>
                 <div class="stat-row">
                     <!-- Success darker background, small padding, vertically aligned text -->
                     <a href="#" class="stat-cell bg-warning darker padding-sm valign-middle">
-                        Categorie avec le plus gros budget de l'anné
+                        La Categorie avec le plus gros budget de l'année est {{$budget->title}}
 
                     </a>
                 </div>
@@ -67,14 +67,14 @@
                         <!-- Small padding, without horizontal padding -->
                         <div class="stat-cell col-md-4 padding-sm no-padding-hr">
                             <!-- Big text -->
-                            <span class="text-bg"><strong></strong></span><br>
+                            <span class="text-bg"><strong> {{ $random->movies->count() }}</strong></span><br>
                             <!-- Extra small text -->
                             <span class="text-xs">FILMS</span>
                         </div>
                         <!-- Small padding, without horizontal padding -->
                         <div class="stat-cell col-md-4 padding-sm no-padding-hr">
                             <!-- Big text -->
-                            <span class="text-bg"><strong>17</strong></span><br>
+                            <span class="text-bg"><strong></strong></span><br>
                             <!-- Extra small text -->
                             <span class="text-xs">COMMENTAIRES</span>
                         </div>
@@ -124,7 +124,7 @@
                         <td class="col-md-1"><a href="{{route('category.read',['id'=>$category->id])}}" class="thumbnail"> <img class="img-responsive" src="{{$category->image}}"></a></td>
                         <td><a href="{{route('category.read',['id'=>$category->id])}}">{{$category->title}}</a></td>
                         <td>{{$category->description}}</td>
-                        <td><i class="fa fa-film"></i>{{--}}{{$category->description}}--}}</td>
+                        <td><i class="fa fa-film"></i> {{$category -> movies->count()}}</td>
                         {{--<td><a href class="btn btn-default" type="submit"><i class="fa fa-eye"></i> See</a></td>--}}
                         {{--<td><a href="{{route('category.delete',['id'=>$category->id])}}" class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i> Delete</a></td>--}}
 

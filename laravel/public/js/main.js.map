@@ -1,1 +1,1 @@
-{"version":3,"sources":["main.js"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA","file":"main.js","sourcesContent":["$(document).ready(function(){\n\n   $('div.alert-danger').delay(3000).fadeOut('slow');\n    \n});\n"],"sourceRoot":"/source/"}
+{"version":3,"sources":["main.js"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA","file":"main.js","sourcesContent":["$(document).ready(function(){\n\n   $('div.alert-danger').delay(3000).fadeOut('slow');\n\n});\n"],"sourceRoot":"/source/"}

@@ -25,7 +25,8 @@ class MoviesController extends Controller{
             "actif"=>count(Movies::where('visible',1)->get()),
             "budget"=> Movies::where('date_release','>',2015-01-01)->where('date_release','>',2015-12-31)
                     ->sum('budget'),
-            "categories" => Movies::find(1)->categories->get()
+            "categories" => Movies::find(1)->categories,
+            "comments" => Movies::find()->comments
 
 
 

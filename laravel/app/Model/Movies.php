@@ -18,13 +18,21 @@ class Movies extends Model
 //    public $timestamps = false;
 
 
-    public function Categories(){
+    public function categories(){
 
 
-        return $this->belongsTo('App\Model\Categories','id','categories_id');
+        return $this->belongsTo('App\Model\Categories');
 
 
 
     }
+
+    public function comments(){
+
+        return $this->hasMany('App\Model\Comments');
+
+    }
+
+
 
 }

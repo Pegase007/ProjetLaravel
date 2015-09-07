@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Model\Categories;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -71,11 +72,52 @@ class CategoryController extends Controller{
      */
     public function index(){
 
+
+        $category = Categories::all()->random(1);
+//        dump(count($category->movies));
+//
+//        $nb = DB::table('comments')
+//            ->select(DB::raw('COUNT(*)'))
+//            ->join('movies','movies.id', '=', 'comments.movies_id')
+//            ->where('movies.categories_id','=', $category->id)
+//            ->groupBy('movies.categories_id')
+//            ->get();
+//
+//        dump($nb);
+//        exit();
+
+
         $datas =[
 
             'categories'=> Categories::all(),
-            'random'=>Categories::all()->random(1),
-            "movies" => Categories::find(2)->movies
+            'random'=>$category,
+
+            "movies" => Categories::find(1)->movies,
+            "nomovies"=>DB::table('categories')
+                ->select(DB::raw('COUNT(categories.id) as nb'))
+                ->leftJoin('movies', 'categories.id', '=', 'movies.categories_id')
+                ->whereNull('movies.categories_id')
+                ->first(),
+
+            "popular"=> DB::table('categories')
+                ->select ('categories.title')
+                ->join('movies','categories.id', '=', 'movies.categories_id')
+                ->groupBy('movies.categories_id')
+                ->orderBy(DB::raw("COUNT(movies.id)"))
+                ->first(),
+
+            "budget"=>DB::table('categories')
+                ->select ('categories.title')
+                ->join('movies','categories.id', '=', 'movies.categories_id')
+                ->where(DB::raw(" YEAR( movies.date_release )"),'=',"2015")
+                ->groupBy('categories.id')
+                ->first(),
+
+
+//            "countcomments"=>DB::table('comments')
+//                ->select(DB::raw('COUNT(*)'))
+//                ->join('movies','categories.id', '=', 'movies.categories_id')
+//                ->where('$category->movies->id','=','comments.movies_id' )
 
         ];
         return view ('Category/index',$datas);
@@ -93,7 +135,7 @@ class CategoryController extends Controller{
 
         $data=[
 
-          'category'=> Categories::find($id)
+            'category'=> Categories::find($id)
         ];
         return view ('Category/read',$data);
 

@@ -10,4 +10,16 @@ class Comments extends \Illuminate\Database\Eloquent\Model
      * @var string
      */
     protected $table='comments';
+
+
+
+    public function movies(){
+
+
+        return $this->belongsTo('App\Model\Movies');
+
+
+
+    }
+
 }
