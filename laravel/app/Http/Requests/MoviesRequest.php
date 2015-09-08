@@ -11,7 +11,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * Class ActorsRequest
  * @package App\Http\Requests
  */
-class ActorsRequest extends FormRequest{
+class MoviesRequest extends FormRequest{
 
 
     /**
@@ -33,13 +33,21 @@ class ActorsRequest extends FormRequest{
 
         return[
 
-            'firstname' =>'required|min:3',
-            'lastname' =>'required|min:3',
-            'dob' =>'required',
-            'recompenses' =>'required|min:5',
-            'biography' =>'required|min:10|max:500',
-            'roles'=>'required',
-            'nationality' =>'required',
+            'type_film' =>'required',
+            'title' =>'required|min:3',
+            'trailer' =>'required|url',
+            'categories_id' =>'required',
+            'directors_id' =>'required',
+            'actors_id' =>'required',
+            'languages' =>'required',
+            'bo' =>'required',
+            'distributeur' =>'required',
+            'date_release' =>'required',
+//            'note'=>'required|numeric|max:10',
+            'visible'=>'required',
+            'cover'=>'required',
+            'synopsis' =>'required|min:10|max:500',
+            'description' =>'required|min:10|max:500',
            'image' =>'required|image',
 
         ];
@@ -58,20 +66,6 @@ class ActorsRequest extends FormRequest{
         ];
     }
 
-
-    /**
-     * Permet d'aliaser les attributs dans les messages
-     * @return array
-     */
-    public function attributes()
-    {
-        return[
-            'firstname' => 'prénom', //This will replace any instance of 'username' in validation messages with 'email'
-            'lastname' => 'Nom', //This will replace any instance of 'username' in validation messages with 'email'
-            //'anyinput' => 'Nice Name',
-        ];
-
-    }
 
 
 }

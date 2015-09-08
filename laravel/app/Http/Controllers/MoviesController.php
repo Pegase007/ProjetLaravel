@@ -1,8 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\MoviesRequest;
+use App\Model\Actors;
+use App\Model\ActorsMovies;
+use App\Model\Categories;
+use App\Model\Directors;
 use Illuminate\Http\Request;
 use App\Model\Movies;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -26,7 +32,6 @@ class MoviesController extends Controller{
             "budget"=> Movies::where('date_release','>',2015-01-01)->where('date_release','>',2015-12-31)
                     ->sum('budget'),
             "categories" => Movies::find(1)->categories,
-            "comments" => Movies::find()->comments
 
 
 
@@ -145,15 +150,89 @@ class MoviesController extends Controller{
 
     }
 
-
     /**
      * Movies create
      */
     public function create(){
 
-        return view ('Movies/create');
+    $datas = [
+        "categories" => Categories::all(),
+        "actors"=>Actors::all(),
+        "directors"=>Directors::all(),
+    ];
+
+    return view ('Movies/create',$datas);
+
+}
+
+    public function store(MoviesRequest $request){
+
+        // J'enregistre un nouvel acteur dès que mon formulaire est valide (0 erreurs)
+
+
+        $movies=new Movies();
+        $movies->type_film=$request->type_film;
+        $movies->title=$request->title;
+        $movies->date_release = $request->date_release =date_create_from_format("d/m/Y",$request->date_release);
+        $movies->trailer=$request->trailer;
+        $movies->categories_id=$request->categories_id;
+        $movies->languages=$request->languages;
+        $movies->bo=$request->bo;
+        $movies->distributeur=$request->distributeur;
+        $movies->note_presse=$request->note;
+        $movies->visible=$request->visibility;
+        $movies->cover=$request->cover;
+        $movies->synopsis=$request->synopsis;
+        $movies->description=$request->description;
+        $movies->image=$request->image;
+
+//        $actors->filmography=$request->
+
+        //$request->name dans le formulaire
+
+        $filename = ""; //define null
+        if($request->hasFile('image'))
+        {
+            $file = $request->file('image');
+            $filename=$file->getClientOriginalName();
+
+            //Move upload
+            $destinationPath = public_path().'/uploads/movies/'; //path vers public
+            $file->move($destinationPath,$filename); //move the image file into public/upload
+
+        }
+        $movies->image = asset("/uploads/movies/".$filename);
+        $movies->save();
+
+
+//exit(dump($request->actors_id));
+
+
+//        dump($request->actors_id);
+//        dump($movies->id);
+        foreach($request->actors_id as $actor){
+
+
+            DB::table('actors_movies')->insert(array(
+                array('actors_id' => $actor, 'movies_id' => $movies->id),
+            ));
+
+        }
+
+
+
+
+        //j'ecris une session message flash
+        Session:: flash('success',"Le film {$movies->title} a bien été crée");
+
+        //je redirige
+        return Redirect::route('movies.index');
+
+
 
     }
+
+
 
     /**
      * Movies delete

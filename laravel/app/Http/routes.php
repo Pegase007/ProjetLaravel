@@ -96,9 +96,14 @@ Route::group(['prefix' =>'directors', 'as'=>'directors' ],function() {
     Route::get('/read/{id}', ['uses' => 'DirectorsController@read','as'=> '.read'])
     ->where('id','[0-9]+');
     /**
-     * Actors index crée des acteurs
+     * Directors index GET crée des  directors
      */
-    Route::get('/create', ['uses' => 'DirectorsController@create','as'=> '.create']);
+    Route::get('/create', ['uses' => 'DirectorsController@create', 'as'=>'.create']);
+    /**
+     * Directors index  POST va enregistrer les informations du formulaire
+     */
+    Route::post('/create', ['uses' => 'DirectorsController@store', 'as'=>'.post']);
+
     /**
      * Actors index met à jours les acteurs
      */
@@ -136,11 +141,16 @@ Route::group(['prefix' =>'movies', 'as' =>'movies'],function() {
     Route::get('/read/{id}', ['uses' => 'MoviesController@read', 'as'=>'.read']);
 
 
-
     /**
-     * Movies index crée des movies
+     * Movies index GET crée des  directors
      */
     Route::get('/create', ['uses' => 'MoviesController@create', 'as'=>'.create']);
+    /**
+     * Movies index  POST va enregistrer les informations du formulaire
+     */
+    Route::post('/create', ['uses' => 'MoviesController@store', 'as'=>'.post']);
+
+
     /**
      * Movies index met à jours les movies
      */
@@ -273,9 +283,13 @@ Route::group(['prefix' =>'category', 'as'=>'category'],function() {
      */
     Route::get('/read/{id}', ['uses' => 'CategoryController@read', 'as'=>'.read']);
     /**
-     * Category index crée des movies
+     * Category index GET crée des  directors
      */
     Route::get('/create', ['uses' => 'CategoryController@create', 'as'=>'.create']);
+    /**
+     * Category index  POST va enregistrer les informations du formulaire
+     */
+    Route::post('/create', ['uses' => 'CategoryController@store', 'as'=>'.post']);
     /**
      * Category index met à jours les movies
      */

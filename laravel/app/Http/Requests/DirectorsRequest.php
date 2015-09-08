@@ -11,7 +11,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * Class ActorsRequest
  * @package App\Http\Requests
  */
-class ActorsRequest extends FormRequest{
+class DirectorsRequest extends FormRequest{
 
 
     /**
@@ -36,11 +36,9 @@ class ActorsRequest extends FormRequest{
             'firstname' =>'required|min:3',
             'lastname' =>'required|min:3',
             'dob' =>'required',
-            'recompenses' =>'required|min:5',
+            'note'=>'required|numeric|max:10',
             'biography' =>'required|min:10|max:500',
-            'roles'=>'required',
-            'nationality' =>'required',
-           'image' =>'required|image',
+            'image' =>'required|image',
 
         ];
 

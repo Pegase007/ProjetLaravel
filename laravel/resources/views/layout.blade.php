@@ -41,6 +41,10 @@ Use search to find needed section.
     <!-- Pixel Admin's stylesheets -->
     <link href={{asset('css/bootstrap.min.css')}} rel="stylesheet" type="text/css">
     <link href={{asset('css/pixel-admin.min.css')}} rel="stylesheet" type="text/css">
+
+    {{--select 2--}}
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+
     <link href={{asset('css/widgets.min.css')}} rel="stylesheet" type="text/css">
     <link href={{asset('css/rtl.min.css')}} rel="stylesheet" type="text/css">
     <link href={{asset('css/themes.min.css')}} rel="stylesheet" type="text/css">
@@ -399,6 +403,8 @@ Use search to find needed section.
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/pixel-admin.min.js')}}"></script>
 <script src="jquery.maskedinput.js" type="text/javascript"></script>
+{{--select2--}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>
 

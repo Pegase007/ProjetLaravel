@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Movies extends Model
 {
+    public $timestamps=false;
 
     /**
      * Ma table movies represente la classe movies
@@ -27,11 +28,28 @@ class Movies extends Model
 
     }
 
+    public function actors(){
+
+        return $this->hasMany('App\Model\Actors');
+
+    }
+
+
+    public function directors()
+    {
+        return $this->belongsToMany('App\Model\Directors');
+    }
+
+
+
+
     public function comments(){
 
         return $this->hasMany('App\Model\Comments');
 
     }
+
+
 
 
 

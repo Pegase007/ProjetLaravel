@@ -16,6 +16,14 @@ class Actors extends Model
     /**
      * @var bool
      */
+
     public $timestamps=false;
+
+
+    public function movies()
+    {
+        return $this->belongsToMany('App\Model\Movies');
+    }
+
 
 }

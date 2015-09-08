@@ -35,11 +35,7 @@
         @endif
 
 
-
-
-
-
-        <form class="panel form-horizontal" method="post" action="{{ route('actors.post') }}">
+        <form enctype="multipart/form-data" class="panel form-horizontal" method="post" action="{{ route('actors.post') }}">
 
             {{-- Important:CSRF attaque, moyen de détourner un formulaire et envoyer les données ailleur--}}
             {{csrf_field()}}
@@ -71,7 +67,7 @@
                 <div class="form-group">
                     <label for="image" class="col-sm-2 control-label">Image</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="image" id="image" placeholder="http://">
+                        <input type="file" class="form-control" name="image" id="image" placeholder="http://">
                         @if ($errors->has('image')) <p class="help-block text-danger">{{$errors->first('image')}}</p>@endif
 
                     </div>
@@ -107,17 +103,37 @@
                 </div> <!-- / .form-group -->
 
 
+
                 <div class="form-group">
                     <label  name="roles" class="col-sm-2 control-label">Roles</label>
                     <div class="col-sm-10">
                         <select name="roles">
-                            <option>Acteur</option>
-                            <option>Compositeur</option>
-                            <option>Doubleur</option>
-                            <option>Realisateur</option>
+                            <option id="acteur" value="acteur">Acteur</option>
+                            <option id="compositeur" value="compositeur">Compositeur</option>
+                            <option id="doubleur" value="doubleur">Doubleur</option>
+                            <option id="realisateur" value="realisateur">Realisateur</option>
                         </select>
                     </div>
-                </div> <!-- / .form-group -->
+                </div>
+
+                <div class="form-group">
+                    <label  name="filmography" class="col-sm-2 control-label">Filmography</label>
+                    <div class="col-sm-10">
+                        <select multiple class="js-example-tags" name="filmography">
+
+                            @foreach( $movies  as $movie)
+
+                                <option value="{{$movie->id}}">{{$movie->title}}</option>
+
+                            @endforeach
+
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <!-- / .form-group -->
                 <div class="form-group">
                     <label for="recompenses" class="col-sm-2 control-label">Recompenses</label>
                     <div class="col-sm-10">

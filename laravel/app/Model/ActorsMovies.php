@@ -4,23 +4,25 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Directors extends Model
+class ActorsMovies extends Model
 {
 
     /**
      * Ma table actors represente la classe actor
      * @var string
      */
-    protected $table='directors';
+    protected $table='actors_movies';
 
     /**
      * @var bool
      */
 
-    public function movies(){
+    public $timestamps=false;
 
-        return $this->hasMany('App\Model\Movies');
 
+    public function movies()
+    {
+        return $this->belongsToMany('App\Model\Movies');
     }
 
 

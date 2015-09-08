@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\CategoryRequest;
 use App\Model\Categories;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -127,7 +128,6 @@ class CategoryController extends Controller{
     }
 
 
-
     /**
      * Categories read
      */
@@ -153,7 +153,52 @@ class CategoryController extends Controller{
      */
     public function create(){
 
+
         return view ('Category/create');
+
+    }
+
+
+    /*
+     * ActorsRequest est une classe de validation de formulaire
+     * Cette classe est liée à la requete, c'est une classe FormRequest
+     *
+     * Le mecanisme de validation de formulaire dans Laravel
+     * valide le formulaire et fais une redirection vers create quand mon formulaire contiens des erreurs, sinon
+     * rentre dans l'action store()
+     */
+    public function store(CategoryRequest $request){
+
+        // J'enregistre un nouvel acteur dès que mon formulaire est valide (0 erreurs)
+
+        $category=new Categories();
+        $category->title=$request->title;
+        $category->description=$request->description;
+        $category->image=$request->image;
+
+        //$request->name dans le formulaire
+
+        $filename = ""; //define null
+        if($request->hasFile('image'))
+        {
+            $file = $request->file('image');
+            $filename=$file->getClientOriginalName();
+
+            //Move upload
+            $destinationPath = public_path().'/uploads/category/'; //path vers public
+            $file->move($destinationPath,$filename); //move the image file into public/upload
+
+        }
+        $category->image = asset("/uploads/category/".$filename);
+        $category->save();
+
+        //j'ecris une session message flash
+        Session:: flash('success',"La categorie {category->title} a bien été crée");
+
+        //je redirige
+        return Redirect::route('category.index');
+
+
 
     }
 

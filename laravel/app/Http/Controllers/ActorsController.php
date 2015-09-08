@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\ActorsRequest;
 use App\Model\Actors;
+use App\Model\Categories;
+use App\Model\Movies;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -54,7 +56,13 @@ class ActorsController extends Controller{
     public function create(){
 
 
-        return view ('Actors/create');
+
+        $datas = [
+
+            "movies" => Movies::all(),
+        ];
+
+        return view ('Actors/create',$datas);
 
     }
 
@@ -90,13 +98,29 @@ class ActorsController extends Controller{
         $actor=new Actors();
         $actor->firstname=$request->firstname;
         $actor->lastname=$request->lastname;
-        $actor->dob=$request->dob;
+        $actor->dob=$request->dob =date_create_from_format("d/m/Y",$request->dob);
         $actor->biography=$request->biography;
         $actor->roles=$request->roles;
         $actor->image=$request->image;
         $actor->nationality=$request->nationality;
         $actor->recompenses=$request->recompenses;
 
+//        $actors->filmography=$request->
+
+                            //$request->name dans le formulaire
+
+        $filename = ""; //define null
+        if($request->hasFile('image'))
+        {
+            $file = $request->file('image');
+            $filename=$file->getClientOriginalName();
+
+            //Move upload
+            $destinationPath = public_path().'/uploads/actors/'; //path vers public
+            $file->move($destinationPath,$filename); //move the image file into public/upload
+
+        }
+        $actor->image = asset("/uploads/actors/".$filename);
         $actor->save();
 
         //j'ecris une session message flash

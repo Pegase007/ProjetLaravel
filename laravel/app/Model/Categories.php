@@ -18,8 +18,11 @@ class Categories extends Model
 
         return $this->hasMany('App\Model\Movies');
 
+
+
+
     }
 
-
+    public $timestamps=false;
 
 }
