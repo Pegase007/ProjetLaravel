@@ -63,11 +63,24 @@
                         @if ($errors->has('title')) <p class="help-block text-danger">{{$errors->first('title')}}</p>@endif
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label for="budget" class="col-sm-2 control-label">Budget</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="budget" id="budget" value="{{ Input::old('budget') }}" placeholder="Budget">
+                        @if ($errors->has('budget')) <p class="help-block text-danger">{{$errors->first('budget')}}</p>@endif
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="duree" class="col-sm-2 control-label">Duree</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="duree" id="duree" value="{{ Input::old('duree') }}" placeholder="Duree">
+                        @if ($errors->has('duree')) <p class="help-block text-danger">{{$errors->first('duree')}}</p>@endif
+                    </div>
+                </div>
                 <div class="form-group">
                     <label  name="directors" class="col-sm-2 control-label">Directors</label>
                     <div class="col-sm-10">
-                        <select multiple class="js-example-tags" name="directors_id[]">
+                        <select multiple class="js-example-tags" name="directors_id[]"  >
 
                             @foreach( $directors  as $director)
 
@@ -117,7 +130,7 @@
                 <div class="form-group">
                     <label  name="categories_id" class="col-sm-2 control-label">Categories</label>
                     <div class="col-sm-10">
-                        <select multiple class="js-example-tags" name="categories_id">
+                        <select  class="js-example-tags" name="categories_id">
 
                             @foreach( $categories  as $category)
 
@@ -207,19 +220,27 @@
                     </div>
                 </div>
 
+                {{--<div class="form-group">--}}
+                    {{--<label for="annee" class="col-sm-2 control-label">Annee</label>--}}
+                    {{--<div class="col-sm-10">--}}
+                        {{--<input type="hidden" class="form-control" name="annee" id="annee" value="{{ substr(Input::old('date_release'), -4) }}" placeholder="annee">--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+
                 <div class="form-group">
-                    <label for="note" class="col-sm-2 control-label">Note</label>
+                    <label for="note_presse" class="col-sm-2 control-label">Note_presse</label>
                     <div class="col-sm-10">
-                        <input type="hidden"  class="form-control" name="note" id="note" placeholder="Note" >
-                        @if ($errors->has('note')) <p class="help-block text-danger">{{$errors->first('note')}}</p>@endif
-                        <div class="ui-slider-colors-demo ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all col-md-offset-1 col-md-8" aria-disabled="true">
-                            <div  class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" >
+                        <input type="hidden"   name="note_presse" id="note_presse" value="5"  >
 
-                            </div>
-                            <a class="ui-slider-handle ui-state-default ui-corner-all" name="note" id="note" href="#" style="left: 50%;">
 
-                            </a>
+                        <div id="slider"  class="range-slider ui-slider-colors-demo ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all col-md-offset-1 col-md-8" data-slider data-options="start: 1; end: 10;">
+                            <span class="range-slider-handle" role="slider" tabindex="0"></span>
+                            <span class="range-slider-active-segment"></span>
+                            <input type="hidden">
                         </div>
+
+
+
                     </div>
                 </div>
 

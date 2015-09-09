@@ -32,14 +32,28 @@ $(document).ready(function(){
         $("#synopsis").limiter(140, { label: '#character-limit-input-label' });
 
 
-        var colorful_sliders_options = {
+
+
+        $("#slider").slider({
             'range': 'min',
             'min': 0,
             'max': 10,
-            'value': 5
-        };
+            'value': 5,
+             slide: function (event, ui) {
+                    $("#note_presse").val(ui.value);
+                }
 
-        $('.ui-slider-colors-demo').slider(colorful_sliders_options);
+
+        });
+
+
+
+
+
+        });
+
+
+
 
 
     });
@@ -47,5 +61,5 @@ $(document).ready(function(){
 
 
 
-});
+
 //# sourceMappingURL=app.js.map

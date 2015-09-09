@@ -30,9 +30,7 @@ class MoviesController extends Controller{
             "futureRelease"=>count(Movies::where('date_release','>',new \DateTime('today'))->get()),
             "actif"=>count(Movies::where('visible',1)->get()),
             "budget"=> Movies::where('date_release','>',2015-01-01)->where('date_release','>',2015-12-31)
-                    ->sum('budget'),
-            "categories" => Movies::find(1)->categories,
-
+                    ->sum('budget')
 
 
         ];
@@ -168,18 +166,21 @@ class MoviesController extends Controller{
     public function store(MoviesRequest $request){
 
         // J'enregistre un nouvel acteur dès que mon formulaire est valide (0 erreurs)
-
-
+    $year=substr($request->date_release, -4);
         $movies=new Movies();
         $movies->type_film=$request->type_film;
         $movies->title=$request->title;
         $movies->date_release = $request->date_release =date_create_from_format("d/m/Y",$request->date_release);
+        $movies->annee = $year;
         $movies->trailer=$request->trailer;
+        $movies->budget=$request->budget;
+        $movies->duree=$request->duree;
+
         $movies->categories_id=$request->categories_id;
         $movies->languages=$request->languages;
         $movies->bo=$request->bo;
         $movies->distributeur=$request->distributeur;
-        $movies->note_presse=$request->note;
+        $movies->note_presse=$request->note_presse;
         $movies->visible=$request->visibility;
         $movies->cover=$request->cover;
         $movies->synopsis=$request->synopsis;
@@ -205,11 +206,18 @@ class MoviesController extends Controller{
         $movies->save();
 
 
-//exit(dump($request->actors_id));
+//        Get the directors in the form and insert them into the directors_movies table
+        foreach($request->directors_id as $director){
 
 
-//        dump($request->actors_id);
-//        dump($movies->id);
+            DB::table('directors_movies')->insert(array(
+                array('directors_id' => $director, 'movies_id' => $movies->id),
+            ));
+
+        }
+        //        Get the actors in the form and insert them into the actors_movies table
+
+
         foreach($request->actors_id as $actor){
 
 
@@ -218,6 +226,11 @@ class MoviesController extends Controller{
             ));
 
         }
+
+
+
+
+
 
 
 

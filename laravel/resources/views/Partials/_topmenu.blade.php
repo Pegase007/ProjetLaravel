@@ -27,6 +27,10 @@
                     <ul class="nav navbar-nav">
                         <li>
                             <a href="{{ route('home') }}">Home</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ route('movies.index') }}"><i class="fa fa-search"></i> See movies</a></li>
+
+                            </ul>
                         </li>
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-film"></i> Movies</a>
@@ -62,6 +66,14 @@
                             <ul class="dropdown-menu">
                                 <li><a href="{{ route('users.index') }}"><i class="fa fa-search"></i> See User</a></li>
                                 <li><a href="{{ route('users.create') }}"><i class="fa fa-plus"></i> Create User</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-commenting-o"></i>  Comments</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ route('comments.index') }}"><i class="fa fa-search"></i> See comments</a></li>
+                                <li><a href=""><i class="fa fa-plus"></i> Create comments</a></li>
                             </ul>
                         </li>
 

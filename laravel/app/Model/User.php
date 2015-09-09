@@ -12,4 +12,11 @@ class User extends Model
      * @var string
      */
     protected $table='user';
+
+
+    public function comments(){
+
+        return $this->hasMany('App\Model\Comments');
+
+    }
 }

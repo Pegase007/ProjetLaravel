@@ -62,4 +62,21 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    public function getLogin()
+    {
+        return view ('Authentification/login');
+    }
+
+    /**
+     * Shows application registration form
+     * @return \Illuminate\View\View
+     */
+    public function getRegister(){
+
+
+        return view('Authentification/register');
+
+    }
+
 }

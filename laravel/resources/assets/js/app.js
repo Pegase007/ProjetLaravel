@@ -32,18 +32,21 @@ $(document).ready(function(){
         $("#synopsis").limiter(140, { label: '#character-limit-input-label' });
 
 
-        var colorful_sliders_options = {
+
+
+        $("#slider").slider({
             'range': 'min',
             'min': 0,
             'max': 10,
-            'value': 5
-        };
+            'value': 5,
+             slide: function (event, ui) {
+                    $("#note_presse").val(ui.value);
+                }
 
-        $('.ui-slider-colors-demo').slider(colorful_sliders_options);
 
-        $('.ui-slider-colors-demo').change(function(e, ui) {
-            $('#note').attr('value', ui.value);
         });
+
+
 
 
 
@@ -58,4 +61,3 @@ $(document).ready(function(){
 
 
 
-});

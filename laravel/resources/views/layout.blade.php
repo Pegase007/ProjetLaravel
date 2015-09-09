@@ -405,6 +405,7 @@ Use search to find needed section.
 <script src="jquery.maskedinput.js" type="text/javascript"></script>
 {{--select2--}}
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>
 

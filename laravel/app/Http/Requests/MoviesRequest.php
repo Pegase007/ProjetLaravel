@@ -35,6 +35,8 @@ class MoviesRequest extends FormRequest{
 
             'type_film' =>'required',
             'title' =>'required|min:3',
+            'budget' =>'required|numeric|min:3',
+            'duree' =>array('required','regex:/^[0-9]{1,2}(:|h)[0-9]{2}((:|h)[0-9]{2})?$/'),
             'trailer' =>'required|url',
             'categories_id' =>'required',
             'directors_id' =>'required',
@@ -43,11 +45,11 @@ class MoviesRequest extends FormRequest{
             'bo' =>'required',
             'distributeur' =>'required',
             'date_release' =>'required',
-//            'note'=>'required|numeric|max:10',
+            'note_presse'=>'required',
             'visible'=>'required',
             'cover'=>'required',
             'synopsis' =>'required|min:10|max:500',
-            'description' =>'required|min:10|max:500',
+            'description' =>'required|min:10|max:1500',
            'image' =>'required|image',
 
         ];
