@@ -13,7 +13,7 @@
 
                 <!-- Logo -->
                 <a href="index.html" class="navbar-brand">
-                    <div><img alt="Cinema" src="assets/images/pixel-admin/main-navbar-logo.png"></div>
+                    <div><img alt="Cinema" src=""></div>
                     Cinema
                 </a>
 
@@ -284,15 +284,15 @@
 
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
-                                    <img src="assets/demo/avatars/1.jpg" alt="">
-                                    <span>John Doe</span>
+                                    <img src="{{Auth::user()->photo}}" alt="">
+                                    <span>{{Auth::user()->name}}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#"><span class="label label-warning pull-right">New</span>Profile</a></li>
-                                    <li><a href="#"><span class="badge badge-primary pull-right">New</span>Account</a></li>
+                                    <li><a href="{{ route('account') }}"><span class="badge badge-primary pull-right">New</span>Account</a></li>
                                     <li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="pages-signin.html"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+                                    <li><a href="{{url('auth/logout')}}"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
                                 </ul>
                             </li>
                         </ul> <!-- / .navbar-nav -->

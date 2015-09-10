@@ -1,11 +1,5 @@
 $(document).ready(function(){
 
-   $('div.alert-danger').delay(3000).fadeOut('slow');
-
-});
-
-$(document).ready(function(){
-
     //ciblage de lelement + evenement dessus
 
     $('table#list .btn-danger').click(function(e){
@@ -65,5 +59,3 @@ $(document).ready(function(){
     });
 
 
-
-//# sourceMappingURL=main.js.map

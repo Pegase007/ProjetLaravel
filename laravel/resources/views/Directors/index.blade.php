@@ -24,7 +24,7 @@
                             Success Table
                         </div>
                     </div>
-                    <table class="table table-bordered">
+                    <table id="list" class="table table-bordered">
                         <thead>
                         <tr>
                             <th>Id</th>

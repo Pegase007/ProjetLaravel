@@ -48,9 +48,9 @@
     <a href="index.html" class="logo">
         <div class="demo-logo bg-primary"><img src="assets/demo/logo-big.png" alt="" style="margin-top: -4px;"></div>&nbsp;
         <strong>Ciné</strong>Canicule
-    </a> <!-- / .logo -->
-    <a href="" class="btn btn-primary ">Sign Up</a>
-</div> <!-- / .header -->
+    {{--</a> <!-- / .logo -->--}}
+    {{--<a href="{{ url('auth/register') }}" class="btn btn-primary ">Sign Up</a>--}}
+{{--</div> <!-- / .header -->--}}
 
 @include('Partials/_flashdatas')
 

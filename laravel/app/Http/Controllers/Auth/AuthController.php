@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -24,13 +26,31 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
+     *Url apres success login
+     */
+    protected $loginPath = '/auth/login';
+    /**
+     * Url par defaut de redirection generale
+     * When a user is successfully authenticated, they will be redirected to the /home URI
+     * @var string
+     */
+    protected $redirectPath = '/admin/';
+    /**
+     * Url après déconnection
+     */
+    protected $redirectAfterLogout='/auth/login';
+    /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
+    protected $redirectTo='/auth/login';
+
+
+
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('guest', ['except' => ['getLogout','account','modification']]);
     }
 
     /**
@@ -43,8 +63,19 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:administrators',
             'password' => 'required|confirmed|min:6',
+            'prenom'=>'required|max:255',
+            'photo'=>'required|url',
+            'ville'=>'required|max:100',
+            'description'=>'required|max:500'
+
+
+
+        ], [
+
+            'required' => 'The :attribute field is required.',
+
         ]);
     }
 
@@ -60,6 +91,11 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'prenom'=>$data['prenom'],
+            'photo'=>$data['photo'],
+            'ville'=>$data['ville'],
+            'description'=>$data['description']
+
         ]);
     }
 
@@ -78,5 +114,32 @@ class AuthController extends Controller
         return view('Authentification/register');
 
     }
+
+    public function account(){
+
+
+
+
+        return view('Authentification/account');
+
+
+
+    }
+
+//
+//    public function modification(Request $request){
+//
+//        $data = $request->all();
+//
+//        $user = Auth::user();
+//        $user->name = $request->name;
+//        $user->prenom = $request->name;
+//        $user->photo = $request->name;
+//
+//        $user->save();
+//
+//        return Redirect::route('account');
+//    }
+
 
 }

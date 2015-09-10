@@ -15,9 +15,8 @@ elixir(function(mix) {
     //mix.styles(['app.css','main.css']).stylesIn ("public/css");
 
     //mix.sass(['main.sass']).stylesIn ("public/css");
-    mix.scripts(['table.js']).scriptsIn ("public/js");
-
-    mix.scripts(['main.js'],'public/js/main.js');
+    //mix.scripts(['table.js']).scriptsIn ("public/js");
+    mix.scripts(['main.js','ajax.js'],'public/js/main.js');
     mix.scripts(['app.js'],'public/js/app.js');
     mix.sass(['main.sass'],'public/main.css');
 

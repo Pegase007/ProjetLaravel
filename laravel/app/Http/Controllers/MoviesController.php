@@ -259,10 +259,10 @@ class MoviesController extends Controller{
 
 
         //j'ecris un message flash en session
-        Session::flash('success',"L'acteur {$movies->firstname} {$movies->lastname} a bien été supprimé");
+//        Session::flash('success',"L'acteur {$movies->firstname} {$movies->lastname} a bien été supprimé");
 
         //je redirige
-        return Redirect::route('movies.index');
+
     }
 
 

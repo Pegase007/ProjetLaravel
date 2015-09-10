@@ -33,7 +33,7 @@
                     </ul> <!-- / .pagination -->
                 </div> <!-- / .panel-heading-controls -->
             </div> <!-- / .panel-heading -->
-            <table class="table">
+            <table id="list" class="table">
                 <thead>
                 <tr>
                     <th>id</th>

@@ -122,7 +122,7 @@
                         </div>
 
                         <div class="btn-group btn-group-xs">
-                            <select name="actions" class="form-control">
+                            <select id="actions" name="actions" class="form-control">
                                 <option></option>
                                 <option value="Supprimer">Supprimer</option>
                                 <option value="Activer">Activer</option>
@@ -138,7 +138,7 @@
 
             {{--TABLE--}}
 
-            <table class="table table-success table-bordered">
+            <table id='list' class="table table-success table-bordered">
                 <thead>
                 <tr>
 
@@ -150,8 +150,8 @@
                     <th>Enable</th>
                     <th>Cover</th>
                     <th>Title</th>
-                    <th>Languages</th>
-                    <th>Distributeur</th>
+                    <th>Lges</th>
+                    {{--<th>Distributeur</th>--}}
                     <th>Categories</th>
                     <th>Bo</th>
                     <th>Annee</th>
@@ -162,7 +162,7 @@
                     {{--<th></th> --}}
 
                     {{-- DELETE COLUMN --}}
-                    {{--<th></th> --}}
+                    <th></th>
                     <th>Note</th>
                     <th>Actions</th>
 
@@ -177,7 +177,7 @@
 
                         {{--FILL IN TABLE ROW FOR EACH MOVIE --}}
 
-                        <td><label class="px-single"><input type="checkbox" name="movies[]" value="{{$movie->id}}" class="px"><span class="lbl"></span></label>  {{$movie->id}} </td>
+                        <td><label class="px-single"><input data-url="{{route('movies.delete',['id'=> $movie->id])}}" type="checkbox" name="movies[]" value="{{$movie->id}}" class="px"><span class="lbl"></span></label>  {{$movie->id}} </td>
                         <td class="col-md-1"><a href="{{route('movies.read',['id'=>$movie->id])}}" class="thumbnail"> <img class="img-responsive" src="{{$movie->image}}"></a></td>
                         <td>
                             {{--checks if movie is visible or not, uses check boxes to make changes--}}
@@ -212,7 +212,7 @@
 
                         <td><a href="{{route('movies.read',['id'=>$movie->id])}}"> {{$movie->title}}</a></td>
                         <td>{{$movie->languages}}</td>
-                        <td>{{$movie->distributeur}}</td>
+                        {{--<td>{{$movie->distributeur}}</td>--}}
                         <td>{{ $movie->categories->title }}</td>
                         <td>{{$movie->bo}}</td>
                         <td>{{$movie->annee}}</td>
@@ -222,10 +222,11 @@
                         {{--SEE BUTTON --}}
                         {{--<td><button class="btn btn-default" type="submit"><i class="fa fa-eye"></i> See</button></td>--}}
 
-                        {{--DELETE BUTTON--}}
-                        {{--<td><a href="{{route('movies.delete',['id'=>$movie->id])}}" class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i> Delete</a></td>--}}
 
                         <td>{{$movie->note_presse}}</td>
+
+                        {{--DELETE BUTTON--}}
+                        <td><a href="{{route('movies.delete',['id'=>$movie->id])}}" class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i> Delete</a></td>
 
                         {{--ACTIONS COLUM--}}
                         <td>

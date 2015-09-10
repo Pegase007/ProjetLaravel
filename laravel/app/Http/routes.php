@@ -27,6 +27,15 @@ Route::controllers([
 Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
 
 
+    Route::get('/account', ['uses' => 'Auth\AuthController@account', 'as' => 'account']);
+    Route::post('/update', ['uses' => 'Auth\AuthController@modification', 'as' => 'update']);
+
+
+
+
+
+
+
         Route::get('/', ['uses' =>'PagesController@home','as'=>'home']);
         /**
          * Permet de connecter l'URI contact à la page Contact
@@ -166,6 +175,10 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
          * Movies index  POST va enregistrer les informations du formulaire
          */
         Route::post('/create', ['uses' => 'MoviesController@store', 'as'=>'.post']);
+
+
+        Route::get('/delete/{id}', ['uses' => 'MoviesController@delete', 'as'=>'.delete'])
+             ->where('id','[0-9]+');
 
 
         /**
