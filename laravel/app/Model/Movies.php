@@ -5,9 +5,13 @@ namespace App\Model;
  *
  */
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Movies extends Model
 {
+
+    use SoftDeletes;
+
     public $timestamps=false;
 
     /**
@@ -17,6 +21,10 @@ class Movies extends Model
     protected $table='movies';
 
 //    public $timestamps = false;
+
+    protected $dates =['deleted_at'];
+
+
 
 
     public function categories(){

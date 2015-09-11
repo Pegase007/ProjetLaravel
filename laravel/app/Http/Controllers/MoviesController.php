@@ -5,6 +5,7 @@ use App\Http\Requests\MoviesRequest;
 use App\Model\Actors;
 use App\Model\ActorsMovies;
 use App\Model\Categories;
+use App\Model\Comments;
 use App\Model\Directors;
 use Illuminate\Http\Request;
 use App\Model\Movies;
@@ -30,9 +31,11 @@ class MoviesController extends Controller{
             "futureRelease"=>count(Movies::where('date_release','>',new \DateTime('today'))->get()),
             "actif"=>count(Movies::where('visible',1)->get()),
             "budget"=> Movies::where('date_release','>',2015-01-01)->where('date_release','>',2015-12-31)
-                    ->sum('budget')
+                    ->sum('budget'),
 
-
+//            "allmovies"=>Movies::withTrashed()->get(),
+//            "trashed"=>Movies::onlyTrashed()->get(),
+//            "restore"=>Movies::onlyTrashed()->restore()
         ];
 
         return view ('Movies/index',$datas);
@@ -45,13 +48,45 @@ class MoviesController extends Controller{
      */
     public function read($id=null){
 
+
+        $movie=Movies::find($id);
+
+        if(!$movie){ // !$movie <=> $movie == null
+            abort(404);
+            //abort() eest un helper
+            //ne permettant de lancer un code d'erreur
+        }
+
         $datas=[
 
-            'movies'=>Movies::find($id)
+            'movies'=> $movie
+
+
+//        FindorFail me permet de lancer une erreur exception si il ne trouve pas de film
+//        'movies'=>Movies::findorFail($id);
 
         ];
 
+
         return view ('Movies/read',$datas);
+
+    }
+
+
+
+
+    public function comment(Request $request, $id){
+
+        Comments::create([
+                'content'=>$request->input('content'),
+                'movies_id'=>$id,
+                'user_id'=> 28,
+                'date_created'=>new \DateTime('now')
+
+        ]);
+        Session::flash('success',"Le commentaire à bien été ajouté");
+
+        return Redirect::route('movies.read',['id'=>$id]);
 
     }
     /**
@@ -303,6 +338,12 @@ class MoviesController extends Controller{
         if($condition=='visible'){
             $datas=[
 
+                "counter"=>count(Movies::all()),
+                "top"=>count(Movies::where('cover',1)->get()),
+                "futureRelease"=>count(Movies::where('date_release','>',new \DateTime('today'))->get()),
+                "actif"=>count(Movies::where('visible',1)->get()),
+                "budget"=> Movies::where('date_release','>',2015-01-01)->where('date_release','>',2015-12-31)
+                    ->sum('budget'),
                 'movies'=> Movies::where('visible',1)
                     ->get()
 
@@ -314,6 +355,12 @@ class MoviesController extends Controller{
 
             $datas=[
 
+                "counter"=>count(Movies::all()),
+                "top"=>count(Movies::where('cover',1)->get()),
+                "futureRelease"=>count(Movies::where('date_release','>',new \DateTime('today'))->get()),
+                "actif"=>count(Movies::where('visible',1)->get()),
+                "budget"=> Movies::where('date_release','>',2015-01-01)->where('date_release','>',2015-12-31)
+                    ->sum('budget'),
                 'movies'=> Movies::where('visible',0)
                     ->get()
 
@@ -322,7 +369,12 @@ class MoviesController extends Controller{
         if($condition=='VO'){
 
             $datas=[
-
+                "counter"=>count(Movies::all()),
+                "top"=>count(Movies::where('cover',1)->get()),
+                "futureRelease"=>count(Movies::where('date_release','>',new \DateTime('today'))->get()),
+                "actif"=>count(Movies::where('visible',1)->get()),
+                "budget"=> Movies::where('date_release','>',2015-01-01)->where('date_release','>',2015-12-31)
+                    ->sum('budget'),
                 'movies'=> Movies::where('bo','VO')
                     ->get(),
                 'class'=>'"btn btn-sucess"'
@@ -333,6 +385,12 @@ class MoviesController extends Controller{
 
             $datas=[
 
+                "counter"=>count(Movies::all()),
+                "top"=>count(Movies::where('cover',1)->get()),
+                "futureRelease"=>count(Movies::where('date_release','>',new \DateTime('today'))->get()),
+                "actif"=>count(Movies::where('visible',1)->get()),
+                "budget"=> Movies::where('date_release','>',2015-01-01)->where('date_release','>',2015-12-31)
+                    ->sum('budget'),
                 'movies'=> Movies::where('bo','VOST')
                     ->get()
 
@@ -342,6 +400,12 @@ class MoviesController extends Controller{
 
             $datas=[
 
+                "counter"=>count(Movies::all()),
+                "top"=>count(Movies::where('cover',1)->get()),
+                "futureRelease"=>count(Movies::where('date_release','>',new \DateTime('today'))->get()),
+                "actif"=>count(Movies::where('visible',1)->get()),
+                "budget"=> Movies::where('date_release','>',2015-01-01)->where('date_release','>',2015-12-31)
+                    ->sum('budget'),
                 'movies'=> Movies::where('bo','VF')
                     ->get()
 
@@ -351,6 +415,11 @@ class MoviesController extends Controller{
 
             $datas=[
 
+                "counter"=>count(Movies::all()), "top"=>count(Movies::where('cover',1)->get()),
+                "futureRelease"=>count(Movies::where('date_release','>',new \DateTime('today'))->get()),
+                "actif"=>count(Movies::where('visible',1)->get()),
+                "budget"=> Movies::where('date_release','>',2015-01-01)->where('date_release','>',2015-12-31)
+                    ->sum('budget'),
                 'movies'=> Movies::where('bo','VOSTFR')
                     ->get()
 
@@ -360,6 +429,12 @@ class MoviesController extends Controller{
 
             $datas=[
 
+                "counter"=>count(Movies::all()),
+                "top"=>count(Movies::where('cover',1)->get()),
+                "futureRelease"=>count(Movies::where('date_release','>',new \DateTime('today'))->get()),
+                "actif"=>count(Movies::where('visible',1)->get()),
+                "budget"=> Movies::where('date_release','>',2015-01-01)->where('date_release','>',2015-12-31)
+                    ->sum('budget'),
                 'movies'=> Movies::where('distributeur','Warner_Bros')
                     ->get()
 
@@ -368,6 +443,12 @@ class MoviesController extends Controller{
 
         $datas=[
 
+            "counter"=>count(Movies::all()),
+            "top"=>count(Movies::where('cover',1)->get()),
+            "futureRelease"=>count(Movies::where('date_release','>',new \DateTime('today'))->get()),
+            "actif"=>count(Movies::where('visible',1)->get()),
+            "budget"=> Movies::where('date_release','>',2015-01-01)->where('date_release','>',2015-12-31)
+                ->sum('budget'),
             'movies'=> Movies::where('distributeur','HBO')
                 ->get()
 
@@ -458,7 +539,35 @@ class MoviesController extends Controller{
         }
 
 
+    public function trash(){
+
+
+        $movies=Movies::onlyTrashed()->get();
+
+        $datas=[
+            "movies" =>$movies,
+            "counter"=>count($movies),
+            "top"=> 0,
+            "futureRelease"=> 0,
+            "actif"=>0,
+            "budget"=> 0
+        ];
+
+        return view('Movies/index',$datas);
     }
+
+    public function restore($id){
+
+        Movies::where('id', '=', $id)->restore();
+        return Redirect ::route('movies.trash');
+    }
+
+
+
+
+
+
+}
 
 
 ?>

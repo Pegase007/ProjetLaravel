@@ -62,6 +62,24 @@ $(document).ready(function(){
         });
 
 
+    $('#recover').click(function(e){
+
+        e.preventDefault(); //annuler l'evenement href de mes liens
+
+        //console.log('vous avez cliqué dessu :)');
+
+        var elt = $(this);
+        $.ajax({
+            url: elt.attr('href') //url de mon href lien)
+        }).done(function(){
+
+            elt.parents('tr').fadeOut('slow');
+
+        });
+
+    });
+
+
     });
 
 

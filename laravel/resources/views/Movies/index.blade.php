@@ -120,6 +120,10 @@
                             <a href="{{route('movies.index')}}" type="button" class="btn @if(Request::segment(3) == '') btn-success @else btn-default @endif btn-xs">TOUS</a>
 
                         </div>
+                        <div class="btn-group">
+                            <a href="{{route('movies.trash')}}" type="button" class="btn @if(Request::segment(2) == 'trash') btn-success @else btn-default @endif btn-xs">Trash</a>
+
+                        </div>
 
                         <div class="btn-group btn-group-xs">
                             <select id="actions" name="actions" class="form-control">
@@ -162,10 +166,14 @@
                     {{--<th></th> --}}
 
                     {{-- DELETE COLUMN --}}
-                    <th></th>
-                    <th>Note</th>
-                    <th>Actions</th>
 
+                    <th>Note</th>
+                    @if(Route::current()->getName() == 'movies.trash')
+                    <th></th>
+                    @else
+                    <th></th>
+                    <th>Actions</th>
+                    @endif
 
                 </tr>
                 </thead>
@@ -225,17 +233,22 @@
 
                         <td>{{$movie->note_presse}}</td>
 
-                        {{--DELETE BUTTON--}}
-                        <td><a href="{{route('movies.delete',['id'=>$movie->id])}}" class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i> Delete</a></td>
+                        @if(Route::current()->getName() == 'movies.trash')
+                            <td><a href="{{route('movies.restore',['id'=>$movie->id])}}" class="btn btn-success" id=recover type="submit"> Recover</a></td>
+                        @else
+                            {{--DELETE BUTTON--}}
+                            <td><a href="{{route('movies.delete',['id'=>$movie->id])}}" class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i> Delete</a></td>
+                            <td>
+                                <a href="{{route('movies.update',['id'=>$movie->id , 'action'=> 'up'])}}" class="btn btn-primary btn-xs " type="submit"><i class="fa fa-thumbs-o-up"></i> Note up</a>
+
+                                <a href="{{route('movies.update',['id'=>$movie->id , 'action'=> 'down'])}}" class="btn btn-danger btn-xs" type="submit"><i class="fa fa-thumbs-o-down"></i> Note down</a>
+
+
+                            </td>
+                        @endif
 
                         {{--ACTIONS COLUM--}}
-                        <td>
-                            <a href="{{route('movies.update',['id'=>$movie->id , 'action'=> 'up'])}}" class="btn btn-primary btn-xs " type="submit"><i class="fa fa-thumbs-o-up"></i> Note up</a>
 
-                            <a href="{{route('movies.update',['id'=>$movie->id , 'action'=> 'down'])}}" class="btn btn-danger btn-xs" type="submit"><i class="fa fa-thumbs-o-down"></i> Note down</a>
-
-
-                        </td>
 
                     </tr>
                 @endforeach

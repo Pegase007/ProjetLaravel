@@ -166,6 +166,12 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::get('/read/{id}', ['uses' => 'MoviesController@read', 'as'=>'.read'])
             ->where('id','[0-9]+');
 
+             /**
+         * Movies index lit un seul movies
+         */
+        Route::post('/comment/{id}', ['uses' => 'MoviesController@comment', 'as'=>'.comment'])
+            ->where('id','[0-9]+');
+
 
         /**
          * Movies index GET crée des  directors
@@ -194,6 +200,11 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
 
 
         Route::any('/actions', ['uses' => 'MoviesController@actions' , 'as'=>'.actions']);
+
+        Route::get('/trash', ['uses' => 'MoviesController@trash' , 'as'=>'.trash']);
+
+        Route::get('/restore/{id}', ['uses' => 'MoviesController@restore' , 'as'=>'.restore'])
+            ->where('id','[0-9]+');
 
 
 
