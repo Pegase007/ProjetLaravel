@@ -74,6 +74,44 @@ $(document).ready(function(){
     });
 
 
+    $('form#addcomment').submit(function(e){
+
+        e.preventDefault();
+
+        var elt = $(this);
+
+        console.log(elt);
+        console.log(elt.attr('action'));
+        console.log(elt.serialize());
+
+        $.ajax({
+            url: elt.attr('action'),
+            method: "POST", // Methode d'envoi de ma requete
+            data: elt.serialize()
+            //data:envoyer des données
+        }).done(function(data){
+
+            var elt = $('#comment .comment:first').clone();
+
+            elt.find('.comment-text').html(
+                "<div class='comment-heading'><a href='#' title=''>Moi</a><span> il y a un instant</span></div> " + $('#addcomment textarea').val()
+            );
+
+            $('#comment').append(elt);
+            $('#addcomment textarea').val("");
+
+
+
+        });
+
+
+
+    })
+
+
+
+
+
     });
 
 

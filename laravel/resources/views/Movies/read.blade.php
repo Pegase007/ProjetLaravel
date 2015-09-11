@@ -73,7 +73,7 @@
                             <div class="comment">
 
                                 <div class="comment-body">
-                                    <form action="{{route('movies.comment',['id' => $movies->id])}}" method="post" id="leave-comment-form" class="comment-text no-padding no-border expanding-input">
+                                    <form action="{{route('movies.comment',['id' => $movies->id])}}" method="post" id="addcomment" class="comment-text no-padding no-border expanding-input">
                                     {{csrf_field()}}
                                         <textarea name="content" class="form-control expanding-input-target" rows="1" placeholder="Add Comment"></textarea>
                                         <br>
@@ -85,21 +85,20 @@
                                 </div> <!-- / .comment-body -->
                             </div>
 
-                            <div class="comment">
-                        @foreach($movies->comments as $comment)
-
-                                <img src="{{$comment->user->avatar}}" alt="" class="comment-avatar">
-                                <div class="comment-body">
-                                    <div class="comment-text">
-                                        <div class="comment-heading">
-                                            <a href="#" title="">{{$comment->user->username}}</a><span>{{$comment->date_created}}</span>
+                            <div id="comment">
+                                    @foreach($movies->comments as $comment)
+                                        <div  class="comment">
+                                            <img src="{{$comment->user->avatar}}" alt="" class="comment-avatar">
+                                            <div class="comment-body">
+                                                <div class="comment-text">
+                                                    <div class="comment-heading">
+                                                        <a href="#" title="">{{$comment->user->username}}</a><span>{{$comment->date_created}}</span>
+                                                    </div>
+                                                    {{$comment->content}}
+                                                </div>
+                                            </div> <!-- / .comment-body -->
                                         </div>
-                                        {{$comment->content}}
-                                    </div>
-                                </div> <!-- / .comment-body -->
-                                    <div><br></div>
-                                @endforeach
-
+                                    @endforeach
                                 </div> <!-- / .comment -->
 
                             <!-- / .comment -->
