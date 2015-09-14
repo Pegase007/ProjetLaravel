@@ -37,6 +37,9 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
 
 
         Route::get('/', ['uses' =>'PagesController@home','as'=>'home']);
+
+        Route::post('/flashmovie',['uses' => 'PagesController@flashmovie','as'=>'flashmovie']);
+
         /**
          * Permet de connecter l'URI contact à la page Contact
          */
