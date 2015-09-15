@@ -57,6 +57,10 @@ class Movies extends Model
 
     }
 
+    public function sessions()
+    {
+        return $this->hasMany('App\Model\Sessions');
+    }
 
 
 

@@ -7,12 +7,35 @@
 @endsection
 @section('contentheader')
 
-    Welcome
+    Simple
+
 @endsection
 
 {{--Ecrire dans la session content--}}
 @section('content')
+    <div class="col-md-12">
 
+        <div class="pull-right col-xs-12 col-sm-auto">
+            <a href="{{route('pro')}}" class="btn @if(Route::current()->getName() == 'pro') btn-success @else btn-default @endif  btn-labeled" style="width: 100%;">
+                Professionel
+            </a>
+        </div>
+        <div class="pull-right col-xs-12 col-sm-auto">
+            <a href="{{route('advanced')}}" class="btn @if(Route::current()->getName() == 'advanced') btn-success @else btn-default @endif btn-labeled" style="width: 100%;">
+                Avancé
+            </a>
+        </div>
+
+        <div class="pull-right col-xs-12 col-sm-auto">
+            <a href="{{route('home')}}" class="btn @if(Route::current()->getName() == 'home') btn-success @else btn-default @endif btn-labeled" style="width: 100%;">
+                Simple
+            </a>
+        </div>
+
+    </div>
+
+
+<div class="col-md-12"> <br></div>
 
     {{--<ul>--}}
         {{--['ville'=>"Lyon"] permet d'envoyer l'argument ->  ville en tant que paramettre dans mes vues--}}
@@ -240,15 +263,15 @@
 
     {{--end movie form--}}
 {{--START DINAMIC PANEL--}}
-    <div class="col-md-6">
-        <div class="panel panel-success widget-support-tickets" id="dashboard-support-tickets">
+    <div class="col-md-6" id="panelajax" data-url="{{ route('sessions.ajax') }}">
+        <div class="panel panel-success widget-support-tickets" id=" dashboard-recent dashboard-support-tickets">
             <div class="panel-heading">
                 <span class="panel-title"><i class="panel-title-icon fa fa-bullhorn"></i>Prochaines scéances</span>
                 <div class="panel-heading-controls">
                     <div class="panel-heading-text"><a href="#">{{$tocome->coming}} scéances à venir</a></div>
                 </div>
             </div> <!-- / .panel-heading -->
-            <div class="panel-body tab-content-padding">
+            <div   class="panel-body tab-content-padding">
                 <!-- Panel padding, without vertical padding -->
                 <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 300px;"><div class="panel-padding no-padding-vr" style="overflow: hidden; width: auto; height: 300px;">
 
@@ -257,16 +280,14 @@
 
 
                             @if(($movie->dif) < 2)
-                                 <span class="label label-info ticket-label">Moins de deux jours</span>
+                                 <span class="label label-danger ticket-label">Sortie dans {{$movie->dif}}</span>
                             @elseif(($movie->dif) < 6)
-                                <span class="label label-warning ticket-label">Moins de 6 jours</span>
+                                <span class="label label-warning ticket-label">Sortie dans {{$movie->dif}}</span>
+                            @elseif(($movie->dif) < 15)
+                                <span class="label label-info ticket-label">Sortie dans {{$movie->dif}}</span>
                             @elseif(($movie->dif) > 15)
-                                <span class="label label-success ticket-label">Plus de 15 jours</span>
+                                <span class="label label-success ticket-label">Sortie dans {{$movie->dif}}</span>
                             @endif
-
-
-
-
 
                                 <a href="#" title="" class="ticket-title">{{$movie->movies}}<span>[#{{$movie->id}}]</span></a>
 								<span class="ticket-info">
@@ -275,7 +296,8 @@
                         </div> <!-- / .ticket -->
 
                         @endforeach
-                    </div><div class="slimScrollBar" style="width: 7px; position: absolute; top: 38px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 93.5550935550936px; background: rgb(136, 136, 136);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+                    </div>
+                </div>
             </div> <!-- / .panel-body -->
         </div> <!-- / .panel -->
     </div>
@@ -283,4 +305,11 @@
     {{--end dinamic panel--}}
 
 
+<br>
+@endsection
+@section('js')
+    @parent
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="{{  asset('js/gmap.js') }}"></script>
+    <script src="{{ asset('js/realtime.js') }}"> </script>
 @endsection

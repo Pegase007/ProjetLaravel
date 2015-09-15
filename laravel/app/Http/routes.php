@@ -38,7 +38,12 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
 
         Route::get('/', ['uses' =>'PagesController@home','as'=>'home']);
 
+        Route::get('/advanced', ['uses' =>'PagesController@advanced','as'=>'advanced']);
+        Route::get('/pro', ['uses' =>'PagesController@pro','as'=>'pro']);
+
         Route::post('/flashmovie',['uses' => 'PagesController@flashmovie','as'=>'flashmovie']);
+
+
 
         /**
          * Permet de connecter l'URI contact à la page Contact
@@ -378,8 +383,13 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
     });
 
 
+    Route::group(['prefix' =>'sessions', 'as'=>'sessions'],function() {
 
+        Route::get('/index', ['uses' => 'SessionsController@index', 'as'=>'.index']);
 
+        Route::get('/ajax',['uses' => 'SessionsController@ajax','as'=>'.ajax']);
+
+    });
 
 
     /**

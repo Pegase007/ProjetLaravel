@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Model\Actors;
+use App\Model\Cinema;
+use App\Model\Comments;
 use App\Model\Movies;
+use App\Model\Sessions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -153,6 +157,34 @@ class PagesController extends Controller{
 
 
         return view('Pages/search');
+    }
+
+    public function advanced(){
+
+        $data=[
+
+          'items' => DB::table('cinema')
+              ->select('id','title','ville as location')
+              ->get(),
+            'sessions'=>Sessions::all(),
+            'movies'=>Movies::all(),
+            'cinema'=>Cinema::all()
+
+
+
+        ];
+
+
+
+        return view('Pages/advanced',$data);
+
+    }
+
+
+    public function pro(){
+
+        return view('Pages/professional');
+
     }
 
 
