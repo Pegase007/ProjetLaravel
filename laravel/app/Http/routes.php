@@ -39,6 +39,14 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::get('/', ['uses' =>'PagesController@home','as'=>'home']);
 
         Route::get('/advanced', ['uses' =>'PagesController@advanced','as'=>'advanced']);
+
+        Route::get('/task', ['uses' =>'PagesController@task','as'=>'task']);
+
+        Route::post('/nwtask', ['uses' =>'PagesController@nwtask','as'=>'nwtask']);
+
+        Route::post('/position', ['uses' =>'PagesController@position','as'=>'position']);
+
+
         Route::get('/pro', ['uses' =>'PagesController@pro','as'=>'pro']);
 
         Route::post('/flashmovie',['uses' => 'PagesController@flashmovie','as'=>'flashmovie']);

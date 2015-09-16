@@ -130,7 +130,6 @@ $(document).ready(function(){
 
         $('.date').datepicker({
 
-
             format:'dd/mm/yyyy',
             todayBtn:'linked'
         });
@@ -190,6 +189,27 @@ $(document).ready(function(){
             barColor: PixelAdmin.settings.consts.COLORS[1]
         }));
 
+
+//tasks table
+        $('.widget-tasks .panel-body').sortable({
+            axis: "y",
+            handle: ".task-sort-icon",
+            stop: function( event, ui ) {
+                // IE doesn't register the blur when sorting
+                // so trigger focusout handlers to remove .ui-state-focus
+                ui.item.children( ".task-sort-icon" ).triggerHandler( "focusout" );
+                var data = $(this).sortable('serialize');
+
+                $.ajax({
+                    data: { data: data, _token: $('.widget-tasks .panel-body').attr('data-token')},
+                    type: 'POST',
+                    url: $('.widget-tasks .panel-body').attr('data-url')
+                });
+
+                console.log(data);
+            }
+        });
+        console.log( $('.widget-tasks .panel-body').length);
 
 
 

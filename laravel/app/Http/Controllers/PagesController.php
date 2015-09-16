@@ -6,6 +6,8 @@ use App\Model\Cinema;
 use App\Model\Comments;
 use App\Model\Movies;
 use App\Model\Sessions;
+use App\Model\Tasks;
+use App\Model\Temoignages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -163,18 +165,14 @@ class PagesController extends Controller{
 
         $data=[
 
-          'items' => DB::table('cinema')
-              ->select('id','title','ville as location')
-              ->get(),
-            'sessions'=>Sessions::all(),
+            'cinemas' => Cinema::all(),
             'movies'=>Movies::all(),
-            'cinema'=>Cinema::all()
+            'temoignages'=>Temoignages::all(),
+            'tasks'=>Tasks::all(),
 
 
 
         ];
-
-
 
         return view('Pages/advanced',$data);
 
@@ -187,6 +185,44 @@ class PagesController extends Controller{
 
     }
 
+    public function task(){
+
+
+
+    }
+    public function nwtask(Request $request){
+
+        $task = new Tasks();
+        $task->content=$request->content;
+        $task->date=$request->date;
+        $task->movie=$request->movie;
+
+        $task->save();
+
+        return Redirect::route('advanced');
+
+
+
+    }
+
+    public function position(Request $request){
+
+
+        dump($request->data);
+        exit();
+
+        for($i=1; $i <= 5; $i++){
+
+        $position=Tasks::find($request[$i]);
+        $position->position = $i;
+        $position->save();
+
+        }
+
+        return Redirect::route('advanced');
+
+
+    }
 
 
 

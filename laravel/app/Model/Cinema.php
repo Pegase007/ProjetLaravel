@@ -30,4 +30,9 @@ class Cinema extends Model
         return $this->hasMany('App\Model\Sessions');
     }
 
+    public function temoignages()
+    {
+        return $this->hasMany('App\Model\Temoignages');
+    }
+
 }

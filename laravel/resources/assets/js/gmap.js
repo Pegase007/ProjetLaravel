@@ -47,6 +47,7 @@ $(document).ready(function(){
         //console.log(  $( this ).data("title") );
         var address = $( this ).text();
         var title=$( this).data('title');
+        var sceances=$(this).data('sceances')
         var marker='';
 
         geocoder.geocode({'address': address}, function(results, status) {
@@ -61,7 +62,7 @@ $(document).ready(function(){
 
                 });
                 var infowindow = new google.maps.InfoWindow();
-                infowindow.setContent('<div class="stat-row"><div class="stat-cell bg-success darker"><span class="text-bg">'+ title +'</span><br><span class="text-sm">' + address + '</span><br><span class="text-sm pull-right"><strong>   Sceances disponibles </strong> </span></div></div>' );
+                infowindow.setContent('<div class="stat-row"><div class="stat-cell bg-success darker"><span class="text-bg">'+ title +'</span><br><span class="text-sm">' + address + '</span><br><span class="text-sm pull-right"><strong> '+ sceances +'  Sceances disponibles </strong> </span></div></div>' );
 
 
 
