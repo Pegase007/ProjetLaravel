@@ -10,6 +10,12 @@ $(document).ready(function(){
             todayBtn:'linked'
         });
 
+            $('#datetimepicker1').datetimepicker({
+
+                format: 'dd/MM/yyyy hh:mm:ss',
+            });
+
+
         $('.wyswyg').summernote({
             height:200,
             tabsize:2,
@@ -67,6 +73,7 @@ $(document).ready(function(){
 
 
 //tasks table
+
         $('.widget-tasks .panel-body').sortable({
             axis: "y",
             handle: ".task-sort-icon",
@@ -97,6 +104,7 @@ $(document).ready(function(){
 
 
     });
+
 
 
 

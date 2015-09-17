@@ -167,8 +167,8 @@ class PagesController extends Controller{
 
             'cinemas' => Cinema::all(),
             'movies'=>Movies::all(),
-            'temoignages'=>Temoignages::all(),
-            'tasks'=>Tasks::all(),
+            'temoignages'=>Temoignages::orderBy('date','desc')->limit('4')->get(),
+            'tasks'=>Tasks::orderBy('position')->get(),
 
 
 
@@ -192,11 +192,16 @@ class PagesController extends Controller{
     }
     public function nwtask(Request $request){
 
+//        dump(\DateTime::format ($request->date ));
+//        exit();
+
+
+
         $task = new Tasks();
         $task->content=$request->content;
-        $task->date=$request->date;
+        $task->date=$request->date=date_create_from_format("d/m/Y H:i:s",$request->date);
         $task->movie=$request->movie;
-
+        $task->administrators_id=$request->administrator_id;
         $task->save();
 
         return Redirect::route('advanced');
@@ -208,19 +213,69 @@ class PagesController extends Controller{
     public function position(Request $request){
 
 
-        dump($request->data);
-        exit();
 
-        for($i=1; $i <= 5; $i++){
 
-        $position=Tasks::find($request[$i]);
-        $position->position = $i;
-        $position->save();
+        $exploded=explode("&",($request->data));
+        $tab=[];
+        foreach ($exploded as $explode){
+
+            $data=explode("=",($explode));
+            array_push($tab,$data[1]);
+
+
+        }
+//        dump(count($tab));
+//        exit();
+
+
+        for($i=0; $i < count($tab); $i++){
+
+            $position=Tasks::find($tab[$i]);
+            $position->position = $i;
+            $position->save();
 
         }
 
+
         return Redirect::route('advanced');
 
+
+    }
+
+    public function clear(Request  $request){
+
+        $tasks = $request->input('task');
+
+        foreach($tasks as $task) {
+
+//            dump($task);
+            $tache = Tasks::find($task);
+            $tache->delete();
+
+        }
+
+
+
+    }
+
+    public function state($id){
+
+        $task=Tasks::find($id);
+
+        if($task->state ==0){
+
+            $task->state = 1;
+
+            $task->save();
+
+        }
+        else{
+
+            $task->state = 0;
+
+            $task->save();
+
+        }
 
     }
 

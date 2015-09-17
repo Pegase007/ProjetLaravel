@@ -1,5 +1,31 @@
 $(document).ready(function(){
 
+//realtime des prochaines sceances sur la home
+
+    if($('#panelajax').length > 0){
+        setInterval(function(){
+
+            //console.log('test');
+
+            $.ajax({
+
+                url:$('#panelajax').attr('data-url')
+
+
+            }).done(function (data) {
+
+                $('#dashboard-recent').html(data);
+
+            });
+
+
+
+
+        },3000);
+    }
+
+
+    //realtime des tasks sur la advanced
 
     setInterval(function(){
 
@@ -7,12 +33,12 @@ $(document).ready(function(){
 
         $.ajax({
 
-            url:$('#panelajax').attr('data-url')
+            url:$('.widget-tasks').attr('data-url')
 
 
         }).done(function (data) {
 
-            $('#dashboard-recent').html(data);
+            $('.widget-tasks .panel-body').html(data);
 
         });
 
@@ -20,6 +46,30 @@ $(document).ready(function(){
 
 
     },3000);
+
+//realtime for cinema reviews
+
+    setInterval(function(){
+
+        //console.log('test');
+
+        $.ajax({
+
+            url:$('.cinema-review').attr('data-url')
+
+
+        }).done(function (data) {
+
+            $('.cinema-review').html(data);
+
+        });
+
+
+
+
+    },3000);
+
+
 
 
 });

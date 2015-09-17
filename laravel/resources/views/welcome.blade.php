@@ -312,4 +312,5 @@
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script src="{{  asset('js/gmap.js') }}"></script>
     <script src="{{ asset('js/realtime.js') }}"> </script>
+
 @endsection

@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Model\Cinema;
+use App\Model\Movies;
+use App\Model\Tasks;
+use App\Model\Temoignages;
 use App\Model\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -41,6 +45,44 @@ class SessionsController extends Controller{
             ['comingsoon' => $comingsoon, 'tocome' => $tocome]
         );
     }
+
+
+
+
+    public function tasks(){
+
+        $data=[
+
+            'cinemas' => Cinema::all(),
+            'movies'=>Movies::all(),
+            'temoignages'=>Temoignages::all(),
+            'tasks'=>Tasks::orderBy('position')->get(),
+
+
+
+        ];
+
+        return view('Sessions/tasks',$data);
+    }
+
+
+    public function review(){
+
+        $data=[
+
+            'cinemas' => Cinema::all(),
+            'movies'=>Movies::all(),
+            'temoignages'=>Temoignages::orderBy('date','desc')->limit('4')->get(),
+
+
+
+        ];
+
+        return view('Sessions/review',$data);
+    }
+
+
+
 
 
 }

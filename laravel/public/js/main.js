@@ -61,6 +61,7 @@ $(document).ready(function(){
 
         });
 
+//RECOVERY OF DELETED MOVIES
 
     $('#recover').click(function(e){
 
@@ -79,7 +80,7 @@ $(document).ready(function(){
 
     });
 
-
+//ON SUBMIT OF COMMENT
     $('form#addcomment').submit(function(e){
 
         e.preventDefault();
@@ -112,7 +113,63 @@ $(document).ready(function(){
 
 
 
-    })
+    });
+
+
+//LISTENS TO ANY ACTION ON A NON EXISTING OBJECT TASK
+    $('.widget-tasks').on( "click", ":checkbox", function(e) {
+
+            console.log('ahhhhh');
+
+            var elt = $(this);
+            $.ajax({
+                url: elt.attr('data-url') //url de mon href lien)
+            })
+
+        });
+
+    $('form#clear').submit(function (e) {
+        e.preventDefault();
+
+        $('.widget-tasks .panel-body').pixelTasks('clearCompletedTasks');
+
+        var elt = $(this);
+
+        $.ajax({
+            method: "POST", // Methode d'envoi de ma requete
+            data: elt.serialize(),
+            url: elt.attr('action') //url de mon href lien)
+        })
+
+
+    });
+
+
+    $('form#taskform').submit(function(e){
+
+        e.preventDefault();
+
+        var elt = $(this);
+
+        $.ajax({
+            url: elt.attr('action'),
+            method: "POST", // Methode d'envoi de ma requete
+            data: elt.serialize()
+            //data:envoyer des données
+        }).done(function(data){
+
+                $.growl.notice({ message: "Task added" });
+            document.getElementById("taskform").reset();
+            });
+
+        });
+
+
+
+
+
+
+
 
 
 
@@ -133,6 +190,12 @@ $(document).ready(function(){
             format:'dd/mm/yyyy',
             todayBtn:'linked'
         });
+
+            $('#datetimepicker1').datetimepicker({
+
+                format: 'dd/MM/yyyy hh:mm:ss',
+            });
+
 
         $('.wyswyg').summernote({
             height:200,
@@ -191,6 +254,7 @@ $(document).ready(function(){
 
 
 //tasks table
+
         $('.widget-tasks .panel-body').sortable({
             axis: "y",
             handle: ".task-sort-icon",
@@ -221,6 +285,7 @@ $(document).ready(function(){
 
 
     });
+
 
 
 

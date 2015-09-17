@@ -47,7 +47,13 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::post('/position', ['uses' =>'PagesController@position','as'=>'position']);
 
 
+        Route::post('/clear', ['uses' =>'PagesController@clear','as'=>'clear']);
+
+
         Route::get('/pro', ['uses' =>'PagesController@pro','as'=>'pro']);
+
+        Route::get('/state/{id}', ['uses' =>'PagesController@state','as'=>'state'])
+            ->where('id','[0-9]+');
 
         Route::post('/flashmovie',['uses' => 'PagesController@flashmovie','as'=>'flashmovie']);
 
@@ -396,6 +402,10 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::get('/index', ['uses' => 'SessionsController@index', 'as'=>'.index']);
 
         Route::get('/ajax',['uses' => 'SessionsController@ajax','as'=>'.ajax']);
+
+        Route::get('/tasks',['uses' => 'SessionsController@tasks','as'=>'.tasks']);
+
+        Route::get('/review',['uses' => 'SessionsController@review','as'=>'.review']);
 
     });
 

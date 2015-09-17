@@ -60,11 +60,11 @@
 
     {{--CINEMA REVIEWS --}}
     <div class="col-md-12"><br></div>
-    <div class=" col-md-6 panel widget-threads">
+    <div class=" col-md-6 panel widget-threads ">
         <div class="panel-heading">
             <span class="panel-title"><i class="panel-title-icon fa fa-comments-o"></i>Cinema Reviews</span>
         </div> <!-- / .panel-heading -->
-        <div class="panel-body">
+        <div class="panel-body cinema-review" data-url="{{ route('sessions.review') }}">
 
             @foreach($temoignages as $temoignage)
                 <div class="thread">
@@ -87,15 +87,17 @@
 
     {{--START TASKS--}}
 
-    <div  class="col-md-offset-1 col-md-5 panel widget-tasks">
-        <div class="panel-heading">
+    <div data-url="{{ route('sessions.tasks') }}" class="col-md-offset-1 col-md-5 panel widget-tasks">
+
+        <div class="panel-heading" >
             <span class="panel-title"><i class="panel-title-icon fa fa-tasks"></i>Tasks</span>
         </div> <!-- / .panel-heading -->
-
+        <form method="get" action="{{ route('clear') }}" id="clear" class="row">
+            {{csrf_field()}}
         <div class="panel-body" data-url="{{ route('position') }}" data-token="{{ csrf_token() }}">
 
         @foreach($tasks as $task)
-            <div  class="task" id="taks_{{ $task->id  }}">
+            <div  class="task @if($task->state==1) completed @endif " id="taks_{{ $task->id  }}">
 
 
                 @if(( $time=\App\Model\Tasks::select(DB::raw('TIMESTAMPDIFF(HOUR,NOW(), date) as date'))->where('id', '=', $task->id)->first()->date) < 24)
@@ -113,46 +115,56 @@
 
                 <div class="fa fa-arrows-v task-sort-icon"></div>
                 <div class="action-checkbox">
-                    <label class="px-single"><input type="checkbox" name="" value="" class="px"><span class="lbl"></span></label>
+                    <label class="px-single">
+                        <input class="px" data-url="{{route('state',['id'=> $task->id])}}" type="checkbox" name="task[]" value="{{$task->id}}" @if($task->state ==1)checked @endif><span class="lbl"></span></label>
                 </div>
 
 
 
-
-
-                <a href="#" class="task-title">{{$task->content}}<span> Dans {{ \App\Model\Tasks::select(DB::raw('TIMESTAMPDIFF(HOUR,NOW(), date) as date'))->where('id', '=', $task->id)->first()->date}} heures
+                <a href="#" class="task-title">{{$task->content}}<span>
+                         {{  \Carbon\Carbon::createFromTimeStamp(strtotime($task->date))->diffForHumans() }}
                     </span></a>
             </div> <!-- / .task -->
         @endforeach
         </div>
 
+
         {{--COMPLETED TASKS--}}
         <div class="panel-footer clearfix">
             <div class="pull-right">
-                <button class="btn btn-xs" id="clear-completed-tasks"> Clear </button>
+                <button type="submit" class="btn btn-xs" > Clear </button>
             </div>
         </div> <!-- / .panel-body -->
+        </form>
 
         {{--ADD TASK--}}
         <div class="col-md-12"><br></div>
-        <form method="post" action="{{ route('nwtask') }}" class="row">
+        <form method="post" id="taskform" action="{{ route('nwtask') }}" class="row">
             {{csrf_field()}}
             <div class="col-md-12">
                 <input name='content' id="content" type="text" placeholder="Add a task" class="form-control input-lg widget-profile-input">
             </div>
             <div class="col-md-12"><br></div>
 
-            <div class="col-md-4">
-                <input type="text" class="form-control date input-lg widget-profile-input" name="date" id="date" placeholder="due-date">
+            <div class="col-md-12">
+            <div class="form-control input-lg widget-profile-input" id="datetimepicker1" >
+                <input name="date" style="border: none" data-format="MM/dd/yyyy HH:mm:ss PP" type="text"></input>
+                <span class="add-on">
+                  <i class="fa fa-calendar pull-right"></i>
+                </span>
             </div>
-
-            <div class="col-md-8">
+            </div>
+            <div class="col-md-12"><br></div>
+            <div class="col-md-12">
                 <select class="form-control input-lg widget-profile-input " name="movie">
                     @foreach($movies as $movie)
                         <option id="{{$movie->id}}" value="{{$movie->id}}">{{$movie->title}}</option>
                     @endforeach
                 </select>
             </div>
+
+            <input name="administrator_id" style="border: none; display: none"  type="text" value="{{Auth::user()->id}}"></input>
+
             <div class="col-md-12"> <br></div>
             <button type="submit" class="btn btn-primary btn-xs col-md-offset-1 col-md-10">Creer</button>
 
