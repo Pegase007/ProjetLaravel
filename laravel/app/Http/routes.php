@@ -407,6 +407,8 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
 
         Route::get('/review',['uses' => 'SessionsController@review','as'=>'.review']);
 
+        Route::get('/users',['uses' => 'SessionsController@users','as'=>'.users']);
+
     });
 
 

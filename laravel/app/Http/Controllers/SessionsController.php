@@ -82,6 +82,23 @@ class SessionsController extends Controller{
     }
 
 
+    public function users(){
+
+        $data=[
+
+
+            'users'=>User::orderBy('created_at','desc')->limit('5')->get()
+
+
+
+        ];
+
+        return view('Sessions/users',$data);
+    }
+
+
+
+
 
 
 

@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 use App\Model\Actors;
 use App\Model\Cinema;
 use App\Model\Comments;
+use App\Model\Directors_Movies;
 use App\Model\Movies;
 use App\Model\Sessions;
 use App\Model\Tasks;
 use App\Model\Temoignages;
+use App\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -169,6 +171,28 @@ class PagesController extends Controller{
             'movies'=>Movies::all(),
             'temoignages'=>Temoignages::orderBy('date','desc')->limit('4')->get(),
             'tasks'=>Tasks::orderBy('position')->get(),
+            'users'=>User::orderBy('created_at','desc')->limit('5')->get(),
+
+            'marseille'=>Actors::where('city','=','Marseille')->get(),
+            'lyon'=>Actors::where('city','=','Lyon')->get(),
+            'newyork'=>Actors::where('city','=','NewYork')->get(),
+            'hampshire'=>Actors::where('city','=','Hampshire')->get(),
+
+
+            'one'=>Actors::where(DB::raw('TIMESTAMPDIFF( YEAR,  `dob` , NOW( ) )'),'>','18')->where(DB::raw('TIMESTAMPDIFF( YEAR,  `dob` , NOW( ) )'),'<','25')->get(),
+            'two'=>Actors::where(DB::raw('TIMESTAMPDIFF( YEAR,  `dob` , NOW( ) )'),'>','25')->where(DB::raw('TIMESTAMPDIFF( YEAR,  `dob` , NOW( ) )'),'<','35')->get(),
+            'three'=>Actors::where(DB::raw('TIMESTAMPDIFF( YEAR,  `dob` , NOW( ) )'),'>','35')->where(DB::raw('TIMESTAMPDIFF( YEAR,  `dob` , NOW( ) )'),'<','45')->get(),
+            'four'=>Actors::where(DB::raw('TIMESTAMPDIFF( YEAR,  `dob` , NOW( ) )'),'>','45')->where(DB::raw('TIMESTAMPDIFF( YEAR,  `dob` , NOW( ) )'),'<','60')->get(),
+            'five'=>Actors::where(DB::raw('TIMESTAMPDIFF( YEAR,  `dob` , NOW( ) )'),'<','60')->get(),
+
+
+            'bestdirector'=>Directors_Movies::select('directors.id','directors.firstname','directors.lastname')
+                ->join('directors','directors.id', '=', 'directors_movies.directors_id')
+                ->groupBy('directors_movies.directors_id')
+                ->orderBy(DB::raw('COUNT(directors_movies.movies_id)'), 'desc')
+                ->limit('4')
+                ->get(),
+
 
 
 

@@ -52,7 +52,10 @@ Use search to find needed section.
     <link href={{asset('css/main.css')}} rel="stylesheet" type="text/css">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-@show
+    {{--GRAPHS--}}
+    <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+
+    @show
 
     <!--[if lt IE 9]>
     <script src="{{ asset('js/ie.min.js') }}"></script>
@@ -77,7 +80,7 @@ Use search to find needed section.
 <body class="theme-default main-menu-animated">
 
 <script>var init = [];</script>
-<!-- Demo script --> <script src="assets/demo/demo.js"></script> <!-- / Demo script -->
+
 
 <div id="main-wrapper">
 
@@ -404,15 +407,27 @@ Use search to find needed section.
 <!-- Pixel Admin's javascripts -->
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/pixel-admin.min.js')}}"></script>
+
 <script src="jquery.maskedinput.js" type="text/javascript"></script>
 {{--select2--}}
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
-<script type="text/javascript"
-        src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-</script>
-<script type="text/javascript"
-        src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
-</script>
+
+{{--DATETIME PICKER BOOTSTRAP--}}
+<script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js"></script>
+
+{{--GRAPHS--}}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+
+<script type="text/javascript" src="{{asset('js/jquery.flot.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/jquery.flot.pie.js')}}"></script>
+
+
+
 
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>

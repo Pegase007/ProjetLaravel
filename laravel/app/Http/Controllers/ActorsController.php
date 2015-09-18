@@ -18,6 +18,20 @@ class ActorsController extends Controller{
      */
     public function index(){
 
+//        CONNECTION A LA BD DE MONGO DB
+//        $m=new\MongoClient();
+//        $db=$m->selectDB('laravel');
+//        $collection=new \MongoCollection($db,'unicorns');
+//
+//        $find=array('name'=>'Horny');
+//        $cursor=$collection->find($find);
+//        foreach($cursor as $doc){
+//
+//            dump($doc);
+//        }
+//
+//exit();
+
 
         $datas = [
 

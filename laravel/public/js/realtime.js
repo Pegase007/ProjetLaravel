@@ -71,6 +71,29 @@ $(document).ready(function(){
 
 
 
+    setInterval(function(){
+
+        //console.log('test');
+
+        $.ajax({
+
+            url:$('table #users').attr('data-url')
+
+
+        }).done(function (data) {
+
+            $('table #users').html(data);
+
+        });
+
+
+
+
+    },3000);
+
+
+
+
 
 });
 //# sourceMappingURL=realtime.js.map
