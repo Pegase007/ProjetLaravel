@@ -29,6 +29,7 @@ class AuthController extends Controller
      *Url apres success login
      */
     protected $loginPath = '/auth/login';
+
     /**
      * Url par defaut de redirection generale
      * When a user is successfully authenticated, they will be redirected to the /home URI
@@ -94,7 +95,8 @@ class AuthController extends Controller
             'prenom'=>$data['prenom'],
             'photo'=>$data['photo'],
             'ville'=>$data['ville'],
-            'description'=>$data['description']
+            'description'=>$data['description'],
+             'trial_ends_at' => Carbon::now()->addDays(14),
 
         ]);
     }

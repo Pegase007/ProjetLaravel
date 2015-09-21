@@ -9,7 +9,9 @@ use App\Model\Comments;
 use App\Model\Directors;
 use Illuminate\Http\Request;
 use App\Model\Movies;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -23,6 +25,11 @@ class MoviesController extends Controller{
      */
     public function index(){
 
+//super admin permission
+        if (Gate::denies('superadmin')){
+            abort(403);
+        }
+
         $datas = [
 
             "movies"=> Movies::all(),
@@ -31,7 +38,7 @@ class MoviesController extends Controller{
             "futureRelease"=>count(Movies::where('date_release','>',new \DateTime('today'))->get()),
             "actif"=>count(Movies::where('visible',1)->get()),
             "budget"=> Movies::where('date_release','>',2015-01-01)->where('date_release','>',2015-12-31)
-                    ->sum('budget'),
+                ->sum('budget'),
 
 //            "allmovies"=>Movies::withTrashed()->get(),
 //            "trashed"=>Movies::onlyTrashed()->get(),
@@ -78,10 +85,10 @@ class MoviesController extends Controller{
     public function comment(Request $request, $id){
 
         Comments::create([
-                'content'=>$request->input('content'),
-                'movies_id'=>$id,
-                'user_id'=> 28,
-                'date_created'=>new \DateTime('now')
+            'content'=>$request->input('content'),
+            'movies_id'=>$id,
+            'user_id'=> 28,
+            'date_created'=>new \DateTime('now')
 
         ]);
         Session::flash('success',"Le commentaire à bien été ajouté");
@@ -98,8 +105,8 @@ class MoviesController extends Controller{
         if ($action =='visible'){
 
             $movies=Movies::find($id);
-    //        ->where('visible', 0)
-    //        ->update(['visible' => 1]);
+            //        ->where('visible', 0)
+            //        ->update(['visible' => 1]);
 
             if ($movies->visible == 0) {
 
@@ -188,20 +195,20 @@ class MoviesController extends Controller{
      */
     public function create(){
 
-    $datas = [
-        "categories" => Categories::all(),
-        "actors"=>Actors::all(),
-        "directors"=>Directors::all(),
-    ];
+        $datas = [
+            "categories" => Categories::all(),
+            "actors"=>Actors::all(),
+            "directors"=>Directors::all(),
+        ];
 
-    return view ('Movies/create',$datas);
+        return view ('Movies/create',$datas);
 
-}
+    }
 
     public function store(MoviesRequest $request){
 
         // J'enregistre un nouvel acteur dès que mon formulaire est valide (0 erreurs)
-    $year=substr($request->date_release, -4);
+        $year=substr($request->date_release, -4);
         $movies=new Movies();
         $movies->type_film=$request->type_film;
         $movies->title=$request->title;
@@ -221,6 +228,7 @@ class MoviesController extends Controller{
         $movies->synopsis=$request->synopsis;
         $movies->description=$request->description;
         $movies->image=$request->image;
+        $movies->administrators_id=Auth::user()->id;
 
 //        $actors->filmography=$request->
 
@@ -288,8 +296,14 @@ class MoviesController extends Controller{
 
     public function delete($id){
 
+
+
+
         //je supprime un acteur
         $movies=Movies::find($id);
+            if (Gate::denies('hasmovie', $movies)){
+                 abort(403);
+            };
         $movies->delete();
 
 
@@ -297,6 +311,8 @@ class MoviesController extends Controller{
 //        Session::flash('success',"L'acteur {$movies->firstname} {$movies->lastname} a bien été supprimé");
 
         //je redirige
+
+
 
     }
 
@@ -489,24 +505,24 @@ class MoviesController extends Controller{
 
             }
         }
-            if ($actions == "Activer") {
+        if ($actions == "Activer") {
 
 
-                foreach ($movies as $movie) {
+            foreach ($movies as $movie) {
 
-                    $mov = Movies::find($movie);
+                $mov = Movies::find($movie);
 
-                    if ($mov->visible == 0) {
+                if ($mov->visible == 0) {
 
-                        $mov->visible = 1;
+                    $mov->visible = 1;
 
-                        $mov->save();
+                    $mov->save();
 
-                        array_push( $movflash,("Le film ".$mov->title." a bien été activé"));
+                    array_push( $movflash,("Le film ".$mov->title." a bien été activé"));
 
-                    }
                 }
             }
+        }
         if ($actions == "Desactiver") {
 
 
@@ -532,11 +548,11 @@ class MoviesController extends Controller{
 
 //            Session::flash('success', "Le film ".$movie." , a bien été activé");
 
-            //je redirige
-            return Redirect::route('movies.index');
+        //je redirige
+        return Redirect::route('movies.index');
 
 
-        }
+    }
 
 
     public function trash(){

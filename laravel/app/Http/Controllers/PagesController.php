@@ -11,7 +11,9 @@ use App\Model\Tasks;
 use App\Model\Temoignages;
 use App\Model\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -21,6 +23,10 @@ use Illuminate\Support\Facades\Session;
  * @package App\Http\Controllers
  */
 class PagesController extends Controller{
+
+
+
+
     /**
      * Page Contact
      */
@@ -49,6 +55,10 @@ class PagesController extends Controller{
 
     public function home(){
 
+        if (Gate::denies('authexpire')){
+            Auth::logout();
+            return Redirect::to('auth/login');
+        };
 //        $db=DB::table('sessions')
 //            ->select(DB::raw('COUNT(id)'))
 //            ->where('date_session', '>',DB::raw(' DATE(NOW())'))
@@ -184,6 +194,7 @@ class PagesController extends Controller{
             'three'=>Actors::where(DB::raw('TIMESTAMPDIFF( YEAR,  `dob` , NOW( ) )'),'>','35')->where(DB::raw('TIMESTAMPDIFF( YEAR,  `dob` , NOW( ) )'),'<','45')->get(),
             'four'=>Actors::where(DB::raw('TIMESTAMPDIFF( YEAR,  `dob` , NOW( ) )'),'>','45')->where(DB::raw('TIMESTAMPDIFF( YEAR,  `dob` , NOW( ) )'),'<','60')->get(),
             'five'=>Actors::where(DB::raw('TIMESTAMPDIFF( YEAR,  `dob` , NOW( ) )'),'<','60')->get(),
+
 
 
             'bestdirector'=>Directors_Movies::select('directors.id','directors.firstname','directors.lastname')

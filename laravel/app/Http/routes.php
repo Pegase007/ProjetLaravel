@@ -30,6 +30,7 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/account', ['uses' => 'Auth\AuthController@account', 'as' => 'account']);
     Route::post('/update', ['uses' => 'Auth\AuthController@modification', 'as' => 'update']);
 
+    Route::controller('api','ApiController');
 
 
 

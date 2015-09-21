@@ -246,27 +246,31 @@
         <div id="bestdirectors" class="graph">
 
             @for($i=1990; $i<=2015; $i++)
+                <bestdir data-year="$i">
 
-                @foreach($bestdirector as $bestdir)
-
-
-
-                    {{--<div style="display: none" data-dir="{{$bestdir->firstname}} {{$bestdir->lastname}}"--}}
-                         {{--data-count="{{\App\Model\Directors_Movies::join('movies','movies.id','=','directors_movies.movies_id')->where('directors_id','=',$bestdir->id)->where(DB::raw('YEAR( movies.date_release)'),'=',$i)}}">--}}
-
-                    {{--</div>--}}
-
-                    {{$tabdir = collect([])}};
-
-                    {{$tabdir->put("$bestdir->firstname $bestdir->lastname",\App\Model\Directors_Movies::join('movies','movies.id','=','directors_movies.movies_id')->where('directors_id','=',$bestdir->id)->where(DB::raw('YEAR( movies.date_release)'),'=',$i ) }};
-
-                    {{$tabdir->all()}};
-
-                    {{--{{$bestdir->firstname}} {{$bestdir->lastname}}/{{\App\Model\Directors_Movies::join('movies','movies.id','=','directors_movies.movies_id')->where('directors_id','=',$bestdir->id)->where(DB::raw('YEAR( movies.date_release)'),'=',$i}}--}}
+                    @foreach($bestdirector as $bestdir)
 
 
 
-                @endforeach
+
+
+                        {{--<div style="display: none" data-dir="{{$bestdir->firstname}} {{$bestdir->lastname}}"--}}
+                        {{--data-count="{{\App\Model\Directors_Movies::join('movies','movies.id','=','directors_movies.movies_id')->where('directors_id','=',$bestdir->id)->where(DB::raw('YEAR( movies.date_release)'),'=',$i)}}">--}}
+
+                        {{--</div>--}}
+
+                        {{--{{$tabdir = collect([])}};--}}
+
+                        {{--{{$tabdir->put("$bestdir->firstname $bestdir->lastname",\App\Model\Directors_Movies::join('movies','movies.id','=','directors_movies.movies_id')->where('directors_id','=',$bestdir->id)->where(DB::raw('YEAR( movies.date_release)'),'=',$i ) }};--}}
+
+                        {{--{{$tabdir->all()}};--}}
+
+                        {{--{{$bestdir->firstname}} {{$bestdir->lastname}}/{{\App\Model\Directors_Movies::join('movies','movies.id','=','directors_movies.movies_id')->where('directors_id','=',$bestdir->id)->where(DB::raw('YEAR( movies.date_release)'),'=',$i}}--}}
+
+
+
+                    @endforeach
+                </bestdir>
 
             @endfor
 
@@ -275,6 +279,9 @@
 
 
 
+        <div class="graph-container">
+            <div data-url="{{url('admin/api/best-directors')}}" id="hero-area" ></div>
+        </div>
 
     </div>
 

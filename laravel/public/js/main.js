@@ -236,122 +236,125 @@ $(document).ready(function(){
 
 
 // Easy Pie Charts
-        var easyPieChartDefaults = {
-            animate: 2000,
-            scaleColor: false,
-            lineWidth: 6,
-            lineCap: 'square',
-            size: 90,
-            trackColor: '#e5e5e5'
-        };
-        $('#easy-pie-chart-1').easyPieChart($.extend({}, easyPieChartDefaults, {
-            barColor: PixelAdmin.settings.consts.COLORS[1]
-        }));
-        $('#easy-pie-chart-2').easyPieChart($.extend({}, easyPieChartDefaults, {
-            barColor: PixelAdmin.settings.consts.COLORS[1]
-        }));
-        $('#easy-pie-chart-3').easyPieChart($.extend({}, easyPieChartDefaults, {
-            barColor: PixelAdmin.settings.consts.COLORS[1]
-        }));
+        if($('#easy-pie-chart-1').length > 0) {
+            var easyPieChartDefaults = {
+                animate: 2000,
+                scaleColor: false,
+                lineWidth: 6,
+                lineCap: 'square',
+                size: 90,
+                trackColor: '#e5e5e5'
+            };
+            $('#easy-pie-chart-1').easyPieChart($.extend({}, easyPieChartDefaults, {
+                barColor: PixelAdmin.settings.consts.COLORS[1]
+            }));
+            $('#easy-pie-chart-2').easyPieChart($.extend({}, easyPieChartDefaults, {
+                barColor: PixelAdmin.settings.consts.COLORS[1]
+            }));
+            $('#easy-pie-chart-3').easyPieChart($.extend({}, easyPieChartDefaults, {
+                barColor: PixelAdmin.settings.consts.COLORS[1]
+            }));
+        }
 
 
 //tasks table
+        if($('.widget-tasks .panel-body').length > 0) {
+            $('.widget-tasks .panel-body').sortable({
+                axis: "y",
+                handle: ".task-sort-icon",
+                stop: function (event, ui) {
+                    // IE doesn't register the blur when sorting
+                    // so trigger focusout handlers to remove .ui-state-focus
+                    ui.item.children(".task-sort-icon").triggerHandler("focusout");
+                    var data = $(this).sortable('serialize');
 
-        $('.widget-tasks .panel-body').sortable({
-            axis: "y",
-            handle: ".task-sort-icon",
-            stop: function( event, ui ) {
-                // IE doesn't register the blur when sorting
-                // so trigger focusout handlers to remove .ui-state-focus
-                ui.item.children( ".task-sort-icon" ).triggerHandler( "focusout" );
-                var data = $(this).sortable('serialize');
+                    $.ajax({
+                        data: {data: data, _token: $('.widget-tasks .panel-body').attr('data-token')},
+                        type: 'POST',
+                        url: $('.widget-tasks .panel-body').attr('data-url')
+                    });
 
-                $.ajax({
-                    data: { data: data, _token: $('.widget-tasks .panel-body').attr('data-token')},
-                    type: 'POST',
-                    url: $('.widget-tasks .panel-body').attr('data-url')
-                });
+                    console.log(data);
+                }
+            });
+            console.log($('.widget-tasks .panel-body').length);
 
-                console.log(data);
-            }
-        });
-        console.log( $('.widget-tasks .panel-body').length);
+        }
 
 
 
-
-    });
 
 
     //GRAPHS
 
+    if($('#actorsgraph').length > 0) {
+        var marseille = $('#actorsgraph').data('marseille');
+        var lyon = $('#actorsgraph').data('lyon');
+        var newyork = $('#actorsgraph').data('newyork')
+        var hampshire = $('#actorsgraph').data('hampshire');
 
-        var marseille = $( '#actorsgraph').data('marseille');
-        var lyon=$( '#actorsgraph').data('lyon');
-        var newyork=$('#actorsgraph').data('newyork')
-        var hampshire=$('#actorsgraph').data('hampshire');
+        console.log(hampshire);
 
-    console.log(hampshire);
+        Morris.Bar({
+            element: 'actorsgraph',
+            data: [
+                {ville: 'Lyon', quantity: lyon},
+                {ville: 'Marseille', quantity: marseille},
+                {ville: 'Hampshire', quantity: hampshire},
+                {ville: 'New York', quantity: newyork},
 
-    Morris.Bar({
-        element: 'actorsgraph',
-        data: [
-            { ville: 'Lyon', quantity: lyon },
-            { ville: 'Marseille', quantity: marseille },
-            { ville: 'Hampshire', quantity: hampshire },
-            { ville: 'New York', quantity: newyork },
-
-        ],
-        xkey: 'ville',
-        ykeys: ['quantity'],
-        labels: ['Actors']
-    });
-
+            ],
+            xkey: 'ville',
+            ykeys: ['quantity'],
+            labels: ['Actors']
+        });
+    }
 
 
 
 //PIE CHART ACTORS AGE
-    var dataSet = [{
-        label: "Entre 18 et 25",
-        data: $('#actorsage').data('one'),
-        color: "#005CDE"
-    }, {
-        label: "Entre 25 et 35",
-        data: $('#actorsage').data('two'),
-        color: "#00A36A"
-    }, {
-        label: "Entre 35 et 45",
-        data: $('#actorsage').data('three'),
-        color: "#7D0096"
-    }, {
-        label: "Entre 45 et 60",
-        data: $('#actorsage').data('four'),
-        color: "#992B00"
-    }, {
-        label: "Plus de 60",
-        data: $('#actorsage').data('five'),
-        color: "#DE000F"
-    }];
+    if($('#actorsage').length > 0) {
+        var dataSet = [{
+            label: "Entre 18 et 25",
+            data: $('#actorsage').data('one'),
+            color: "#005CDE"
+        }, {
+            label: "Entre 25 et 35",
+            data: $('#actorsage').data('two'),
+            color: "#00A36A"
+        }, {
+            label: "Entre 35 et 45",
+            data: $('#actorsage').data('three'),
+            color: "#7D0096"
+        }, {
+            label: "Entre 45 et 60",
+            data: $('#actorsage').data('four'),
+            color: "#992B00"
+        }, {
+            label: "Plus de 60",
+            data: $('#actorsage').data('five'),
+            color: "#DE000F"
+        }];
 
-    var options = {
-        series: {
-            pie: {
-                show: true,
-                innerRadius: 0.5,
+        var options = {
+            series: {
+                pie: {
+                    show: true,
+                    innerRadius: 0.5,
 
+                }
+            },
+            legend: {
+                show: true
+            },
+            grid: {
+                hoverable: true
             }
-        },
-        legend: {
-            show: true
-        },
-        grid: {
-            hoverable: true
-        }
-    };
+        };
 
 
         $.plot($("#actorsage"), dataSet, options);
-
+    }
 
     //$('#actorsage').plot(dataSet, {
     //    series: {
@@ -375,6 +378,7 @@ $(document).ready(function(){
 
 
 //DIRECTORS CHART
+    if($('#bestdirectors').length > 0){
     Morris.Line({
         element: 'bestdirectors',
         data: [
@@ -401,7 +405,23 @@ $(document).ready(function(){
         resize: true
     });
 
+    }
 
+
+    $.getJSON(
+        $("#hero-area").data('url'), function(data){
+        var items = [];
+
+        $.each(data, function (key, val) {
+            items.push(val.firstname);
+        });
+
+        console.log(items);
+
+    });
+
+
+    });
 
 });
 

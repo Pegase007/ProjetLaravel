@@ -5,6 +5,7 @@ use App\Http\Requests\ActorsRequest;
 use App\Model\Actors;
 use App\Model\Categories;
 use App\Model\Movies;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -87,6 +88,11 @@ class ActorsController extends Controller{
     public function delete($id){
 
         $actor =Actors::find($id);
+
+        if (Gate::denies('hasactors', $actor)){
+            abort(403);
+        };
+
         $actor->delete();
 
         //j'ecris un message flash en session
