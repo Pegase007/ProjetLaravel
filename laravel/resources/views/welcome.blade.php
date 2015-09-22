@@ -215,6 +215,54 @@
         </div>
     @endif
 
+    {{--START CHAT--}}
+    <div class="col-md-12"><div class="panel widget-chat">
+            <div class="panel-heading">
+                <span class="panel-title"><i class="panel-title-icon fa fa-comments-o"></i>Chat</span>
+            </div> <!-- / .panel-heading -->
+            <div class="panel-body">
+
+                @foreach($messages as $message)
+                <div class="message">
+                    <img src="http://thesocialmediamonthly.com/wp-content/uploads/2015/08/photo.png" alt="" class="message-avatar">
+                    <div class="message-body">
+                        <div class="message-heading">
+                            <a href="#" title="">{{$message['user']['name']}}</a> says:
+                            <span class="pull-right">
+
+
+
+                                {{\Carbon\Carbon::createFromTimestamp(strtotime($message->created_at))->diffForHumans()}}
+
+
+
+
+                            </span>
+                        </div>
+                        <div class="message-text">
+                            {{$message['content']}}
+                        </div>
+                    </div> <!-- / .message-body -->
+                </div>  <!-- / .message -->
+
+               @endforeach
+
+            </div> <!-- / .panel-body -->
+            <form action="{{route('newmessages')}}" method="post" class="panel-footer chat-controls">
+                {{csrf_field()}}
+                <div class="chat-controls-input">
+                    <textarea rows="1" name="content" class="form-control" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 32px;"></textarea>
+                </div>
+                <button class="btn btn-primary chat-controls-btn">Send</button>
+            </form> <!-- / .panel-footer -->
+        </div>
+    </div>
+
+    {{--ENDCHAT--}}
+
+
+
+
 <div class="col-md-6">
     <form action="{{ route('flashmovie') }}" method="post" class="panel form-horizontal">
         {{csrf_field()}}
@@ -303,7 +351,6 @@
     </div>
 
     {{--end dinamic panel--}}
-
 
     {{--Piechart repartition des films par categories--}}
    <div class="col-md-7">

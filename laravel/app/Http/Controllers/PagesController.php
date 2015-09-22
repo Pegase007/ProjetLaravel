@@ -7,6 +7,7 @@ use App\Model\Categories;
 use App\Model\Cinema;
 use App\Model\Comments;
 use App\Model\Directors_Movies;
+use App\Model\Messages;
 use App\Model\Movies;
 use App\Model\Sessions;
 use App\Model\Tasks;
@@ -59,11 +60,6 @@ class PagesController extends Controller{
     {
 
 
-
-
-
-
-
         if (Gate::denies('authexpire')){
             Auth::logout();
             return Redirect::to('auth/login');
@@ -74,6 +70,18 @@ class PagesController extends Controller{
 //            ->first();
 //                 dump($db);
 //                  exit();
+
+
+////        CONNECTION A LA BD DE MONGO DB
+//        $m=new\MongoClient();
+//        $db=$m->selectDB('laravel');
+//        $collection=new \MongoCollection($db,'messages');
+//
+//        $find=array();
+//        $messages=$collection->find($find);
+
+
+
         $datas=[
 
             'age'=> DB::table('actors')
@@ -142,6 +150,9 @@ class PagesController extends Controller{
                         ->join('cinema','cinema.id','=','sessions.cinema_id')
                         ->where('date_session', '>',DB::raw(' DATE(NOW())'))
                         ->get(),
+
+            'messages'=> Messages::where('user', 'exists', true)->get(),
+
 
 
 
@@ -320,6 +331,19 @@ class PagesController extends Controller{
             $task->save();
 
         }
+
+    }
+
+
+    public function newmessages(Request $request){
+
+        $message = new Messages();
+        $message-> user = Auth::user()->toArray();
+        $message->content=$request->input('content');
+        $message->save();
+
+        return response()->json([true]);
+
 
     }
 

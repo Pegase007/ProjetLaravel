@@ -74,6 +74,10 @@ $(document).ready(function(){
 
 
 
+        //CHAT
+        $(".chat-controls-input .form-control").autosize();
+
+
 //tasks table
         if($('.widget-tasks .panel-body').length > 0) {
             $('.widget-tasks .panel-body').sortable({

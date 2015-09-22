@@ -41,6 +41,9 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
 
         Route::get('/', ['uses' =>'PagesController@home','as'=>'home']);
 
+        Route::post('/newmessages', ['uses' =>'PagesController@newmessages','as'=>'newmessages']);
+
+
         Route::get('/advanced', ['uses' =>'PagesController@advanced','as'=>'advanced']);
 
         Route::get('/task', ['uses' =>'PagesController@task','as'=>'task']);

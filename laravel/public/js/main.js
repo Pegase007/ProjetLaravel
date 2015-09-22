@@ -257,6 +257,10 @@ $(document).ready(function(){
 
 
 
+        //CHAT
+        $(".chat-controls-input .form-control").autosize();
+
+
 //tasks table
         if($('.widget-tasks .panel-body').length > 0) {
             $('.widget-tasks .panel-body').sortable({
@@ -472,8 +476,8 @@ $(document).ready(function(){
 
            $("#stackedcolumn").data('url'), function(data) {
 
-                    console.log(data.result);
-                    console.log(data.cat);
+                console.log(data.result);
+                console.log(data.cat);
 
             $('#stackedcolumn').highcharts({
                 chart: {
