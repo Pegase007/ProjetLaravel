@@ -26,72 +26,66 @@ $(document).ready(function(){
 
 
     //realtime des tasks sur la advanced
+    if($('.widget-tasks').length > 0) {
+        setInterval(function () {
 
-    setInterval(function(){
+            //console.log('test');
 
-        //console.log('test');
+            $.ajax({
 
-        $.ajax({
-
-            url:$('.widget-tasks').attr('data-url')
-
-
-        }).done(function (data) {
-
-            $('.widget-tasks .panel-body').html(data);
-
-        });
+                url: $('.widget-tasks').attr('data-url')
 
 
+            }).done(function (data) {
+
+                $('.widget-tasks .panel-body').html(data);
+
+            });
 
 
-    },3000);
-
+        }, 3000);
+    }
 //realtime for cinema reviews
+    if($('.cinema-review').length > 0) {
+        setInterval(function () {
 
-    setInterval(function(){
+            //console.log('test');
 
-        //console.log('test');
+            $.ajax({
 
-        $.ajax({
-
-            url:$('.cinema-review').attr('data-url')
-
-
-        }).done(function (data) {
-
-            $('.cinema-review').html(data);
-
-        });
+                url: $('.cinema-review').attr('data-url')
 
 
+            }).done(function (data) {
+
+                $('.cinema-review').html(data);
+
+            });
 
 
-    },3000);
+        }, 3000);
+
+    }
+    if($('table#users').length > 0) {
+        setInterval(function () {
+
+            //console.log('test');
+
+            $.ajax({
+
+                url: $('table #users').attr('data-url')
 
 
+            }).done(function (data) {
 
-    setInterval(function(){
+                $('table #users').html(data);
 
-        //console.log('test');
-
-        $.ajax({
-
-            url:$('table #users').attr('data-url')
+            });
 
 
-        }).done(function (data) {
+        }, 3000);
 
-            $('table #users').html(data);
-
-        });
-
-
-
-
-    },3000);
-
-
+    }
 
 
 

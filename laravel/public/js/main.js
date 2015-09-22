@@ -236,7 +236,7 @@ $(document).ready(function(){
 
 
 // Easy Pie Charts
-        if($('#easy-pie-chart-1').length > 0) {
+
             var easyPieChartDefaults = {
                 animate: 2000,
                 scaleColor: false,
@@ -254,7 +254,7 @@ $(document).ready(function(){
             $('#easy-pie-chart-3').easyPieChart($.extend({}, easyPieChartDefaults, {
                 barColor: PixelAdmin.settings.consts.COLORS[1]
             }));
-        }
+
 
 
 //tasks table
@@ -407,6 +407,7 @@ $(document).ready(function(){
 
     }
 
+        if($('#hero-area').length > 0){
 
     $.getJSON(
         $("#hero-area").data('url'), function(data){
@@ -419,10 +420,118 @@ $(document).ready(function(){
         console.log(items);
 
     });
+        }
+
+        //Piechart repartition des films par categories
+        if($('#container').length > 0) {
+            $.getJSON(
+                $("#container").data('url'), function(data) {
+                    $('#container').highcharts({
+                        chart: {
+                            type: 'pie',
+                            options3d: {
+                                enabled: true,
+                                alpha: 45,
+                                beta: 0
+                            }
+                        },
+                        title: {
+                            text: 'Piechart repartition des films par categories'
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                depth: 35,
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '{point.name}'
+                                }
+                            }
+                        },
+                        series: [{
+                            type: 'pie',
+                            name: 'Browser share',
+                            data: data
+                        }]
+                    });
+                });
+//FIN PIE CHART
+
+    }
 
 
-    });
+        //STACKED COLUMN CHART
+        if($('#stackedcolumn').length > 0) {
 
+            $.getJSON(
+
+
+           $("#stackedcolumn").data('url'), function(data) {
+
+                    console.log(data.result);
+                    console.log(data.cat);
+
+            $('#stackedcolumn').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Repartition des categories pour les 5 meilleurs acteurs'
+                },
+                xAxis: {
+                    categories: data.cat
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'nb de films'
+                    },
+                    stackLabels: {
+                        enabled: true,
+                        style: {
+                            fontWeight: 'bold',
+                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                        }
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    x: -30,
+                    verticalAlign: 'top',
+                    y: 25,
+                    floating: true,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+                    borderColor: '#CCC',
+                    borderWidth: 1,
+                    shadow: false
+                },
+                tooltip: {
+                    headerFormat: '<b>{point.x}</b><br/>',
+                    pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: true,
+                            color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                            style: {
+                                textShadow: '0 0 3px black'
+                            }
+                        }
+                    }
+                },
+                series: data.result
+            });
+
+        })}
+
+//END STACKD COLUMN
+});
 });
 
 

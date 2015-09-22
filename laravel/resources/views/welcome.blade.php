@@ -305,6 +305,17 @@
     {{--end dinamic panel--}}
 
 
+    {{--Piechart repartition des films par categories--}}
+   <div class="col-md-7">
+    <div id="container" data-url="{{url('admin/api/movies-cat')}}" style="height: 600px"></div>
+   </div>
+
+    <div class="col-md-5">
+        <div id="stackedcolumn" data-url="{{url('admin/api/act-movies')}}" style=" height: 600px; margin: 0 auto"></div>
+    </div>
+
+
+
 <br>
 @endsection
 @section('js')

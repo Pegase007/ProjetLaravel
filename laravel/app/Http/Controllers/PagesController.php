@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Model\Actors;
+use App\Model\ActorsMovies;
+use App\Model\Categories;
 use App\Model\Cinema;
 use App\Model\Comments;
 use App\Model\Directors_Movies;
@@ -53,12 +55,19 @@ class PagesController extends Controller{
 
     }
 
-    public function home(){
+    public function home()
+    {
+
+
+
+
+
+
 
         if (Gate::denies('authexpire')){
             Auth::logout();
             return Redirect::to('auth/login');
-        };
+        }
 //        $db=DB::table('sessions')
 //            ->select(DB::raw('COUNT(id)'))
 //            ->where('date_session', '>',DB::raw(' DATE(NOW())'))
@@ -132,7 +141,7 @@ class PagesController extends Controller{
                         ->join('movies','movies.id','=','sessions.movies_id')
                         ->join('cinema','cinema.id','=','sessions.cinema_id')
                         ->where('date_session', '>',DB::raw(' DATE(NOW())'))
-                        ->get()
+                        ->get(),
 
 
 
