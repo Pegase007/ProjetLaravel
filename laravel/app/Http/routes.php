@@ -235,6 +235,8 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
             ->where('id','[0-9]+');
 
 
+        Route::post('/handlefav', ['uses' => 'MoviesController@fav', 'as'=>'.fav']);
+
 
 
 

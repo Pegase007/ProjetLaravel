@@ -5,6 +5,7 @@ use App\Http\Requests\ActorsRequest;
 use App\Http\Requests\DirectorsRequest;
 use App\Model\Directors;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
 /**

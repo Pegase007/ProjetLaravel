@@ -361,6 +361,10 @@
         <div id="stackedcolumn" data-url="{{url('admin/api/act-movies')}}" style=" height: 600px; margin: 0 auto"></div>
     </div>
 
+    <div class="col-md-12">
+        <div id="seances" data-url="{{url('admin/api/seances')}}" style="height: 400px"></div>
+    </div>
+
 
 
 <br>
@@ -368,6 +372,13 @@
 @section('js')
     @parent
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    {{--GRAPHS--}}
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    {{--PIE CHART--}}
+    <script src="http://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
     <script src="{{  asset('js/gmap.js') }}"></script>
     <script src="{{ asset('js/realtime.js') }}"> </script>
 

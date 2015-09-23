@@ -288,70 +288,427 @@ $(document).ready(function(){
         //STACKED COLUMN CHART
         if($('#stackedcolumn').length > 0) {
 
-            $.getJSON(
+            $.getJSON( $("#stackedcolumn").data('url'), function(data) {
 
-
-           $("#stackedcolumn").data('url'), function(data) {
-
-                console.log(data.result);
-                console.log(data.cat);
-
-            $('#stackedcolumn').highcharts({
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: 'Repartition des categories pour les 5 meilleurs acteurs'
-                },
-                xAxis: {
-                    categories: data.cat
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'nb de films'
+                $('#stackedcolumn').highcharts({
+                    chart: {
+                        type: 'column'
                     },
-                    stackLabels: {
-                        enabled: true,
-                        style: {
-                            fontWeight: 'bold',
-                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                        }
-                    }
-                },
-                legend: {
-                    align: 'right',
-                    x: -30,
-                    verticalAlign: 'top',
-                    y: 25,
-                    floating: true,
-                    backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-                    borderColor: '#CCC',
-                    borderWidth: 1,
-                    shadow: false
-                },
-                tooltip: {
-                    headerFormat: '<b>{point.x}</b><br/>',
-                    pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-                },
-                plotOptions: {
-                    column: {
-                        stacking: 'normal',
-                        dataLabels: {
+                    title: {
+                        text: 'Repartition des categories pour les 5 meilleurs acteurs'
+                    },
+                    xAxis: {
+                        categories: data.cat
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'nb de films'
+                        },
+                        stackLabels: {
                             enabled: true,
-                            color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
                             style: {
-                                textShadow: '0 0 3px black'
+                                fontWeight: 'bold',
+                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
                             }
                         }
-                    }
-                },
-                series: data.result
-            });
+                    },
+                    legend: {
+                        align: 'right',
+                        x: -30,
+                        verticalAlign: 'top',
+                        y: 25,
+                        floating: true,
+                        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+                        borderColor: '#CCC',
+                        borderWidth: 1,
+                        shadow: false
+                    },
+                    tooltip: {
+                        headerFormat: '<b>{point.x}</b><br/>',
+                        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+                    },
+                    plotOptions: {
+                        column: {
+                            stacking: 'normal',
+                            dataLabels: {
+                                enabled: true,
+                                color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                                style: {
+                                    textShadow: '0 0 3px black'
+                                }
+                            }
+                        }
+                    },
+                    series: data.result
+                });
 
         })}
 
 //END STACKD COLUMN
+
+//3D chart with null value
+        if($('#seances').length > 0) {
+
+            $.getJSON(
+
+                $("#seances").data('url'), function(data) {
+
+                    $('#seances').highcharts({
+                        chart: {
+                            type: 'column',
+                            margin: 75,
+                            options3d: {
+                                enabled: true,
+                                alpha: 10,
+                                beta: 25,
+                                depth: 70
+                            }
+                        },
+                        title: {
+                            text: 'Nombre de seances par mois'
+                        },
+                        subtitle: {
+                            text: 'Nombre de seaces sorties et diffusees par mois'
+                        },
+                        plotOptions: {
+                            column: {
+                                depth: 25
+                            }
+                        },
+                        xAxis: {
+                            categories: Highcharts.getOptions().lang.shortMonths
+                        },
+                        yAxis: {
+                            title: {
+                                text: null
+                            }
+                        },
+                        series: [{
+                            name: 'Seances',
+                            data: data
+                        }]
+                    });
+                })}
+
+//END 3D chart
+
+
+        //AREA CHART
+        if($('#budget').length > 0) {
+
+            $.getJSON(
+
+                $("#budget").data('url'), function(data) {
+
+
+
+                    $('#budget').highcharts({
+                        chart: {
+                            type: 'area'
+                        },
+                        title: {
+                            text: 'Repartition du budget pour les 4 meilleurs categories'
+                        },
+
+                        xAxis: {
+                            categories: Highcharts.getOptions().lang.shortMonths,
+                            tickmarkPlacement: 'on',
+                            title: {
+                                enabled: false
+                            }
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Budget en (k)'
+                            },
+                            //labels: {
+                            //    formatter: function () {
+                            //        return this.value / 1000;
+                            //    }
+                            //}
+                        },
+                        tooltip: {
+                            shared: true,
+                            valueSuffix: ' millions'
+                        },
+                        plotOptions: {
+                            area: {
+                                stacking: 'normal',
+                                lineColor: '#666666',
+                                lineWidth: 1,
+                                marker: {
+                                    lineWidth: 1,
+                                    lineColor: '#666666'
+                                }
+                            }
+                        },
+                        series: data
+                    });
+                })}
+
+//END AREA CHART
+
+        //
+        ////GRAPH COMCINE
+        //$('#comcine').highcharts({
+        //    chart: {
+        //        type: 'column'
+        //    },
+        //    title: {
+        //        text: 'Repartition du nombre de commentaires par cinema'
+        //    },
+        //    xAxis: {
+        //        type: 'category'
+        //    },
+        //    yAxis: {
+        //        title: {
+        //            text: 'Nb comments'
+        //        }
+        //
+        //    },
+        //    legend: {
+        //        enabled: false
+        //    },
+        //    plotOptions: {
+        //        series: {
+        //            borderWidth: 0,
+        //            dataLabels: {
+        //                enabled: true,
+        //                format: '{point.y:.1f}%'
+        //            }
+        //        }
+        //    },
+        //
+        //    tooltip: {
+        //        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        //        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+        //    },
+        //
+        //    series: [{
+        //        name: "Brands",
+        //        colorByPoint: true,
+        //        data: [{
+        //            name: "Microsoft Internet Explorer",
+        //            y: 56.33,
+        //            drilldown: "Microsoft Internet Explorer"
+        //        }, {
+        //            name: "Chrome",
+        //            y: 24.03,
+        //            drilldown: "Chrome"
+        //        }, {
+        //            name: "Firefox",
+        //            y: 10.38,
+        //            drilldown: "Firefox"
+        //        }, {
+        //            name: "Safari",
+        //            y: 4.77,
+        //            drilldown: "Safari"
+        //        }, {
+        //            name: "Opera",
+        //            y: 0.91,
+        //            drilldown: "Opera"
+        //        }, {
+        //            name: "Proprietary or Undetectable",
+        //            y: 0.2,
+        //            drilldown: null
+        //        }]
+        //    }],
+        //    drilldown: {
+        //        series: [{
+        //            name: "Microsoft Internet Explorer",
+        //            id: "Microsoft Internet Explorer",
+        //            data: [
+        //                [
+        //                    "v11.0",
+        //                    24.13
+        //                ],
+        //                [
+        //                    "v8.0",
+        //                    17.2
+        //                ],
+        //                [
+        //                    "v9.0",
+        //                    8.11
+        //                ],
+        //                [
+        //                    "v10.0",
+        //                    5.33
+        //                ],
+        //                [
+        //                    "v6.0",
+        //                    1.06
+        //                ],
+        //                [
+        //                    "v7.0",
+        //                    0.5
+        //                ]
+        //            ]
+        //        }, {
+        //            name: "Chrome",
+        //            id: "Chrome",
+        //            data: [
+        //                [
+        //                    "v40.0",
+        //                    5
+        //                ],
+        //                [
+        //                    "v41.0",
+        //                    4.32
+        //                ],
+        //                [
+        //                    "v42.0",
+        //                    3.68
+        //                ],
+        //                [
+        //                    "v39.0",
+        //                    2.96
+        //                ],
+        //                [
+        //                    "v36.0",
+        //                    2.53
+        //                ],
+        //                [
+        //                    "v43.0",
+        //                    1.45
+        //                ],
+        //                [
+        //                    "v31.0",
+        //                    1.24
+        //                ],
+        //                [
+        //                    "v35.0",
+        //                    0.85
+        //                ],
+        //                [
+        //                    "v38.0",
+        //                    0.6
+        //                ],
+        //                [
+        //                    "v32.0",
+        //                    0.55
+        //                ],
+        //                [
+        //                    "v37.0",
+        //                    0.38
+        //                ],
+        //                [
+        //                    "v33.0",
+        //                    0.19
+        //                ],
+        //                [
+        //                    "v34.0",
+        //                    0.14
+        //                ],
+        //                [
+        //                    "v30.0",
+        //                    0.14
+        //                ]
+        //            ]
+        //        }, {
+        //            name: "Firefox",
+        //            id: "Firefox",
+        //            data: [
+        //                [
+        //                    "v35",
+        //                    2.76
+        //                ],
+        //                [
+        //                    "v36",
+        //                    2.32
+        //                ],
+        //                [
+        //                    "v37",
+        //                    2.31
+        //                ],
+        //                [
+        //                    "v34",
+        //                    1.27
+        //                ],
+        //                [
+        //                    "v38",
+        //                    1.02
+        //                ],
+        //                [
+        //                    "v31",
+        //                    0.33
+        //                ],
+        //                [
+        //                    "v33",
+        //                    0.22
+        //                ],
+        //                [
+        //                    "v32",
+        //                    0.15
+        //                ]
+        //            ]
+        //        }, {
+        //            name: "Safari",
+        //            id: "Safari",
+        //            data: [
+        //                [
+        //                    "v8.0",
+        //                    2.56
+        //                ],
+        //                [
+        //                    "v7.1",
+        //                    0.77
+        //                ],
+        //                [
+        //                    "v5.1",
+        //                    0.42
+        //                ],
+        //                [
+        //                    "v5.0",
+        //                    0.3
+        //                ],
+        //                [
+        //                    "v6.1",
+        //                    0.29
+        //                ],
+        //                [
+        //                    "v7.0",
+        //                    0.26
+        //                ],
+        //                [
+        //                    "v6.2",
+        //                    0.17
+        //                ]
+        //            ]
+        //        }, {
+        //            name: "Opera",
+        //            id: "Opera",
+        //            data: [
+        //                [
+        //                    "v12.x",
+        //                    0.34
+        //                ],
+        //                [
+        //                    "v28",
+        //                    0.24
+        //                ],
+        //                [
+        //                    "v27",
+        //                    0.17
+        //                ],
+        //                [
+        //                    "v29",
+        //                    0.16
+        //                ]
+        //            ]
+        //        }]
+        //    }
+        //});
+        //
+        ////END GRAPH COMCINE
+
+//SWITCHER
+        $('.switcher').switcher({
+            on_state_content: '<span class="fa fa-check" style="font-size:11px;"></span>',
+            off_state_content: '<span class="fa fa-times" style="font-size:11px;"></span>'
+        });
+        //ENDSWITCHER
+
 });
 });
 

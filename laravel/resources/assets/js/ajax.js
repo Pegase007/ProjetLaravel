@@ -158,8 +158,57 @@ $(document).ready(function(){
 
         });
 
+    //SWITCHER
+    //$('.switcher').switcher({
+    //    on_state_content: '<span class="fa fa-check" style="font-size:11px;"></span>',
+    //    off_state_content: '<span class="fa fa-times" style="font-size:11px;"></span>'
+    //});
 
 
+    $('.switcher').click(function(e){
+
+
+        var elt = $(this);
+
+        if($(this).is(':checked')){
+
+            $.ajax({
+                url:elt.data('url'),
+                method:"POST",
+                data: {id: elt.data('id'), action: 'add',  _token: elt.data('token')}
+
+            }).done(function(){
+
+                console.log(elt.data('id')+ " en fav")
+
+            });
+
+
+
+
+
+        }else{
+
+        $.ajax({
+            url: "/handlefavorite",
+            method:"POST",
+            data: {id: elt.data('id'), action: 'remove', _token: elt.data('token')}
+
+        }).done(function(){
+
+            console.log(elt.data('id')+ " plus en fav")
+
+
+        });
+
+        }
+
+
+
+
+    });
+
+    //ENDSWITCHER
 
 
 

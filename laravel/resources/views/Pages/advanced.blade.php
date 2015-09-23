@@ -293,12 +293,20 @@
 
 
 
+
 @endsection
 
 
 @section('js')
     @parent
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    {{--GRAPHS--}}
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    {{--PIE CHART--}}
+    <script src="http://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
     <script src="{{  asset('js/gmap.js') }}"></script>
     <script src="{{ asset('js/realtime.js') }}"> </script>
 

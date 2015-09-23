@@ -154,6 +154,7 @@
                     <th>Enable</th>
                     <th>Cover</th>
                     <th>Title</th>
+                    <th>Fav</th>
                     <th>Lges</th>
                     {{--<th>Distributeur</th>--}}
                     <th>Categories</th>
@@ -219,6 +220,12 @@
 
 
                         <td><a href="{{route('movies.read',['id'=>$movie->id])}}"> {{$movie->title}}</a></td>
+                        <td>
+                                <input type="checkbox"  data-url="{{route('movies.fav')}}"
+                                       data-token="{{csrf_token()}}"
+                                       data-id="{{$movie->id}}"
+                                       class="switcher" data-class="switcher-sm" >
+                        </td>
                         <td>{{$movie->languages}}</td>
                         {{--<td>{{$movie->distributeur}}</td>--}}
                         <td>{{ $movie->categories->title }}</td>

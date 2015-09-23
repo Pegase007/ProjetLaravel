@@ -60,6 +60,8 @@ class PagesController extends Controller{
     {
 
 
+
+
         if (Gate::denies('authexpire')){
             Auth::logout();
             return Redirect::to('auth/login');
@@ -235,6 +237,7 @@ class PagesController extends Controller{
 
 
     public function pro(){
+
 
         return view('Pages/professional');
 

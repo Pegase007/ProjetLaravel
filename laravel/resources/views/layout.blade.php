@@ -428,13 +428,6 @@ Use search to find needed section.
 
 <script src="{{asset('js/demo.js')}}"></script>
 
-{{--GRAPHS--}}
-<script src="http://code.highcharts.com/highcharts.js"></script>
-{{--PIE CHART--}}
-<script src="http://code.highcharts.com/highcharts-3d.js"></script>
-<script src="http://code.highcharts.com/modules/exporting.js"></script>
-{{--COLUMN--}}
-<script src="http://code.highcharts.com/modules/exporting.js"></script>
 
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>

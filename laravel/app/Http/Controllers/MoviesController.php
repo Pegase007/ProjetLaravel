@@ -317,6 +317,16 @@ class MoviesController extends Controller{
     }
 
 
+    public function fav(Request $request){
+
+        exit(dump(
+            $request->input('id'),
+            $request->input('action')
+        ));
+
+
+    }
+
     /**
      * Movies delete
      */
