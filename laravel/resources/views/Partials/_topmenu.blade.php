@@ -157,6 +157,7 @@
                             </li>
                             <li class="nav-icon-btn nav-icon-btn-success dropdown">
                                 <a href="#messages" class="dropdown-toggle" data-toggle="dropdown">
+
                                     <span class="label">10</span>
                                     <i class="nav-icon fa fa-envelope"></i>
                                     <span class="small-screen-text">Income messages</span>
@@ -164,119 +165,30 @@
 
                                 <!-- MESSAGES -->
 
-                                <!-- Javascript -->
-                                <script>
-                                    init.push(function () {
-                                        $('#main-navbar-messages').slimScroll({ height: 250 });
-                                    });
-                                </script>
-                                <!-- / Javascript -->
+{{--                                {{dump(session('favoris'))}}--}}
 
-                                <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
-                                    <div class="messages-list" id="main-navbar-messages">
+                                <div  class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
+                                    <div class="messages-list" id="favmovies"  data-url="{{route('sessions.boxmovie')}}">
+
+                                        @foreach(session("favoris",[]) as $key  => $val )
+
 
                                         <div class="message">
-                                            <img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
-                                            <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
-                                            <div class="message-description">
-                                                from <a href="#">Robert Jang</a>
-                                                &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                2h ago
-                                            </div>
-                                        </div> <!-- / .message -->
+                                            <img src="{{\App\Model\Movies::select('image')->where('id','=',(int)$val)->first()->image}}" alt="" class="message-avatar">
 
-                                        <div class="message">
-                                            <img src="assets/demo/avatars/3.jpg" alt="" class="message-avatar">
-                                            <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+                                            <a href="#" class="message-subject"> {{\App\Model\Movies::select('title')->where('id','=',(int)$val)->first()->title}}</a>
                                             <div class="message-description">
-                                                from <a href="#">Michelle Bortz</a>
-                                                &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                2h ago
-                                            </div>
-                                        </div> <!-- / .message -->
 
-                                        <div class="message">
-                                            <img src="assets/demo/avatars/4.jpg" alt="" class="message-avatar">
-                                            <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
-                                            <div class="message-description">
-                                                from <a href="#">Timothy Owens</a>
-                                                &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                2h ago
-                                            </div>
-                                        </div> <!-- / .message -->
 
-                                        <div class="message">
-                                            <img src="assets/demo/avatars/5.jpg" alt="" class="message-avatar">
-                                            <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                                            <div class="message-description">
-                                                from <a href="#">Denise Steiner</a>
-                                                &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                2h ago
                                             </div>
                                         </div> <!-- / .message -->
+                                        @endforeach
 
-                                        <div class="message">
-                                            <img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
-                                            <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
-                                            <div class="message-description">
-                                                from <a href="#">Robert Jang</a>
-                                                &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                2h ago
-                                            </div>
-                                        </div> <!-- / .message -->
-
-                                        <div class="message">
-                                            <img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
-                                            <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
-                                            <div class="message-description">
-                                                from <a href="#">Robert Jang</a>
-                                                &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                2h ago
-                                            </div>
-                                        </div> <!-- / .message -->
-
-                                        <div class="message">
-                                            <img src="assets/demo/avatars/3.jpg" alt="" class="message-avatar">
-                                            <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                                            <div class="message-description">
-                                                from <a href="#">Michelle Bortz</a>
-                                                &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                2h ago
-                                            </div>
-                                        </div> <!-- / .message -->
-
-                                        <div class="message">
-                                            <img src="assets/demo/avatars/4.jpg" alt="" class="message-avatar">
-                                            <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
-                                            <div class="message-description">
-                                                from <a href="#">Timothy Owens</a>
-                                                &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                2h ago
-                                            </div>
-                                        </div> <!-- / .message -->
-
-                                        <div class="message">
-                                            <img src="assets/demo/avatars/5.jpg" alt="" class="message-avatar">
-                                            <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                                            <div class="message-description">
-                                                from <a href="#">Denise Steiner</a>
-                                                &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                2h ago
-                                            </div>
-                                        </div> <!-- / .message -->
-
-                                        <div class="message">
-                                            <img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">
-                                            <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
-                                            <div class="message-description">
-                                                from <a href="#">Robert Jang</a>
-                                                &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                2h ago
-                                            </div>
-                                        </div> <!-- / .message -->
 
                                     </div> <!-- / .messages-list -->
-                                    <a href="#" class="messages-link">MORE MESSAGES</a>
+
+                                    <span data-href="{{route('movies.favbox')}}" id='favbox' class="messages-link">DELETE</span>
+
                                 </div> <!-- / .dropdown-menu -->
                             </li>
                             <!-- /3. $END_NAVBAR_ICON_BUTTONS -->

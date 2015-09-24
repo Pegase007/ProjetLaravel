@@ -237,6 +237,8 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
 
         Route::post('/handlefav', ['uses' => 'MoviesController@fav', 'as'=>'.fav']);
 
+        Route::get('/favbox', ['uses' => 'MoviesController@favbox', 'as'=>'.favbox']);
+
 
 
 
@@ -402,7 +404,15 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::get('/delete/{id}', ['uses' => 'CommentsController@delete', 'as'=>'.delete'])
             ->where('id','[0-9]+');
 
-    });
+             /**
+              * Gets comments fav
+              */
+        Route::post('/fav', ['uses' => 'CommentsController@fav', 'as' => '.fav']);
+
+
+
+
+         });
 
 
     Route::group(['prefix' =>'sessions', 'as'=>'sessions'],function() {
@@ -416,6 +426,9 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::get('/review',['uses' => 'SessionsController@review','as'=>'.review']);
 
         Route::get('/users',['uses' => 'SessionsController@users','as'=>'.users']);
+
+        Route::get('/boxmovie',['uses' => 'SessionsController@boxmovie','as'=>'.boxmovie']);
+
 
     });
 

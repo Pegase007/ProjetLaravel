@@ -38,6 +38,7 @@
                 <tr>
                     <th>id</th>
                     <th>User</th>
+                    <th>Fav</th>
                     <th>Movie</th>
                     <th>Note</th>
                     <th>Content</th>
@@ -52,6 +53,21 @@
                     <td><label class="px-single"><input type="checkbox" name="comments[]" value="{{$comment->id}}" class="px"><span class="lbl"></span></label> {{$comment->id}}</td>
                     <td>
                        {{$comment->user->username}}
+                    </td>
+
+                    <td>     <a href=""
+                              data-url="{{route("comments.fav")}}"
+                              data-token="{{ csrf_token() }}"
+                              data-id="{{$comment->id}}"
+                              class="heart">
+                            @if(in_array($comment->id,session("comfav",[])))
+                                <i class="fa fa-heart"></i>
+                            @else
+                                <i class="fa fa-heart-o"></i>
+                            @endif
+                        </a>
+
+
                     </td>
                     <td><a href="" title="">{{$comment->movies->title}}</a></td>
                     <td>{{$comment->note}}</td>

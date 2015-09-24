@@ -96,6 +96,13 @@ class SessionsController extends Controller{
         return view('Sessions/users',$data);
     }
 
+    public function boxmovie(){
+
+
+
+        return view('Sessions/boxmovie');
+    }
+
 
 
 

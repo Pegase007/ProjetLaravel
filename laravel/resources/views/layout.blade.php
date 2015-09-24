@@ -431,6 +431,7 @@ Use search to find needed section.
 
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/realtime.js')}}"></script>
 
 
 <script type="text/javascript">

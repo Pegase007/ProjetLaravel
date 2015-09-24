@@ -30,4 +30,6 @@ class Sessions extends Model
         return $this->belongsTo('App\Model\Cinema');
     }
 
+
+
 }

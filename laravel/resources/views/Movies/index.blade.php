@@ -220,11 +220,15 @@
 
 
                         <td><a href="{{route('movies.read',['id'=>$movie->id])}}"> {{$movie->title}}</a></td>
-                        <td>
+                        <td class="checkup" >
                                 <input type="checkbox"  data-url="{{route('movies.fav')}}"
                                        data-token="{{csrf_token()}}"
                                        data-id="{{$movie->id}}"
-                                       class="switcher" data-class="switcher-sm" >
+                                       class="switcher"
+                                       @if(in_array($movie->id,session("favoris",[])))
+                                       checked
+                                       @endif
+                                       data-class="switcher-sm" >
                         </td>
                         <td>{{$movie->languages}}</td>
                         {{--<td>{{$movie->distributeur}}</td>--}}

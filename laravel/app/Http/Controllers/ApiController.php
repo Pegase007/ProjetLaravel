@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\ActorsMovies;
 use App\Model\Categories;
 use App\Model\Cinema;
+use App\Model\Comments;
 use App\Model\Directors;
 use App\Model\Movies;
 use App\Model\Sessions;
@@ -197,42 +198,73 @@ class ApiController extends Controller
 //    public function getComments(){
 //
 //
-//        $movcoms=Movies::select('movies.title',DB::raw('COUNT(comments.id)'))
-//            ->join('comments','comments.movies_id','=','movies.id')
-//            ->groupBy('movies.id')
-//            ->get();
 //
 //
-//        $ttcinecoms=Cinema::select('cinema.title',DB::raw('COUNT(comments.id)as count'))
+//
+//        $ttcinecoms=Cinema::select(DB::raw('COUNT(comments.id)as count'))
 //            ->join('cinema_movies','cinema.id', '=', 'cinema_movies.cinemas_id')
 //            ->join('movies','movies.id', '=', 'cinema_movies.movies_id')
 //            ->join('comments','comments.movies_id', '=', 'movies.id')
-////            ->groupBy('cinema.id')
+//            ->first();
+//
+//        $cinecoms=Cinema::select('cinema.title','cinema.id as id',DB::raw('COUNT(comments.id)as count'))
+//            ->join('cinema_movies','cinema.id', '=', 'cinema_movies.cinemas_id')
+//            ->join('movies','movies.id', '=', 'cinema_movies.movies_id')
+//            ->join('comments','comments.movies_id', '=', 'movies.id')
+//            ->groupBy('cinema.id')
 //            ->get();
-//$tab=[];
+////            ->toSql();
+//        $tab=[];
+//        $drilldown=[];
 //
 //
-//        foreach($ttcinecoms as $cine){
 //
-//            dump($cine->groupBy('cinema.id'));
-//            exit();
+////        dump($cinecoms);
 //
-//            $tab[]=array("name"=>$cine->title,"Y"=>(($cine->count->groupBy('cinema.id')*100)/(int)$cine->count));
+//        foreach($cinecoms as $cine) {
+//
+////            dump($ttcinecoms->count);
+//
+//            $pourcentage = ($cine->count * 100) / $ttcinecoms->count;
+////            dump();
+////            exit();
+//
+//            array_push($tab, array("name" => $cine->title,
+//                "Y" => number_format($pourcentage, 0),
+//                "drilldown" => $cine->title));
+//
+//            $movcoms = Cinema::select('cinema_movies.movies_id as id', 'movies.title')
+//                ->join('cinema_movies', 'cinema.id', '=', 'cinema_movies.cinemas_id')
+//                ->join('movies', 'movies.id', '=', 'cinema_movies.movies_id')
+//                ->where('cinema_movies.cinemas_id', '=', $cine->id);
+//
+//
+//            foreach ($movcoms as $mov)
+//
+//                $movie=Comments::select('movies.title',DB::raw('COUNT(comments.id'))
+//                    ->join('movies', 'movies.id', '=', 'comments.movies_id')
+//                    ->where('movies.id','=',$mov->id);
+//
+//                    array_push($drilldown, array("name" => $cine->title,
+//                        "id" => $cine->title,
+//                        array($ )));
+//        }
+//
+//
+//
+//
+//    };
+
+
+//        foreach($movcoms as $mov){
+//
 //
 //
 //
 //        }
+//return response()->json($tab);
 //
-//
-////        foreach($movcoms as $mov){
-////
-////
-////
-////
-////        }
-//        return response()->json($tab);
-//
-//    }
+//}
 
 
 

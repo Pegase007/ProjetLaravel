@@ -7,6 +7,7 @@ use App\Model\ActorsMovies;
 use App\Model\Categories;
 use App\Model\Comments;
 use App\Model\Directors;
+use App\Model\Sessions;
 use Illuminate\Http\Request;
 use App\Model\Movies;
 use Illuminate\Support\Facades\Auth;
@@ -319,13 +320,63 @@ class MoviesController extends Controller{
 
     public function fav(Request $request){
 
-        exit(dump(
-            $request->input('id'),
-            $request->input('action')
-        ));
+
+            $id= $request->input('id');
+            $action=$request->input('action');
+             $liked=session("favoris",[]);
+
+        if($action=="add"){
+
+            //recuperer en session l'item favoris
+
+            $liked[]=$id;
+            //enregistrer un item avec sa valeur
+            Session::put("favoris",$liked);
+
+
+        }else{
+
+
+            //retourne la position de mon film dans le tableau liked
+            $position = array_search($id, $liked);
+
+            //enregistrer un item avec sa valeur
+            unset ($liked[$position]);
+            Session::put("favoris",$liked);
+        }
+
+        return response()->json([true]);
+
+    }
+
+
+    public function favbox(){
+
+
+        foreach(session('favoris') as $key => $val){
+
+            $liked[]=$val;
+            $position = array_search($val, $liked);
+
+            //enregistrer un item avec sa valeur
+            unset ($liked[$position]);
+            Session::put("favoris",$liked);
+
+        }
+
+
+
+        return Redirect::route('movies.index');
 
 
     }
+
+
+
+
+
+
+
 
     /**
      * Movies delete

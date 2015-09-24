@@ -4,66 +4,11 @@ $(document).ready(function(){
 
 });
 
-$(document).ready(function(){
+$(document).ready(function() {
 
     //ciblage de lelement + evenement dessus
 
-    $('table#list .btn-danger').click(function(e){
-
-        e.preventDefault(); //annuler l'evenement href de mes liens
-
-       //console.log('vous avez cliqué dessu :)');
-
-        var elt = $(this);
-        $.ajax({
-            url: elt.attr('href') //url de mon href lien)
-        }).done(function(){
-
-            elt.parents('tr').fadeOut('slow');
-
-        });
-
-        });
-
-
-    //cliblage et greffe du bon element
-        $('#actions').change(function(e) {
-
-            if ($(this).val() == 'Activer') {
-
-                $("#list :checked").each(function (index) {
-
-                    console.log($(this));
-                    //Envoyer une requete ajax d'activation pour chaque film coché
-
-                });
-            }
-
-            else if ($(this).val() == 'Supprimer') {
-
-                $("#list :checked").each(function (index) {
-
-                    //console.log($(this));
-                    //Envoyer une requete ajax de suppression pour chaque film coché
-
-                    var elt = $(this);
-                    $.ajax({
-                        url: elt.attr('data-url') //url de mon href lien)
-                    }).done(function () {
-
-                        elt.parents('tr').fadeOut('slow');
-
-                    });
-                });
-
-            }
-
-
-        });
-
-//RECOVERY OF DELETED MOVIES
-
-    $('#recover').click(function(e){
+    $('table#list .btn-danger').click(function (e) {
 
         e.preventDefault(); //annuler l'evenement href de mes liens
 
@@ -72,7 +17,62 @@ $(document).ready(function(){
         var elt = $(this);
         $.ajax({
             url: elt.attr('href') //url de mon href lien)
-        }).done(function(){
+        }).done(function () {
+
+            elt.parents('tr').fadeOut('slow');
+
+        });
+
+    });
+
+
+    //cliblage et greffe du bon element
+    $('#actions').change(function (e) {
+
+        if ($(this).val() == 'Activer') {
+
+            $("#list :checked").each(function (index) {
+
+                console.log($(this));
+                //Envoyer une requete ajax d'activation pour chaque film coché
+
+            });
+        }
+
+        else if ($(this).val() == 'Supprimer') {
+
+            $("#list :checked").each(function (index) {
+
+                //console.log($(this));
+                //Envoyer une requete ajax de suppression pour chaque film coché
+
+                var elt = $(this);
+                $.ajax({
+                    url: elt.attr('data-url') //url de mon href lien)
+                }).done(function () {
+
+                    elt.parents('tr').fadeOut('slow');
+
+                });
+            });
+
+        }
+
+
+    });
+
+//RECOVERY OF DELETED MOVIES
+
+    $('#recover').click(function (e) {
+
+        e.preventDefault(); //annuler l'evenement href de mes liens
+
+        //console.log('vous avez cliqué dessu :)');
+
+        var elt = $(this);
+        $.ajax({
+            url: elt.attr('href') //url de mon href lien)
+        }).done(function () {
 
             elt.parents('tr').fadeOut('slow');
 
@@ -81,7 +81,7 @@ $(document).ready(function(){
     });
 
 //ON SUBMIT OF COMMENT
-    $('form#addcomment').submit(function(e){
+    $('form#addcomment').submit(function (e) {
 
         e.preventDefault();
 
@@ -96,7 +96,7 @@ $(document).ready(function(){
             method: "POST", // Methode d'envoi de ma requete
             data: elt.serialize()
             //data:envoyer des données
-        }).done(function(data){
+        }).done(function (data) {
 
             var elt = $('#comment .comment:first').clone();
 
@@ -108,25 +108,23 @@ $(document).ready(function(){
             $('#addcomment textarea').val("");
 
 
-
         });
-
 
 
     });
 
 
 //LISTENS TO ANY ACTION ON A NON EXISTING OBJECT TASK
-    $('.widget-tasks').on( "click", ":checkbox", function(e) {
+    $('.widget-tasks').on("click", ":checkbox", function (e) {
 
-            console.log('ahhhhh');
+        console.log('ahhhhh');
 
-            var elt = $(this);
-            $.ajax({
-                url: elt.attr('data-url') //url de mon href lien)
-            })
+        var elt = $(this);
+        $.ajax({
+            url: elt.attr('data-url') //url de mon href lien)
+        })
 
-        });
+    });
 
     $('form#clear').submit(function (e) {
         e.preventDefault();
@@ -145,7 +143,7 @@ $(document).ready(function(){
     });
 
 
-    $('form#taskform').submit(function(e){
+    $('form#taskform').submit(function (e) {
 
         e.preventDefault();
 
@@ -156,13 +154,13 @@ $(document).ready(function(){
             method: "POST", // Methode d'envoi de ma requete
             data: elt.serialize()
             //data:envoyer des données
-        }).done(function(data){
+        }).done(function (data) {
 
-                $.growl.notice({ message: "Task added" });
+            $.growl.notice({message: "Task added"});
             document.getElementById("taskform").reset();
-            });
-
         });
+
+    });
 
     //SWITCHER
     //$('.switcher').switcher({
@@ -171,45 +169,40 @@ $(document).ready(function(){
     //});
 
 
-    $('.switcher').click(function(e){
+    $('.switcher').click(function (e) {
 
 
         var elt = $(this);
 
-        if($(this).is(':checked')){
+        if ($(this).is(':checked')) {
 
             $.ajax({
-                url:elt.data('url'),
-                method:"POST",
-                data: {id: elt.data('id'), action: 'add',  _token: elt.data('token')}
+                url: elt.data('url'),
+                method: "POST",
+                data: {id: elt.data('id'), action: 'add', _token: elt.data('token')}
 
-            }).done(function(){
+            }).done(function () {
 
-                console.log(elt.data('id')+ " en fav")
+                console.log(elt.data('id') + " en fav")
 
             });
 
 
+        } else {
+
+            $.ajax({
+                url: elt.data('url'),
+                method: "POST",
+                data: {id: elt.data('id'), action: 'remove', _token: elt.data('token')}
+
+            }).done(function () {
+
+                console.log(elt.data('id') + " plus en fav")
 
 
-
-        }else{
-
-        $.ajax({
-            url: "/handlefavorite",
-            method:"POST",
-            data: {id: elt.data('id'), action: 'remove', _token: elt.data('token')}
-
-        }).done(function(){
-
-            console.log(elt.data('id')+ " plus en fav")
-
-
-        });
+            });
 
         }
-
-
 
 
     });
@@ -217,58 +210,141 @@ $(document).ready(function(){
     //ENDSWITCHER
 
 
+    //FAV
 
 
+    //SWITCHER
+    //$('.switcher').switcher({
+    //    on_state_content: '<span class="fa fa-check" style="font-size:11px;"></span>',
+    //    off_state_content: '<span class="fa fa-times" style="font-size:11px;"></span>'
+    //});
+
+//START FAV
+    $('.heart').click(function (e) {
+        e.preventDefault();
+
+        var elt = $(this);
+
+        if (elt.find("i").hasClass("fa-heart-o")) {
+
+            $.ajax({
+                url: elt.data('url'),
+                method: "POST",
+                data: {id: elt.data('id'), action: 'comfav', _token: elt.data('token')}
+
+            }).done(function () {
+
+                elt.find('i').removeClass("fa fa-heart-o").addClass("fa fa-heart")
+
+            })
+        }
+
+        else {
+
+            $.ajax({
+                url: elt.data('url'),
+                method: "POST",
+                data: {id: elt.data('id'), action: 'comunfav', _token: elt.data('token')}
+
+            }).done(function () {
+
+                elt.find('i').removeClass("fa fa-heart").addClass("fa fa-heart-o")
 
 
+            })
 
-
-
-
-
+        }
     });
 
+        //END FAV
+    console.log('booooo');
+        //START FAVBOX
 
 
-$(document).ready(function(){
+    $('#favbox').click(function (e) {
+
+            e.preventDefault();
+
+            var elt = $(this);
+        //$(".switcher").removeAttr('checked');
+
+        console.log('good');
+
+            $.ajax({
+                url: elt.data('href'),
 
 
-    init.push(function(){
+
+            }).done(function () {
+
+               elt.parent().find('.message').fadeOut('slow');
+                //$('.switcher').switcher({
+                //    selected: false
+                //});
+
+                //$(".switcher").attr('checked',false);
+
+
+
+
+
+                console.log('coucou')
+
+
+            })
+
+        });
+
+        //ENDBOX
+
+
+
+
+
+
+
+
+
+});
+
+
+
+$(document).ready(function() {
+
+
+    init.push(function () {
 
 
         $('.date').datepicker({
 
-            format:'dd/mm/yyyy',
-            todayBtn:'linked'
+            format: 'dd/mm/yyyy',
+            todayBtn: 'linked'
         });
 
-            $('#datetimepicker1').datetimepicker({
+        $('#datetimepicker1').datetimepicker({
 
-                format: 'dd/MM/yyyy hh:mm:ss',
-            });
+            format: 'dd/MM/yyyy hh:mm:ss',
+        });
 
 
         $('.wyswyg').summernote({
-            height:200,
-            tabsize:2,
-            codemirror:{
-                theme:'monokai'
+            height: 200,
+            tabsize: 2,
+            codemirror: {
+                theme: 'monokai'
             }
         });
 
 
-
         $('#image').pixelFileInput(
-            {placeholder:"Aucun fichier selectionné"}
+            {placeholder: "Aucun fichier selectionné"}
         );
 
 
         $(".js-example-tags").select2();
 
 
-        $("#synopsis").limiter(140, { label: '#character-limit-input-label' });
-
-
+        $("#synopsis").limiter(140, {label: '#character-limit-input-label'});
 
 
         $("#slider").slider({
@@ -276,9 +352,9 @@ $(document).ready(function(){
             'min': 0,
             'max': 10,
             'value': 5,
-             slide: function (event, ui) {
-                    $("#note_presse").val(ui.value);
-                }
+            slide: function (event, ui) {
+                $("#note_presse").val(ui.value);
+            }
 
 
         });
@@ -286,24 +362,23 @@ $(document).ready(function(){
 
 // Easy Pie Charts
 
-            var easyPieChartDefaults = {
-                animate: 2000,
-                scaleColor: false,
-                lineWidth: 6,
-                lineCap: 'square',
-                size: 90,
-                trackColor: '#e5e5e5'
-            };
-            $('#easy-pie-chart-1').easyPieChart($.extend({}, easyPieChartDefaults, {
-                barColor: PixelAdmin.settings.consts.COLORS[1]
-            }));
-            $('#easy-pie-chart-2').easyPieChart($.extend({}, easyPieChartDefaults, {
-                barColor: PixelAdmin.settings.consts.COLORS[1]
-            }));
-            $('#easy-pie-chart-3').easyPieChart($.extend({}, easyPieChartDefaults, {
-                barColor: PixelAdmin.settings.consts.COLORS[1]
-            }));
-
+        var easyPieChartDefaults = {
+            animate: 2000,
+            scaleColor: false,
+            lineWidth: 6,
+            lineCap: 'square',
+            size: 90,
+            trackColor: '#e5e5e5'
+        };
+        $('#easy-pie-chart-1').easyPieChart($.extend({}, easyPieChartDefaults, {
+            barColor: PixelAdmin.settings.consts.COLORS[1]
+        }));
+        $('#easy-pie-chart-2').easyPieChart($.extend({}, easyPieChartDefaults, {
+            barColor: PixelAdmin.settings.consts.COLORS[1]
+        }));
+        $('#easy-pie-chart-3').easyPieChart($.extend({}, easyPieChartDefaults, {
+            barColor: PixelAdmin.settings.consts.COLORS[1]
+        }));
 
 
         //CHAT
@@ -311,7 +386,7 @@ $(document).ready(function(){
 
 
 //tasks table
-        if($('.widget-tasks .panel-body').length > 0) {
+        if ($('.widget-tasks .panel-body').length > 0) {
             $('.widget-tasks .panel-body').sortable({
                 axis: "y",
                 handle: ".task-sort-icon",
@@ -335,150 +410,146 @@ $(document).ready(function(){
         }
 
 
+        //GRAPHS
 
+        if ($('#actorsgraph').length > 0) {
+            var marseille = $('#actorsgraph').data('marseille');
+            var lyon = $('#actorsgraph').data('lyon');
+            var newyork = $('#actorsgraph').data('newyork')
+            var hampshire = $('#actorsgraph').data('hampshire');
 
+            console.log(hampshire);
 
-    //GRAPHS
+            Morris.Bar({
+                element: 'actorsgraph',
+                data: [
+                    {ville: 'Lyon', quantity: lyon},
+                    {ville: 'Marseille', quantity: marseille},
+                    {ville: 'Hampshire', quantity: hampshire},
+                    {ville: 'New York', quantity: newyork},
 
-    if($('#actorsgraph').length > 0) {
-        var marseille = $('#actorsgraph').data('marseille');
-        var lyon = $('#actorsgraph').data('lyon');
-        var newyork = $('#actorsgraph').data('newyork')
-        var hampshire = $('#actorsgraph').data('hampshire');
-
-        console.log(hampshire);
-
-        Morris.Bar({
-            element: 'actorsgraph',
-            data: [
-                {ville: 'Lyon', quantity: lyon},
-                {ville: 'Marseille', quantity: marseille},
-                {ville: 'Hampshire', quantity: hampshire},
-                {ville: 'New York', quantity: newyork},
-
-            ],
-            xkey: 'ville',
-            ykeys: ['quantity'],
-            labels: ['Actors']
-        });
-    }
-
+                ],
+                xkey: 'ville',
+                ykeys: ['quantity'],
+                labels: ['Actors']
+            });
+        }
 
 
 //PIE CHART ACTORS AGE
-    if($('#actorsage').length > 0) {
-        var dataSet = [{
-            label: "Entre 18 et 25",
-            data: $('#actorsage').data('one'),
-            color: "#005CDE"
-        }, {
-            label: "Entre 25 et 35",
-            data: $('#actorsage').data('two'),
-            color: "#00A36A"
-        }, {
-            label: "Entre 35 et 45",
-            data: $('#actorsage').data('three'),
-            color: "#7D0096"
-        }, {
-            label: "Entre 45 et 60",
-            data: $('#actorsage').data('four'),
-            color: "#992B00"
-        }, {
-            label: "Plus de 60",
-            data: $('#actorsage').data('five'),
-            color: "#DE000F"
-        }];
+        if ($('#actorsage').length > 0) {
+            var dataSet = [{
+                label: "Entre 18 et 25",
+                data: $('#actorsage').data('one'),
+                color: "#005CDE"
+            }, {
+                label: "Entre 25 et 35",
+                data: $('#actorsage').data('two'),
+                color: "#00A36A"
+            }, {
+                label: "Entre 35 et 45",
+                data: $('#actorsage').data('three'),
+                color: "#7D0096"
+            }, {
+                label: "Entre 45 et 60",
+                data: $('#actorsage').data('four'),
+                color: "#992B00"
+            }, {
+                label: "Plus de 60",
+                data: $('#actorsage').data('five'),
+                color: "#DE000F"
+            }];
 
-        var options = {
-            series: {
-                pie: {
-                    show: true,
-                    innerRadius: 0.5,
+            var options = {
+                series: {
+                    pie: {
+                        show: true,
+                        innerRadius: 0.5,
 
+                    }
+                },
+                legend: {
+                    show: true
+                },
+                grid: {
+                    hoverable: true
                 }
-            },
-            legend: {
-                show: true
-            },
-            grid: {
-                hoverable: true
-            }
-        };
+            };
 
 
-        $.plot($("#actorsage"), dataSet, options);
-    }
+            $.plot($("#actorsage"), dataSet, options);
+        }
 
-    //$('#actorsage').plot(dataSet, {
-    //    series: {
-    //        pie: {
-    //            show: true,
-    //            radius: 1,
-    //            innerRadius: 0.5,
-    //            label: {
-    //                show: true,
-    //                radius: 3 / 4,
-    //                formatter: function (label, series) {
-    //                    return '<div style="font-size:14px;text-align:center;padding:2px;color:white;">' + Math.round(series.percent) + '%</div>';
-    //                },
-    //                background: { opacity: 0 }
-    //            }
-    //        }
-    //    }
-    //}, {
-    //    height: 205
-    //});
+        //$('#actorsage').plot(dataSet, {
+        //    series: {
+        //        pie: {
+        //            show: true,
+        //            radius: 1,
+        //            innerRadius: 0.5,
+        //            label: {
+        //                show: true,
+        //                radius: 3 / 4,
+        //                formatter: function (label, series) {
+        //                    return '<div style="font-size:14px;text-align:center;padding:2px;color:white;">' + Math.round(series.percent) + '%</div>';
+        //                },
+        //                background: { opacity: 0 }
+        //            }
+        //        }
+        //    }
+        //}, {
+        //    height: 205
+        //});
 
 
 //DIRECTORS CHART
-    if($('#bestdirectors').length > 0){
-    Morris.Line({
-        element: 'bestdirectors',
-        data: [
-            { period: '2010 Q1', iphone: 2666, ipad: null, itouch: 2647 },
-            { period: '2010 Q2', iphone: 2778, ipad: 2294, itouch: 2441 },
-            { period: '2010 Q3', iphone: 4912, ipad: 1969, itouch: 2501 },
-            { period: '2010 Q4', iphone: 3767, ipad: 3597, itouch: 5689 },
-            { period: '2011 Q1', iphone: 6810, ipad: 1914, itouch: 2293 },
-            { period: '2011 Q2', iphone: 5670, ipad: 4293, itouch: 1881 },
-            { period: '2011 Q3', iphone: 4820, ipad: 3795, itouch: 1588 },
-            { period: '2011 Q4', iphone: 15073, ipad: 5967, itouch: 5175 },
-            { period: '2012 Q1', iphone: 10687, ipad: 4460, itouch: 2028 },
-            { period: '2012 Q2', iphone: 8432, ipad: 5713, itouch: 1791 }
-        ],
-        xkey: 'period',
-        ykeys: ['iphone', 'ipad', 'itouch'],
-        labels: ['iPhone', 'iPad', 'iPod Touch'],
-        hideHover: 'auto',
-        fillOpacity: 0.3,
-        behaveLikeLine: true,
-        lineWidth: 2,
-        pointSize: 4,
-        gridLineColor: '#cfcfcf',
-        resize: true
-    });
+        if ($('#bestdirectors').length > 0) {
+            Morris.Line({
+                element: 'bestdirectors',
+                data: [
+                    {period: '2010 Q1', iphone: 2666, ipad: null, itouch: 2647},
+                    {period: '2010 Q2', iphone: 2778, ipad: 2294, itouch: 2441},
+                    {period: '2010 Q3', iphone: 4912, ipad: 1969, itouch: 2501},
+                    {period: '2010 Q4', iphone: 3767, ipad: 3597, itouch: 5689},
+                    {period: '2011 Q1', iphone: 6810, ipad: 1914, itouch: 2293},
+                    {period: '2011 Q2', iphone: 5670, ipad: 4293, itouch: 1881},
+                    {period: '2011 Q3', iphone: 4820, ipad: 3795, itouch: 1588},
+                    {period: '2011 Q4', iphone: 15073, ipad: 5967, itouch: 5175},
+                    {period: '2012 Q1', iphone: 10687, ipad: 4460, itouch: 2028},
+                    {period: '2012 Q2', iphone: 8432, ipad: 5713, itouch: 1791}
+                ],
+                xkey: 'period',
+                ykeys: ['iphone', 'ipad', 'itouch'],
+                labels: ['iPhone', 'iPad', 'iPod Touch'],
+                hideHover: 'auto',
+                fillOpacity: 0.3,
+                behaveLikeLine: true,
+                lineWidth: 2,
+                pointSize: 4,
+                gridLineColor: '#cfcfcf',
+                resize: true
+            });
 
-    }
+        }
 
-        if($('#hero-area').length > 0){
+        if ($('#hero-area').length > 0) {
 
-    $.getJSON(
-        $("#hero-area").data('url'), function(data){
-        var items = [];
+            $.getJSON(
+                $("#hero-area").data('url'), function (data) {
+                    var items = [];
 
-        $.each(data, function (key, val) {
-            items.push(val.firstname);
-        });
+                    $.each(data, function (key, val) {
+                        items.push(val.firstname);
+                    });
 
-        console.log(items);
+                    console.log(items);
 
-    });
+                });
         }
 
         //Piechart repartition des films par categories
-        if($('#container').length > 0) {
+        if ($('#container').length > 0) {
             $.getJSON(
-                $("#container").data('url'), function(data) {
+                $("#container").data('url'), function (data) {
                     $('#container').highcharts({
                         chart: {
                             type: 'pie',
@@ -514,13 +585,13 @@ $(document).ready(function(){
                 });
 //FIN PIE CHART
 
-    }
+        }
 
 
         //STACKED COLUMN CHART
-        if($('#stackedcolumn').length > 0) {
+        if ($('#stackedcolumn').length > 0) {
 
-            $.getJSON( $("#stackedcolumn").data('url'), function(data) {
+            $.getJSON($("#stackedcolumn").data('url'), function (data) {
 
                 $('#stackedcolumn').highcharts({
                     chart: {
@@ -575,16 +646,16 @@ $(document).ready(function(){
                     series: data.result
                 });
 
-        })}
+            })
+        }
 
 //END STACKD COLUMN
 
 //3D chart with null value
-        if($('#seances').length > 0) {
+        if ($('#seances').length > 0) {
 
             $.getJSON(
-
-                $("#seances").data('url'), function(data) {
+                $("#seances").data('url'), function (data) {
 
                     $('#seances').highcharts({
                         chart: {
@@ -621,18 +692,17 @@ $(document).ready(function(){
                             data: data
                         }]
                     });
-                })}
+                })
+        }
 
 //END 3D chart
 
 
         //AREA CHART
-        if($('#budget').length > 0) {
+        if ($('#budget').length > 0) {
 
             $.getJSON(
-
-                $("#budget").data('url'), function(data) {
-
+                $("#budget").data('url'), function (data) {
 
 
                     $('#budget').highcharts({
@@ -677,11 +747,12 @@ $(document).ready(function(){
                         },
                         series: data
                     });
-                })}
+                })
+        }
 
 //END AREA CHART
 
-        //
+
         ////GRAPH COMCINE
         //$('#comcine').highcharts({
         //    chart: {
@@ -935,13 +1006,25 @@ $(document).ready(function(){
         ////END GRAPH COMCINE
 
 //SWITCHER
-        $('.switcher').switcher({
-            on_state_content: '<span class="fa fa-check" style="font-size:11px;"></span>',
-            off_state_content: '<span class="fa fa-times" style="font-size:11px;"></span>'
-        });
+        if ($('.switcher').length > 0) {
+            $('.switcher').switcher({
+                on_state_content: '<span class="fa fa-check" style="font-size:11px;"></span>',
+                off_state_content: '<span class="fa fa-times" style="font-size:11px;"></span>'
+            });
+        }
         //ENDSWITCHER
 
-});
+
+        //FAV MOVIES SCROLL BAR
+        if ($('#favmovies').length > 0) {
+
+            $('#favmovies').slimScroll({height: 250});
+        }
+//END SCROLL BAR
+
+
+    });
+
 });
 
 

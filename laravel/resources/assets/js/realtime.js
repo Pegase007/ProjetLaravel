@@ -87,6 +87,35 @@ $(document).ready(function(){
 
     }
 
+    if($('#favmovies').length > 0) {
+
+        setInterval(function () {
+
+            //console.log('test');
+
+            $.ajax({
+
+                url: $('#favmovies').attr('data-url')
+
+
+            }).done(function (data) {
+
+                $('#favmovies').html(data)
+
+
+                //console.log($(".checkup").find(':checkbox:checked').length);
+
+            });
+
+
+        }, 3000);
+
+    }
+
+
+
+
+
 
 
 });

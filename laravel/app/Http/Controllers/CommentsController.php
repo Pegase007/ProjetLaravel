@@ -55,6 +55,37 @@ class CommentsController extends Controller
         return Redirect::route('comments.index');
     }
 
+    public function fav(Request $request){
+
+
+        $id= $request->input('id');
+        $action=$request->input('action');
+        $liked=session("comfav",[]);
+
+        if($action=="comfav"){
+
+            //recuperer en session l'item favoris
+
+            $liked[]=$id;
+            //enregistrer un item avec sa valeur
+            Session::put("comfav",$liked);
+
+
+        }else{
+
+
+            //retourne la position de mon film dans le tableau liked
+            $position = array_search($id, $liked);
+
+            //enregistrer un item avec sa valeur
+            unset ($liked[$position]);
+            Session::put("comfav",$liked);
+        }
+
+       return response()->json([true]);
+
+    }
+
 
 
 
