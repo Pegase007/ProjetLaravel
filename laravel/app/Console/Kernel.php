@@ -15,6 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\Inspire::class,
         \App\Console\Commands\CategoryCheck::class,
+        \App\Console\Commands\MovieInactiv::class,
+
     ];
 
     /**
