@@ -364,19 +364,8 @@ class MoviesController extends Controller{
 
         }
 
-
-
         return Redirect::route('movies.index');
-
-
     }
-
-
-
-
-
-
-
 
     /**
      * Movies delete

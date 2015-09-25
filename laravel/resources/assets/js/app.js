@@ -712,6 +712,46 @@ $(document).ready(function() {
 //END SCROLL BAR
 
 
+        //BOOT X-editable
+
+            //$('.bs-x-editable-username').editable({
+            //    type: 'text',
+            //    name: 'username',
+            //    title: 'Enter username'
+            //});
+            //
+            //$('.bs-x-editable-movie').editable({
+            //    validate: function(value) {
+            //        if($.trim(value) == '') return 'This field is required';
+            //    }
+            //});
+            //
+            //$('.bs-x-editable-note').editable({
+            //    validate: function(value) {
+            //        if($.trim(value) == '') return 'This field is required';
+            //    }
+            //});
+        if ($('.bs-x-editable-content').length > 0) {
+            $('.bs-x-editable-content').editable({
+
+                //validate: function(value) {
+                //    if($.trim(value) == '') return 'This field is required';
+                //},
+                params: function (params) {
+                    params._token = $('.bs-x-editable-content').data('token');
+                    return params;
+                },
+                url: $(this).data('url'),
+                type: 'text',
+                title: 'Edit ',
+                placement: 'left',
+
+
+            });
+        }
+
+
+
     });
 
 });

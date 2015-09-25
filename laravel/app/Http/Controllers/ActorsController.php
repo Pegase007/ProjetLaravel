@@ -7,6 +7,7 @@ use App\Model\Categories;
 use App\Model\Movies;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 /**
@@ -36,7 +37,8 @@ class ActorsController extends Controller{
 
         $datas = [
 
-           "actors"=> Actors::all()
+           "actors"=> Actors::all(),
+            "session" =>session('thumbup')
         ];
 
         return view ('Actors/index',$datas);
@@ -150,6 +152,40 @@ class ActorsController extends Controller{
         return Redirect::route('actors.index');
 
 
+
+    }
+
+
+    public function thumb(Request $request){
+
+        $id=$request->input('id');
+        $action=$request->input('action');
+
+        $thumbup=session("thumbup",[]);
+        $thumbdown=session("thumbdown",[]);
+
+
+        if($action=="like"){
+
+            //recuperer en session l'item favoris
+
+            $thumbup[]=$id;
+            //enregistrer un item avec sa valeur
+            Session::put("thumbup",$thumbup);
+
+
+        }
+        else{
+
+            $thumbdown[]=$id;
+            //enregistrer un item avec sa valeur
+            Session::put("thumbdown",$thumbdown);
+        }
+
+        dump(session('thumbup'));
+        dump(session('thumbdown'));
+
+//        return response()->json([true]);
 
     }
 

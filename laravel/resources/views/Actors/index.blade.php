@@ -94,8 +94,13 @@
                     <td>{{$actor->id}}</td>
                     <td class="col-md-1"><a href="{{route('actors.read',['id'=>$actor->id])}}" class="thumbnail"> <img class="img-responsive" src="{{$actor->image}}" alt="{{$actor->lastname}} {{$actor->firstname}}" title="{{$actor->lastname}} {{$actor->firstname}}" ></a></td>
 
-                    <td><a href="{{route('actors.read',['id'=>$actor->id])}}" >{{$actor->lastname}}</a></td>
-                    <td><a href="{{route('actors.read',['id'=>$actor->id])}}" >{{$actor->firstname}}</a></td>
+                    <td><a href="{{route('actors.read',['id'=>$actor->id])}}" >{{$actor->lastname}}{{$actor->firstname}}</a></td>
+                    <td > <a href="" data-url="{{route('actors.thumb')}}" class="like" data-token="{{csrf_token()}}" data-actor={{$actor->id}} > <i  class="col-md-offset-2 col-md-2 fa fa-thumbs-up"></i></a>
+                        <span class="col-md-2"> 0 </span>
+                        <a  href="" data-url="{{route('actors.thumb')}}" class="dislike" data-token="{{csrf_token()}}" data-actor={{$actor->id}}  > <i class="col-md-2 fa fa-thumbs-down"></i></a>
+                        <span class="col-md-2">0</span>
+                    </td>
+                    {{--{{dump($session)}}--}}
                     <td>{{$actor->dob}}</td>
                     <td>{{$actor->city}}</td>
                     <td>{{$actor->nationality}}</td>

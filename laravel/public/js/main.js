@@ -183,7 +183,7 @@ $(document).ready(function() {
 
             }).done(function () {
 
-                console.log(elt.data('id') + " en fav")
+                //console.log(elt.data('id') + " en fav")
 
             });
 
@@ -197,7 +197,7 @@ $(document).ready(function() {
 
             }).done(function () {
 
-                console.log(elt.data('id') + " plus en fav")
+                //console.log(elt.data('id') + " plus en fav")
 
 
             });
@@ -266,29 +266,22 @@ $(document).ready(function() {
             e.preventDefault();
 
             var elt = $(this);
-        //$(".switcher").removeAttr('checked');
+
 
         console.log('good');
 
-            $.ajax({
-                url: elt.data('href'),
 
+        $.ajax({
+                url: elt.data('href'),
 
 
             }).done(function () {
 
                elt.parent().find('.message').fadeOut('slow');
-                //$('.switcher').switcher({
-                //    selected: false
-                //});
 
-                //$(".switcher").attr('checked',false);
+                 $('.switcher').removeClass('checked');
 
 
-
-
-
-                console.log('coucou')
 
 
             })
@@ -299,7 +292,50 @@ $(document).ready(function() {
 
 
 
+    //END BOOT EDITABLE
+//START LIKE BUTTON
+    $('.like').click(function(e) {
 
+        e.preventDefault();
+
+        var elt = $(this);
+
+        $.ajax({
+            url: elt.data('url'),
+            method: "POST",
+            data: {id: elt.data('actor'), action: 'like', _token: elt.data('token')}
+
+
+        }).done(function () {
+
+            console.log('banana')
+
+        });
+    });
+
+    //LIKE DISLIKE THUMB
+
+//START DISLIKE BUTTON
+    $('.dislike').click(function(e) {
+
+        e.preventDefault();
+
+        var elt = $(this);
+
+        $.ajax({
+            url: elt.data('url'),
+            method: "POST",
+            data: {id: elt.data('actor'), action: 'dislike', _token: elt.data('token')}
+
+
+        }).done(function () {
+
+            console.log('bananadown')
+
+        });
+    });
+
+    // DISLIKE THUMB
 
 
 
@@ -1021,6 +1057,46 @@ $(document).ready(function() {
             $('#favmovies').slimScroll({height: 250});
         }
 //END SCROLL BAR
+
+
+        //BOOT X-editable
+
+            //$('.bs-x-editable-username').editable({
+            //    type: 'text',
+            //    name: 'username',
+            //    title: 'Enter username'
+            //});
+            //
+            //$('.bs-x-editable-movie').editable({
+            //    validate: function(value) {
+            //        if($.trim(value) == '') return 'This field is required';
+            //    }
+            //});
+            //
+            //$('.bs-x-editable-note').editable({
+            //    validate: function(value) {
+            //        if($.trim(value) == '') return 'This field is required';
+            //    }
+            //});
+        if ($('.bs-x-editable-content').length > 0) {
+            $('.bs-x-editable-content').editable({
+
+                //validate: function(value) {
+                //    if($.trim(value) == '') return 'This field is required';
+                //},
+                params: function (params) {
+                    params._token = $('.bs-x-editable-content').data('token');
+                    return params;
+                },
+                url: $(this).data('url'),
+                type: 'text',
+                title: 'Edit ',
+                placement: 'left',
+
+
+            });
+        }
+
 
 
     });

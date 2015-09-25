@@ -9,6 +9,7 @@ use App\Model\Comments;
 use App\Model\Directors_Movies;
 use App\Model\Messages;
 use App\Model\Movies;
+use App\Model\Notifications;
 use App\Model\Sessions;
 use App\Model\Tasks;
 use App\Model\Temoignages;
@@ -154,6 +155,9 @@ class PagesController extends Controller{
                         ->get(),
 
             'messages'=> Messages::where('user', 'exists', true)->get(),
+
+            'notifications' => Notifications::all(),
+
 
 
 

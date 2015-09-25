@@ -65,6 +65,7 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
 
 
 
+
         /**
          * Permet de connecter l'URI contact à la page Contact
          */
@@ -124,6 +125,7 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::get('/delete/{id}',['uses' =>'ActorsController@delete','as'=>'.delete'])
             ->where('id','[0-9]+');
 
+        Route::post('/thumb', ['uses' => 'ActorsController@thumb', 'as'=>'.thumb']);
 
 
 
@@ -397,6 +399,9 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'auth'], function() {
          * Gets comments page
          */
         Route::get('/index', ['uses' => 'CommentsController@index', 'as' => '.index']);
+
+
+        Route::post('/comedit', ['uses' => 'CommentsController@comedit', 'as' => '.comedit']);
 
         /**
          * Category index supprime des movies

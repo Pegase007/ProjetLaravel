@@ -86,6 +86,7 @@ $(document).ready(function(){
         }, 3000);
 
     }
+//RELOADS THE MOVIES FAVORITE BOX
 
     if($('#favmovies').length > 0) {
 
@@ -97,7 +98,6 @@ $(document).ready(function(){
 
                 url: $('#favmovies').attr('data-url')
 
-
             }).done(function (data) {
 
                 $('#favmovies').html(data)
@@ -106,11 +106,9 @@ $(document).ready(function(){
                 //console.log($(".checkup").find(':checkbox:checked').length);
 
             });
-
-
         }, 3000);
-
     }
+//END RELOAD FAVBOX
 
 
 

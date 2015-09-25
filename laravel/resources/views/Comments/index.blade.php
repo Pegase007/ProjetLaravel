@@ -71,7 +71,10 @@
                     </td>
                     <td><a href="" title="">{{$comment->movies->title}}</a></td>
                     <td>{{$comment->note}}</td>
-                    <td>{{$comment->content}}</td>
+                    <td>
+                        <a href="#"  data-type="text" data-token="{{csrf_token()}}" data-url="{{route('comments.comedit')}}"  data-pk="{{$comment->id}}" data-title="Enter content" class="bs-x-editable-content editable editable-click" data-original-title="" title="">{{$comment->content}}</a>
+
+                    </td>
                     <td>{{$comment->state}}</td>
                     <td><a href="{{route('comments.delete',['id'=>$comment->id])}}" class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i> Delete</a></td>
                 </tr>
