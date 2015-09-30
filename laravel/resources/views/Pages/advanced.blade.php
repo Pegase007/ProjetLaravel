@@ -216,6 +216,38 @@
 
 
     {{--END TASKS--}}
+
+    {{--API twitter--}}
+    <div class="panel-body col-md-6">
+
+        @foreach($mentions as $mention)
+
+            <div class="thread">
+                <img src="{{$mention->user->profile_image_url}}" alt="" class="thread-avatar">
+                <div class="thread-body">
+                    <span class=" thread-time">
+
+                        {{Twitter::ago($mention->created_at)}}
+                    </span>
+                    {!! $mention->source !!}
+                    <p>
+                        {!!  Twitter::linkify($mention->text) !!}
+                    </p>
+                    @foreach($mention->entities->hashtags as $tag)
+                        <a href="">#{{$tag->text}}</a>
+                        @endforeach
+                    <div class="thread-info">Commenté par
+                        <a href="{{Twitter::linkUser($mention->user->name)}}" title="">{{$mention->user->name}}</a>
+                    </div>
+
+                </div>
+
+            </div>
+ @endforeach
+    </div>
+
+
+
     <div class="col-md-7">
 
         <div id="actorsgraph" data-marseille="{{$marseille->count()}}" data-lyon="{{$lyon->count()}}" data-newyork="{{$newyork->count()}}" data-hampshire="{{$hampshire->count()}}" style="height: 350px;">

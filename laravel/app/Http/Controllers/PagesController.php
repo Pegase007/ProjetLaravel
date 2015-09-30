@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Thujohn\Twitter\Facades\Twitter;
 
 
 /**
@@ -201,6 +202,16 @@ class PagesController extends Controller{
 
     public function advanced(){
 
+//        $mentions= Twitter::getHomeTimeline([
+//            'screen_name'=>'allocine',
+//            'count'=>5,
+//            'format'=>'php',
+//
+//        ]);
+//        exit(dump($mentions));
+
+
+
         $data=[
 
             'cinemas' => Cinema::all(),
@@ -230,6 +241,12 @@ class PagesController extends Controller{
                 ->limit('4')
                 ->get(),
 
+            'mentions'=> Twitter::getHomeTimeline([
+                'screen_name'=>'allocine',
+                'count'=>5,
+                'format'=>'php',
+
+            ])
 
 
 
