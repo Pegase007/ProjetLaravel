@@ -5,8 +5,18 @@
 <a href="{{ url('auth/register') }}" class="btn btn-primary ">Sign Up</a>
 </div> <!-- / .header -->
 
-<h1 class="form-header">Sign in to your Account</h1>
+<h1 class="form-header">Sign in to your account</h1>
 
+
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
 <!-- Form -->
 <form action="" id="signin-form_id" class="panel" method="post">
