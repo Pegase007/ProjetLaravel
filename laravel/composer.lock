@@ -4,12 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "hash": "5d7bc64dcf40e3eaa66326aaec6c489d",
-=======
-    "hash": "fc207a3ac14f8144817bc59ca4676de8",
-    "content-hash": "7c1b4da1989300b9dbc2a1cd0cae8bde",
->>>>>>> 1f64aa175b0d177bd67df607bbd182ccd4cd80bd
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1066,21 +1061,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-<<<<<<< HEAD
-                "reference": "d6cf02fe73634c96677e428f840704bfbcaec29e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/d6cf02fe73634c96677e428f840704bfbcaec29e",
-                "reference": "d6cf02fe73634c96677e428f840704bfbcaec29e",
-=======
                 "reference": "06cb17c013a82f94a3d840682b49425cd00a2161"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/console/zipball/06cb17c013a82f94a3d840682b49425cd00a2161",
                 "reference": "06cb17c013a82f94a3d840682b49425cd00a2161",
->>>>>>> 1f64aa175b0d177bd67df607bbd182ccd4cd80bd
                 "shasum": ""
             },
             "require": {
@@ -1132,21 +1118,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-<<<<<<< HEAD
-                "reference": "0b5c07b516226b7dd32afbbc82fe547a469c5092"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/0b5c07b516226b7dd32afbbc82fe547a469c5092",
-                "reference": "0b5c07b516226b7dd32afbbc82fe547a469c5092",
-=======
                 "reference": "abe19cc0429a06be0c133056d1f9859854860970"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/css-selector/zipball/abe19cc0429a06be0c133056d1f9859854860970",
                 "reference": "abe19cc0429a06be0c133056d1f9859854860970",
->>>>>>> 1f64aa175b0d177bd67df607bbd182ccd4cd80bd
                 "shasum": ""
             },
             "require": {
@@ -1194,21 +1171,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-<<<<<<< HEAD
-                "reference": "9daa1bf9f7e615fa2fba30357e479a90141222e3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/9daa1bf9f7e615fa2fba30357e479a90141222e3",
-                "reference": "9daa1bf9f7e615fa2fba30357e479a90141222e3",
-=======
                 "reference": "c79c361bca8e5ada6a47603875a3c964d03b67b1"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/debug/zipball/c79c361bca8e5ada6a47603875a3c964d03b67b1",
                 "reference": "c79c361bca8e5ada6a47603875a3c964d03b67b1",
->>>>>>> 1f64aa175b0d177bd67df607bbd182ccd4cd80bd
                 "shasum": ""
             },
             "require": {
@@ -1258,21 +1226,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-<<<<<<< HEAD
-                "reference": "9dabece63182e95c42b06967a0d929a5df78bc35"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/9dabece63182e95c42b06967a0d929a5df78bc35",
-                "reference": "9dabece63182e95c42b06967a0d929a5df78bc35",
-=======
                 "reference": "2e185ca136399f902b948694987e62c80099c052"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/2e185ca136399f902b948694987e62c80099c052",
                 "reference": "2e185ca136399f902b948694987e62c80099c052",
->>>>>>> 1f64aa175b0d177bd67df607bbd182ccd4cd80bd
                 "shasum": ""
             },
             "require": {
@@ -1320,21 +1279,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-<<<<<<< HEAD
-                "reference": "9310b5f9a87ec2ea75d20fec0b0017c77c66dac3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/9310b5f9a87ec2ea75d20fec0b0017c77c66dac3",
-                "reference": "9310b5f9a87ec2ea75d20fec0b0017c77c66dac3",
-=======
                 "reference": "ae4dcc2a8d3de98bd794167a3ccda1311597c5d9"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/ae4dcc2a8d3de98bd794167a3ccda1311597c5d9",
                 "reference": "ae4dcc2a8d3de98bd794167a3ccda1311597c5d9",
->>>>>>> 1f64aa175b0d177bd67df607bbd182ccd4cd80bd
                 "shasum": ""
             },
             "require": {
@@ -1436,21 +1386,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-<<<<<<< HEAD
-                "reference": "863af6898081b34c65d42100c370b9f3c51b70ca"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/863af6898081b34c65d42100c370b9f3c51b70ca",
-                "reference": "863af6898081b34c65d42100c370b9f3c51b70ca",
-=======
                 "reference": "e1509119f164a0d0a940d7d924d693a7a28a5470"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/http-foundation/zipball/e1509119f164a0d0a940d7d924d693a7a28a5470",
                 "reference": "e1509119f164a0d0a940d7d924d693a7a28a5470",
->>>>>>> 1f64aa175b0d177bd67df607bbd182ccd4cd80bd
                 "shasum": ""
             },
             "require": {
@@ -1498,21 +1439,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-<<<<<<< HEAD
-                "reference": "405d3e7a59ff7a28ec469441326a0ac79065ea98"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/405d3e7a59ff7a28ec469441326a0ac79065ea98",
-                "reference": "405d3e7a59ff7a28ec469441326a0ac79065ea98",
-=======
                 "reference": "353aa457424262d7d4e4289ea483145921cffcb5"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/http-kernel/zipball/353aa457424262d7d4e4289ea483145921cffcb5",
                 "reference": "353aa457424262d7d4e4289ea483145921cffcb5",
->>>>>>> 1f64aa175b0d177bd67df607bbd182ccd4cd80bd
                 "shasum": ""
             },
             "require": {

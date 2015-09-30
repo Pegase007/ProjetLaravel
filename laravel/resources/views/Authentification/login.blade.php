@@ -30,7 +30,7 @@
     </div> <!-- / Password -->
 
     <div class="form-actions">
-        <input type="submit" value="Sign In" class="btn btn-primary btn-block btn-lg">
+        <input type="submit" id="Connexion" value="Connexion" class="btn btn-primary btn-block btn-lg">
     </div> <!-- / .form-actions -->
 
     {{ csrf_field() }}

@@ -1,5 +1,6 @@
 /vendor
 /.idea
+/home/machine/sites/ProjetLaravel/laravel/config/database.php
 /node_modules
 Homestead.yaml
 Homestead.json
