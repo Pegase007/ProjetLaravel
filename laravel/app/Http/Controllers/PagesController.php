@@ -242,11 +242,24 @@ class PagesController extends Controller{
                 ->get(),
 
             'mentions'=> Twitter::getHomeTimeline([
-                'screen_name'=>'allocine',
                 'count'=>5,
                 'format'=>'php',
 
-            ])
+            ]),
+
+            'twits'=>Twitter::getUserTimeline([
+            'screen_name' => 'allocine',
+            'count' => 5,
+            'format' => 'php'
+            ]),
+
+            'favtwit'=>Twitter::getFavorites([
+
+            'count' => 5,
+            'format' => 'php'
+
+        ])
+
 
 
 

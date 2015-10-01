@@ -216,37 +216,104 @@
 
 
     {{--END TASKS--}}
-
+<div class="col-md-12"></div>
     {{--API twitter--}}
     <div class="panel-body col-md-6">
 
-        @foreach($mentions as $mention)
-
-            <div class="thread">
-                <img src="{{$mention->user->profile_image_url}}" alt="" class="thread-avatar">
-                <div class="thread-body">
-                    <span class=" thread-time">
-
+      <div class="panel widget-messages-alt">
+        <div class="panel-heading">
+            <span class="panel-title"><i class="panel-title-icon fa fa-envelope"></i>Page perso de twitter</span>
+        </div> <!-- / .panel-heading -->
+        <div class="panel-body padding-sm">
+            <div class="messages-list">
+                @foreach($mentions as $mention)
+                <div class="message">
+                    <img src="{{$mention->user->profile_image_url}}" alt="" class="message-avatar">
+                    <p class="message-subject"> {!!  Twitter::linkify($mention->text) !!}</p>
+                    {{--@foreach($mention->entities->hashtags as $tag)--}}
+                       {{--<br> <a href="">#{{$tag->text}}</a>--}}
+                    {{--@endforeach--}}
+                    <div class="message-description">
+                        from <a href="#">{!! $mention->source !!} </a>
+                        &nbsp;&nbsp;·&nbsp;&nbsp;
                         {{Twitter::ago($mention->created_at)}}
-                    </span>
-                    {!! $mention->source !!}
-                    <p>
-                        {!!  Twitter::linkify($mention->text) !!}
-                    </p>
-                    @foreach($mention->entities->hashtags as $tag)
-                        <a href="">#{{$tag->text}}</a>
-                        @endforeach
-                    <div class="thread-info">Commenté par
-                        <a href="{{Twitter::linkUser($mention->user->name)}}" title="">{{$mention->user->name}}</a>
-                    </div>
+                    </div> <!-- / .message-description -->
 
-                </div>
+                    <div class="message-description">
+                        commenté par <a href="{{Twitter::linkUser($mention->user->name)}}" title="">{{$mention->user->name}}</a>
+                        &nbsp;&nbsp;·&nbsp;&nbsp;
 
-            </div>
- @endforeach
+                    </div> <!-- / .message-description -->
+
+                </div> <!-- / .message -->
+           @endforeach
+
+            </div> <!-- / .messages-list -->
+
+        </div> <!-- / .panel-body -->
+    </div>
+        </div>
+
+{{--END FIRST API--}}
+
+
+
+
+
+    <div class="panel widget-messages-alt col-md-6">
+        <div class="panel-heading">
+            <span class="panel-title"><i class="panel-title-icon fa fa-envelope"></i>Twits d'allociné</span>
+        </div> <!-- / .panel-heading -->
+        <div class="panel-body padding-sm">
+            <div class="messages-list">
+
+
+                @foreach($twits as $twit)
+                    <div class="message">
+                        <img src="{{ $twit->user->profile_image_url }}" alt="" class="message-avatar">
+                        <a href="#" class="message-subject">{{ $twit->user->name }}</a>
+                        <p class="col-md-offset-2">{!!  Twitter::linkify($twit->text) !!}</p>
+                        <div class="message-description">
+
+                            {{Twitter::ago($mention->created_at)}}
+                        </div> <!-- / .message-description -->
+                    </div> <!-- / .message -->
+                 @endforeach
+
+            </div> <!-- / .messages-list -->
+
+        </div> <!-- / .panel-body -->
+    </div>
+
+    {{--{{ dump($favtwit) }}--}}
+    <div class="panel widget-messages-alt col-md-6">
+        <div class="panel-heading">
+            <span class="panel-title"><i class="panel-title-icon fa fa-envelope"></i>Twits fav</span>
+        </div> <!-- / .panel-heading -->
+        <div class="panel-body padding-sm">
+            <div class="messages-list">
+
+
+                @foreach($favtwit as $twit)
+                    <div class="message">
+
+                        <p >{!!  Twitter::linkify($twit->text) !!}</p>
+                        <div class="message-description">
+                            écrit par <a href="{{Twitter::linkUser($twit->user->name)}}" title="">{{$twit->user->name}}</a>
+                            {{Twitter::ago($mention->created_at)}}
+                        </div> <!-- / .message-description -->
+                    </div> <!-- / .message -->
+                @endforeach
+
+
+            </div> <!-- / .messages-list -->
+
+          </div> <!-- / .panel-body -->
     </div>
 
 
+
+{{--Graph--}}
 
     <div class="col-md-7">
 
